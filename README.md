@@ -1,9 +1,8 @@
 # HandyGDX
-
 A bunch of libraries for [libGDX](http://libgdx.badlogicgames.com/).
 
 ## Features
-Navigate through the different sections with these links; each one will have a small overview, and some will have examples.
+Each section here will have a small overview, and some will have examples.
 A very simple example project (that will contain most of the topics below in action) can be found [here](https://github.com/ImXico/HandyGDX/tree/master/example).
 
 *Note:* There will be lots of references to the [official libGDX wiki](https://github.com/libgdx/libgdx). It is really complete and well-written, and there's also loads of documentation over its various APIs.
@@ -18,7 +17,7 @@ A very simple example project (that will contain most of the topics below in act
   - [State Manager](#state-manager)
   - [Root App](#root-app)
   - [State Transitions](#state-transitions)
-- [Camera Helper](#camera-helper)
+- [Camera Styles](#camera-styles)
 - [Text Helper](#text-helper)
 - [Sprite Helper](#sprite-helper)
 
@@ -55,7 +54,7 @@ Keeping your assets organized.
 #### Image Manager
 This is made to be used with [TextureAtlases](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.html). Information on how to use the TexturePacker to pack many smaller images onto larger images can be found [here](https://github.com/libgdx/libgdx/wiki/Texture-packer).
 
-Say we've got `myPack.png` and `myPack.pack` from the Texture Packer inside our `assets` folder - we'll use that to explore this tiny API.
+Say we've got `myPack.png` and `myPack.pack` from the Texture Packer inside our `assets` folder - we'll use that as an example.
 
 - `ImageManager.loadAtlas("myPack", "myPack.pack")` - Loads "myPack.pack" onto the app and keys it as "myPack".
 - `ImageManager.loadAtlas("myPack", "myPack.pack", true)` - Loading + setting it as the default atlas.
@@ -63,13 +62,11 @@ Say we've got `myPack.png` and `myPack.pack` from the Texture Packer inside our 
 - `ImageManager.take("regionName")` - Getting a region that's inside the default atlas.
 - `ImageManager.take("regionName", "otherAtlasKey")` - Getting a region that's inside another (loaded) atlas.
 
-That's it!
-
 #### Audio Manager
 Once again with an example, say we've got ourselves a sound file called `beep.ogg` located at `assets/sounds`.
 With the [AudioManager](https://github.com/ImXico/HandyGDX/blob/master/source/AudioManager/AudioManager.java) we can:
 
-- `AudioManager.loadSong("sounds/beep.mp3", "beep")` - Loads "beep.mp3" and keys it as "beep".
+- `AudioManager.loadSong("beep", "sounds/beep.ogg")` - Loads "beep.ogg" and keys it as "beep".
 - `AudioManager.playSound("beep")` - Plays the "beep" sound at a default volume.
 - `AudioManager.playSound("beep", 0.3f)` - Plays the "beep" sound at volume = 0.3f.
 - `AudioManager.stopSound("beep")` - Stops the "beep" sound.
@@ -77,8 +74,6 @@ With the [AudioManager](https://github.com/ImXico/HandyGDX/blob/master/source/Au
 - `AudioManager.resumeSound("beep")` - Resumes the "beep" sound.
 - `AudioManager.loopSound("beep")` - Loops the "beep" sound at a default volume.
 - `AudioManager.loopSound("beep", 0.7f)` - Loops the "beep" sound at volume = 0.7f.
-
-That's all...!
 
 --
 
@@ -107,10 +102,7 @@ public void dispose() { ... }
 ```
 
 #### State Manager
-The state manager is exactly that - an entity that manages the states flow. Because it is a singleton, there is global access to its API, making it 
-super easy to use.
-
-A quick overview of the [StateManager](https://github.com/ImXico/HandyGDX/blob/master/source/State/StateManager.java) - it is a fairly important entity, and thus more detailed documentation can be found on the source):
+The [StateManager](https://github.com/ImXico/HandyGDX/blob/master/source/State/StateManager.java) is exactly that - an entity that manages the states flow. Because it is a singleton, there is global access to it, making it easy to use.
 
 - `static void init(Camera camera, Viewport viewport)` - Initializes the StateManager - call this once.
 - `static StateManager getInstance()` - This is the way to access the StateManager (only after init(...) was called).
@@ -122,7 +114,7 @@ A quick overview of the [StateManager](https://github.com/ImXico/HandyGDX/blob/m
 - `void dispose()` - Diposes the current (and also next, if it exists) state.
 
 #### Root App
-Now that we know how to load assets, how states work, and how the state manager controls the state flow, we can use them to easily setup our root/base class - the one that extends [ApplicationAdapter](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/ApplicationAdapter.html).
+Now that we know how to load and access assets, how states work, and how the state manager controls the states flow, we can use all this to easily setup our root/base class - the one that extends [ApplicationAdapter](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/ApplicationAdapter.html).
 
 More on the root class and the life cycle of a libGDX app can be seen [here](https://github.com/libgdx/libgdx/wiki/The-life-cycle).
 
@@ -148,9 +140,17 @@ public class App extends ApplicationAdapter {
         In this example, an ExtendedViewport is used.
         */
         final Camera camera = new OrthographicCamera(worldWidth, worldHeight);
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0F);
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         final Viewport viewport = new ExtendViewport(worldWidth, worldHeight, camera);
         StateManager.init(camera, viewport);
+        
+        /*
+        Step 2.5: Optionally load the assets here.
+        You may prefer to load them somewhere else, or maybe lazily.
+        */
+        ImageManager.loadAtlas("myPack", "myPack.pack");
+        ImageManager.loadAtlas("myOtherPack", "myOtherPack.pack");
+        AudioManager.loadSound("mySound", "sounds/mySound.ogg");
         
         /*
         Step 3: Create and set an initial state, that will be shown when the app launches.
@@ -190,16 +190,36 @@ public class App extends ApplicationAdapter {
 }
 ```
 
-When we run our desktop app with this ```App``` class as our root class, we can see the result so far:
-![image](https://i.gyazo.com/560887c85670292227a49bba19cd88a1.png)
+#### State Transitions
+Currently there are only two transitions available:
+
+- `FadingTransition`
+
+![gif](https://zippy.gfycat.com/GlamorousExhaustedFrilledlizard.gif)
+
+- `HorizontalSlideTransition` - Left-to-Right or Right-to-Left. Watch in 60 fps [here](https://gfycat.com/HiddenTartIzuthrush).
+
+![gif](https://zippy.gfycat.com/HiddenTartIzuthrush.gif)
+
+But it's easy to make your own - just make sure you implement [Transition](https://github.com/ImXico/HandyGDX/blob/master/source/Transition/Transition.java).
+
+### Camera Styles
+There are a few camera styles available on-the-go. Here are a few:
+
+- `CameraStyles.centerOnScreen(camera)` - Watch in 60 fps [here](https://gfycat.com/GiantPowerfulGoa).
+
+![gif](https://zippy.gfycat.com/GiantPowerfulGoa.gif)
+
+- `CameraStyles.lockOnTarget(camera, targetPosition)` - Watch in 60 fps [here](https://gfycat.com/HauntingCleverBarracuda).
+
+![gif](https://zippy.gfycat.com/HauntingCleverBarracuda.gif)
+
+- `CameraStyles.lerpToTarget(camera, target, lerp)` - Watch in 60 fps [here](https://gfycat.com/DirtyInbornIberianbarbel).
+
+![gif](https://fat.gfycat.com/DirtyInbornIberianbarbel.gif)
+
+### Text Helper
 
 
 
-
-
-
-
-
-
-
-
+### Sprite Helper
