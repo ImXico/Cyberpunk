@@ -7,11 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
 import example.state.MenuState;
-
 import source.ImageManager.ImageManager;
-import source.State.State;
 import source.State.StateManager;
 import source.WorldDimensions.WorldDimensions;
 
@@ -44,8 +41,7 @@ public class App extends ApplicationAdapter {
         ImageManager.loadAtlas("heroFrames", "heroFrames.pack");
 
         /* Step 3: Create and set the initial state. */
-        final State myState = new MenuState();
-        StateManager.getInstance().setState(myState);
+        StateManager.getInstance().setState(new MenuState());
     }
 
     @Override

@@ -56,18 +56,18 @@ public class PlayState extends AbstractState {
     public void update(float delta) {
         hero.update();
         /* Style 1: Center on screen. */
-        CameraStyles.centerOnScreen(StateManager.getInstance().getCamera(), WorldDimensions.WORLD_WIDTH, WorldDimensions.WORLD_HEIGHT);
+//        CameraStyles.centerOnScreen(StateManager.getInstance().getCamera(), WorldDimensions.WORLD_WIDTH, WorldDimensions.WORLD_HEIGHT);
         /* Style 2: Lock on target, ridigly. */
 //        CameraStyles.lockOnTarget(StateManager.getInstance().getCamera(), hero.getPosition());
         /* Style 3: Smoothly lerp to target. */
-//        CameraStyles.lerpToTarget(StateManager.getInstance().getCamera(), hero.getPosition(), 0.1f);
+        CameraStyles.lerpToTarget(StateManager.getInstance().getCamera(), hero.getPosition(), 0.075f);
     }
 
     @Override
     public void render(Batch batch) {
         batch.setProjectionMatrix(StateManager.getInstance().getCamera().combined);
         batch.begin();
-        font.draw(batch, SAMPLE_TEXT, textPosition.x, textPosition.y);
+//        font.draw(batch, SAMPLE_TEXT, textPosition.x, textPosition.y);
         background.render(batch);
         ground.render(batch);
         hero.render(batch);

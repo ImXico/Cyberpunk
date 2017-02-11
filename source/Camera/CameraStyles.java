@@ -3,6 +3,7 @@ package source.Camera;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import source.WorldDimensions.WorldDimensions;
 
 /**
  * Holds a bunch of camera styles.
@@ -27,14 +28,12 @@ public class CameraStyles {
     /**
      * Centers the {@link Camera} in the middle of the screen.
      *
-     * @param camera      camera used.
-     * @param worldWidth  world width in world coordinates.
-     * @param worldHeight world height in world coordinates.
+     * @param camera camera used.
      */
-    public static void centerOnScreen(Camera camera, float worldWidth, float worldHeight) {
+    public static void centerOnScreen(Camera camera) {
         final Vector3 position = camera.position;
-        position.x = worldWidth / 2f;
-        position.y = worldHeight / 2f;
+        position.x = WorldDimensions.WORLD_WIDTH / 2f;
+        position.y = WorldDimensions.WORLD_HEIGHT / 2f;
         setAndUpdate(camera, position);
     }
 
