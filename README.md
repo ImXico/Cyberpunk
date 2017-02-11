@@ -110,78 +110,19 @@ public void dispose() { ... }
 The state manager is exactly that - an entity that manages the states flow. Because it is a singleton, there is global access to its API, making it 
 super easy to use.
 
-A quick overview of the [StateManager](https://github.com/ImXico/HandyGDX/blob/master/source/State/StateManager.java):
+A quick overview of the [StateManager](https://github.com/ImXico/HandyGDX/blob/master/source/State/StateManager.java) - it is a fairly important entity, and thus more detailed documentation can be found on the source):
 
-```java
-/**
- * Initializes the StateManager.
- * A camera and viewport to handle the game screen should be passed - their importance has been mentioned 
- * in the "World Dimensions" section.
- * Should be called **once**, in the {@link App#create()} method of the root/base app.
- */
-void init(Camera camera, Viewport viewport)
-```
-
-```java
-/**
- * This is the way to access the StateManager instance.
- * Should only be called after init(camera, viewport) had been called.
- */
-StateManager getInstance()
-```
-
-```java
-/**
- * Change the current state to a next state.
- * This is done instantly, without a transition of any kind.
- */
-void setState(State nextState)
-```
-
-````java
-/**
- * Change the current state to a next state with a transition.
- * Transitions will be discussed about below.
- */
-void setState(State nextState, Transition transition)
-```
-
-```java
-/**
- * Updates the currently running state and and any on-going transition, if there is one.
- * Called every frame, as it will be seen on the "Root App" section below.
- */
-void update(float delta)
-```
-
-```java
-/**
- * Renders the currenly running state and any on-going transition, if there is one.
- * Like update, also called every frame.
- * Similarly to what happens in the State, render will be called always **after** update. 
- */
-void render()
-```
-
-```java
-/**
- * Resizes the current (and also next, if it exists) state.
- * Also resizes the Viewport (the one passed on init(...)).
- * This will be called on the root/base class' resize(...).
- */
-void resize(int width, int height)
-```
-
-```java
-/**
- * Diposes the current (and also next, if it exists) state.
- */
-void dispose()
-```
+- `static void init(Camera camera, Viewport viewport)` - Initializes the StateManager - call this once.
+- `static StateManager getInstance()` - This is the way to access the StateManager (only after init(...) was called).
+- `void setState(State nextState)` - Instantly change the current state to a given next state.
+- `void setState(State nextState, Transition transition)` - Smoothly change the current state with a transition.
+- `void update(float delta)` - Updates the currently running state and and any on-going transition, if there is one.
+- `void render()` - Renders the currenly running state and any on-going transition, if there is one.
+- `void resize(int width, int height)` -  Resizes the current + next state and the Viewport (passed on init(...)).
+- `void dispose()` - Diposes the current (and also next, if it exists) state.
 
 #### Root App
-Now that we know how States work, and how they're controlled by the StateManager, we can use them to easily setup our root/base class - the one that
-extends [ApplicationAdapter](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/ApplicationAdapter.html).
+Now that we know how to load assets, how states work, and how the state manager controls the state flow, we can use them to easily setup our root/base class - the one that extends [ApplicationAdapter](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/ApplicationAdapter.html).
 
 More on the root class and the life cycle of a libGDX app can be seen [here](https://github.com/libgdx/libgdx/wiki/The-life-cycle).
 
