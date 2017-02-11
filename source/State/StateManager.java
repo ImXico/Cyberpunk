@@ -98,7 +98,6 @@ public class StateManager {
         This snippet was from: <a href="http://stackoverflow.com/questions/14085212/libgdx-framebuffer-scaling">SO</a>
          */
         batch = new SpriteBatch();
-        batch.setProjectionMatrix(camera.combined);
         transitionBatch = new SpriteBatch();
         final Matrix4 matrix = new Matrix4();
         matrix.setToOrtho2D(0, 0, WorldDimensions.WORLD_WIDTH, WorldDimensions.WORLD_HEIGHT);
@@ -120,15 +119,11 @@ public class StateManager {
     }
 
     public Camera getCamera() {
-        return instance.camera;
-    }
-
-    public Matrix4 getCameraCombined() {
-        return instance.camera.combined;
+        return camera;
     }
 
     public Viewport getViewport() {
-        return instance.viewport;
+        return viewport;
     }
 
     /**

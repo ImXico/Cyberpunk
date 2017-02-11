@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import example.state.MenuState;
+
 import source.ImageManager.ImageManager;
 import source.State.State;
 import source.State.StateManager;
@@ -18,24 +19,31 @@ public class App extends ApplicationAdapter {
 
     @Override
     public void create() {
-        /* Step 1: Initialize the World Dimensions. */
-        /* This should always be the first thing to be called. */
+       /*
+        Step 1: Initialize the world dimensions.
+        These values should also be passed in the DesktopLauncher's config width and height.
+        */
         final int worldWidth = 700;
         final int worldHeight = 300;
         WorldDimensions.set(worldWidth, worldHeight);
 
-        /* Step 2: Load one or more texture atlases. */
-        ImageManager.loadAtlas("pack", "pack.pack", true);
-        ImageManager.loadAtlas("heroFrames", "heroFrames.pack");
-
-        /* Step 3: Initialize the StateManager with a camera and a viewport. */
-        /* In this example, it's used an ExtendedViewport. */
+        /*
+        Step 2: Initialize the StateManager with a Camera and a Viewport.
+        In this example, an ExtendedViewport is used.
+        */
         final Camera camera = new OrthographicCamera(worldWidth, worldHeight);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0F);
         final Viewport viewport = new ExtendViewport(worldWidth, worldHeight, camera);
         StateManager.init(camera, viewport);
 
-        /* Step 4: Create and set the initial state. */
+        /*
+        Step 2.5: Optionally load the assets here.
+        You may prefer to load them somewhere else, or maybe lazily.
+        */
+        ImageManager.loadAtlas("pack", "pack.pack", true);
+        ImageManager.loadAtlas("heroFrames", "heroFrames.pack");
+
+        /* Step 3: Create and set the initial state. */
         final State myState = new MenuState();
         StateManager.getInstance().setState(myState);
     }

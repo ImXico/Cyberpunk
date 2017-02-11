@@ -26,10 +26,10 @@ public class AudioManager {
     /**
      * Loads a sound onto the {@link #sounds} map.
      *
-     * @param path      sounds's path inside the assets folder.
      * @param soundName key that will identify this sound in the map.
+     * @param path      sounds's path inside the assets folder.
      */
-    public static void loadSound(String path, String soundName) {
+    public static void loadSound(String soundName, String path) {
         final Sound sound = Gdx.audio.newSound(Gdx.files.internal(path));
         sounds.put(soundName, sound);
     }

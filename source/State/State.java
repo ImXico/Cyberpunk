@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * A state can be a Play source.State, Game Over source.State, Menu source.State, and so on.
+ * A state can be a Play State, Game Over State, Menu State, and so on.
  *
  * @author Xico
  */
@@ -14,7 +14,7 @@ public interface State extends InputProcessor {
 
     /**
      * Updates the state.
-     * This is called 60 times per second.
+     * This is called every frame.
      *
      * @param delta time elapsed since the last call to this method.
      */
@@ -22,8 +22,7 @@ public interface State extends InputProcessor {
 
     /**
      * Renders the state.
-     * This is also called 60 times per second.
-     * Always called before {@link State#update(float)}.
+     * This is also called every frame, always after {@link State#update(float)}.
      *
      * @param batch {@link Batch} used to render the state.
      */

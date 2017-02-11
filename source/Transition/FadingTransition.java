@@ -13,7 +13,7 @@ public class FadingTransition implements Transition {
     /** The default fading speed. */
     private static final float DEFAULT_SPEED = 0.5f;
 
-    private static final float DEFAULT_ALPHA_INC = 0.3f;
+    private static final float DEFAULT_ALPHA_INC = 0.05f;
 
     private boolean running;
     private float speed;
