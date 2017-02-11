@@ -5,7 +5,7 @@ A bunch of libraries for [libGDX](http://libgdx.badlogicgames.com/).
 Each section here will have a small overview, and some will have examples.
 A very simple example project (that will contain most of the topics below in action) can be found [here](https://github.com/ImXico/HandyGDX/tree/master/example).
 
-*Note:* There will be lots of references to the [official libGDX wiki](https://github.com/libgdx/libgdx). It is really complete and well-written, and there's also loads of documentation over its various APIs.
+*Note:* There will be references to the [official libGDX wiki](https://github.com/libgdx/libgdx). It is really complete and well-written, and there's also loads of documentation over its various APIs.
 
 - [World Dimensions](#world-dimensions)
 - [Resource Management](#resource-management)
@@ -218,8 +218,23 @@ There are a few camera styles available on-the-go. Here are a few:
 
 ![gif](https://fat.gfycat.com/DirtyInbornIberianbarbel.gif)
 
+*Note: The assets used here and in the example project are from [Kenney Assets](http://kenney.nl/assets).*
+
 ### Text Helper
+A bunch of helper functions that return `Vector2` coordinates.
 
+- `TextHelper.centerHorizontally(font, "Horizontally Centered Text, Y = 200", 200)`
+- `TextHelper.centerOnScreen(font, "Centered Text!")`
+- `TextHelper.centerOnImage(font, "Centered!", imageWidth, imageHeight, imagePosition)`
 
+![img](https://i.gyazo.com/da82a22d207f6c07785f65026efff612.png)
 
 ### Sprite Helper
+A bunch of helper functions that return `Vector2` coordinates.
+
+- `SpriteHelper.centerOnScreen(imageWidth, imageHeight)`
+- `SpriteHelper.centerOnScreenX(imageWidth, y)`
+- `SpriteHelper.centerOnScreenY(imageHeight, x)`
+- `SpriteHelper.centerOnImage(width, height, imagePosition, imageWidth, imageHeight)`
+
+![img](https://i.gyazo.com/b2b826b4cd321b6aa03a3cf97c36aa6b.png)
