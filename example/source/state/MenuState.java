@@ -1,4 +1,4 @@
-package example.state;
+package example.source.state;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -26,7 +26,7 @@ public class MenuState extends AbstractState {
     }
 
     @Override
-    public boolean keyDown(int keycode) {
+    public boolean touchDown(int x, int y, int pointer, int button) {
         /* Transition 1: Fading transition. */
 //        final Transition transition = new FadingTransition();
         /* Transition 2: HorizontalSlide transition, left-to-right. */
@@ -35,6 +35,7 @@ public class MenuState extends AbstractState {
         return true;
     }
 
+
     @Override
     public void update(float delta) {
         /* Update stuff here... */
@@ -42,7 +43,6 @@ public class MenuState extends AbstractState {
 
     @Override
     public void render(Batch batch) {
-        batch.setProjectionMatrix(StateManager.getInstance().getCamera().combined);
         batch.begin();
         font.draw(batch, SAMPLE_TEXT, textPosition.x, textPosition.y);
         batch.end();

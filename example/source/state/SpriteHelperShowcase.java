@@ -1,6 +1,5 @@
-package example.state;
+package example.source.state;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -8,6 +7,8 @@ import source.ImageManager.ImageManager;
 import source.SpriteHelper.SpriteHelper;
 import source.State.AbstractState;
 import source.State.StateManager;
+
+import static example.source.PackValues.*;
 
 public class SpriteHelperShowcase extends AbstractState {
 
@@ -32,20 +33,21 @@ public class SpriteHelperShowcase extends AbstractState {
     private final Vector2 quadPosition;
 
     public SpriteHelperShowcase() {
-        alienGreen = ImageManager.take("alien-green");
+        /* Green alien + its position. */
+        alienGreen = ImageManager.take(ALIEN_GREEN);
         alienGreenPos = SpriteHelper.centerOnScreen(ALIEN_WIDTH, ALIEN_HEIGHT);
-
-        alienBlue = ImageManager.take("alien-blue");
+        /* Blue alien + its position. */
+        alienBlue = ImageManager.take(ALIEN_BLUE);
         alienBluePos = SpriteHelper.centerOnScreenX(ALIEN_WIDTH, 220f);
-
-        alienPink = ImageManager.take("alien-pink");
+        /* Pink alien + its position. */
+        alienPink = ImageManager.take(ALIEN_PINK);
         alienPinkPos = SpriteHelper.centerOnScreenY(ALIEN_HEIGHT, 70f);
-
-        sampleQuad = ImageManager.take("blank-quad");
+        /* Beige alien + its position + a sample quad image - the beige alien will be centered on it. */
+        sampleQuad = ImageManager.take(BLANK_QUAD);
         quadWidth = 70f;
         quadHeight = 70f;
         quadPosition = new Vector2(500f, 120f);
-        alienBeige = ImageManager.take("alien-beige");
+        alienBeige = ImageManager.take(ALIEN_BEIGE);
         alienBeigePos = SpriteHelper.centerOnImage(ALIEN_WIDTH, ALIEN_HEIGHT, quadPosition, quadWidth, quadHeight);
     }
 
@@ -56,17 +58,12 @@ public class SpriteHelperShowcase extends AbstractState {
 
     @Override
     public void render(Batch batch) {
-        batch.setProjectionMatrix(StateManager.getInstance().getCamera().combined);
         batch.begin();
-
-        batch.setColor(Color.WHITE);
         batch.draw(alienGreen, alienGreenPos.x, alienGreenPos.y, ALIEN_WIDTH, ALIEN_HEIGHT);
         batch.draw(alienBlue, alienBluePos.x, alienBluePos.y, ALIEN_WIDTH, ALIEN_HEIGHT);
         batch.draw(alienPink, alienPinkPos.x, alienPinkPos.y, ALIEN_WIDTH, ALIEN_HEIGHT);
-
         batch.draw(sampleQuad, quadPosition.x, quadPosition.y, quadWidth, quadHeight);
         batch.draw(alienBeige, alienBeigePos.x, alienBeigePos.y, ALIEN_WIDTH, ALIEN_HEIGHT);
-
         batch.end();
     }
 

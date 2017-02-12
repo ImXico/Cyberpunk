@@ -1,0 +1,54 @@
+
+NormalPack.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+tree2
+  rotate: false
+  xy: 1, 44
+  size: 151, 211
+  orig: 151, 211
+  offset: 0, 0
+  index: -1
+tree1
+  rotate: false
+  xy: 154, 20
+  size: 68, 235
+  orig: 68, 235
+  offset: 0, 0
+  index: -1
+adventurer_stand
+  rotate: false
+  xy: 224, 145
+  size: 80, 110
+  orig: 80, 110
+  offset: 0, 0
+  index: -1
+alien-beige
+  rotate: false
+  xy: 224, 73
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+alien-blue
+  rotate: false
+  xy: 224, 1
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+alien-green
+  rotate: false
+  xy: 306, 185
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+blank-quad
+  rotate: false
+  xy: 1, 32
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: -1

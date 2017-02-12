@@ -1,4 +1,4 @@
-package example;
+package example.source;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import example.state.MenuState;
+import example.source.state.MenuState;
 import source.ImageManager.ImageManager;
 import source.State.StateManager;
 import source.WorldDimensions.WorldDimensions;
@@ -29,7 +29,7 @@ public class App extends ApplicationAdapter {
         In this example, an ExtendedViewport is used.
         */
         final Camera camera = new OrthographicCamera(worldWidth, worldHeight);
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0F);
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         final Viewport viewport = new ExtendViewport(worldWidth, worldHeight, camera);
         StateManager.init(camera, viewport);
 
@@ -37,8 +37,8 @@ public class App extends ApplicationAdapter {
         Step 2.5: Optionally load the assets here.
         You may prefer to load them somewhere else, or maybe lazily.
         */
-        ImageManager.loadAtlas("pack", "pack.pack", true);
-        ImageManager.loadAtlas("heroFrames", "heroFrames.pack");
+        ImageManager.loadAtlas("NormalPack", "NormalPack.pack", true);
+        ImageManager.loadAtlas("HeroWalkingPack", "HeroWalkingPack.pack");
 
         /* Step 3: Create and set the initial state. */
         StateManager.getInstance().setState(new MenuState());

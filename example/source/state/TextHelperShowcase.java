@@ -1,10 +1,11 @@
-package example.state;
+package example.source.state;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import example.source.PackValues;
 import source.ImageManager.ImageManager;
 import source.State.AbstractState;
 import source.State.StateManager;
@@ -34,14 +35,14 @@ public class TextHelperShowcase extends AbstractState {
     public TextHelperShowcase() {
         font = new BitmapFont();
         font.setColor(Color.BLACK);
-
+        /* Centered text. */
         centeredText = "Centered Text!";
         centeredCoordinates = TextHelper.centerOnScreen(font, centeredText);
-
+        /* Horizonatlly centered text, arbitrary Y. */
         centeredHorizonatllyText = "Horizontally Centered Text, Y = 200";
         centeredHorizontallyCoordinates = TextHelper.centerHorizontally(font, centeredHorizonatllyText, 200f);
-
-        sampleImage = ImageManager.take("blank-quad");
+        /* Text centered inside some image. */
+        sampleImage = ImageManager.take(PackValues.BLANK_QUAD);
         centeredOnImageText = "Centered!";
         imageWidth = 100f;
         imageHeight = 30f;
@@ -56,7 +57,6 @@ public class TextHelperShowcase extends AbstractState {
 
     @Override
     public void render(Batch batch) {
-        batch.setProjectionMatrix(StateManager.getInstance().getCamera().combined);
         batch.begin();
         /* Draw centered text. */
         font.draw(batch, centeredText, centeredCoordinates.x, centeredCoordinates.y);

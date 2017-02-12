@@ -1,0 +1,19 @@
+
+HeroWalkingPack.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+adventurer_walk1
+  rotate: false
+  xy: 1, 1
+  size: 80, 110
+  orig: 80, 110
+  offset: 0, 0
+  index: -1
+adventurer_walk2
+  rotate: false
+  xy: 83, 1
+  size: 80, 110
+  orig: 80, 110
+  offset: 0, 0
+  index: -1
