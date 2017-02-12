@@ -16,8 +16,7 @@ import source.WorldDimensions.WorldDimensions;
 
 /**
  * Manages the {@link State}s.
- * Holds three fields that will remain immutable:
- * <p>
+ * Holds:
  * .A {@link Camera}.
  * .A {@link Viewport}.
  *
@@ -52,14 +51,9 @@ public class StateManager {
     private FrameBuffer nextFBO;
 
     /**
-     * Batch that's used to render every {@link State}.
+     * Batch that's used to render everything.
      */
     private final Batch batch;
-
-    /**
-     * Batch that's used to render every {@link Transition}.
-     */
-    private final Batch transitionBatch;
 
     /**
      * Game's camera - should remain immutable.
@@ -90,18 +84,8 @@ public class StateManager {
         this.camera = camera;
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         this.viewport = viewport;
-        /*
-        Initialize the batches and set their projection matrices.
-        The projection matrix is combined -> view matrix * projection matrix.
-        *
-        There is a problem with the default projection matrix set function that ignores the viewport for FBOs.
-        This snippet was from: <a href="http://stackoverflow.com/questions/14085212/libgdx-framebuffer-scaling">SO</a>
-         */
+        /* Initialize the batch. */
         batch = new SpriteBatch();
-        transitionBatch = new SpriteBatch();
-        final Matrix4 matrix = new Matrix4();
-        matrix.setToOrtho2D(0, 0, WorldDimensions.WORLD_WIDTH, WorldDimensions.WORLD_HEIGHT);
-        transitionBatch.setProjectionMatrix(matrix);
     }
 
     /**
@@ -209,7 +193,7 @@ public class StateManager {
                 currentFlippedRegion.flip(false, true);
                 final TextureRegion nextFlippedRegion = new TextureRegion(nextFBO.getColorBufferTexture());
                 nextFlippedRegion.flip(false, true);
-                transition.render(transitionBatch, currentFlippedRegion, nextFlippedRegion);
+                transition.render(batch, currentFlippedRegion, nextFlippedRegion);
             }
         }
     }
