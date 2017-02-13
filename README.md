@@ -1,84 +1,41 @@
 # HandyGDX
-A bunch of libraries for [libGDX](http://libgdx.badlogicgames.com/).
+A bunch of libraries for [libGDX](http://libgdx.badlogicgames.com/), aiming to be a useful resource for both experienced developers and newcomers.
 
-## Features
+## How is HandyGDX structured?
+Essentially in two parts:
+
+- The **core** is the base structure of the app - it handles states, how they are managed and the base app. This is useful to get up and running quickly, without having to deal with these
+aspects.
+
+- The **extensions** are the libs and mini-libs that you can fetch as you need. From asset managers to aesthetic utilities, it ranges between a (hopefully increasing) number
+of different fields. It's important to references that *every* extension lib is **totally independent** of the core, meaning that you can use any extension without having
+the core.
+
+## Table of Contents
 Each section here will have a small overview, and some will have examples.
-A very simple example project (that will contain most of the topics below in action) can be found [here](https://github.com/ImXico/HandyGDX/tree/master/example).
+A very simple example project (that will contain most of the topics below in action) can be found [here](https://github.com/ImXico/HandyGDX/tree/master/example). It also contains the assets used and a small walkthrough.
 
-*Note:* There will be references to the [official libGDX wiki](https://github.com/libgdx/libgdx). It is really complete and well-written, and there's also loads of documentation over its various APIs.
+**Note:** There will be references to the [official libGDX wiki](https://github.com/libgdx/libgdx). It is really complete and well-written, and there's also loads of documentation over its various APIs.
 
-- [World Dimensions](#world-dimensions)
-- [Resource Management](#resource-management)
-  - [Image Manager](#image-manager)
-  - [Audio Manager](#audio-manager)
+### The Core
 - [State Management](#state-management)
   - [State](#state)
   - [Abstract State](#abstract-state)
   - [State Manager](#state-manager)
-  - [Root App](#root-app)
   - [State Transitions](#state-transitions)
+- [World Coordinates](#world-coordinates)
+- [Base App](#base-app)
+
+### The Extensions
+- [Image Manager](#image-manager)
+- [Audio Manager](#audio-manager)
 - [Camera Styles](#camera-styles)
 - [Text Helper](#text-helper)
 - [Sprite Helper](#sprite-helper)
 
 --
 
-### World Dimensions
-To keep a consistent app that's independent of real device size or asset size, it's a good idea to:
-- Define a virtual resolution (here it's called world dimensions) that can be whatever you want.
-- Set a [Camera](https://github.com/libgdx/libgdx/wiki/Orthographic-camera) to use that resolution.
-- Use a [Viewport](https://github.com/libgdx/libgdx/wiki/Viewports) to adapt the game screen to the different physical devices.
-
-These virtual dimensions will, thus, be the *boundaries* of our game screen - they'll influence all of the game's rendering.
-Because they'll be used in a lot of places (including on **many** other libs here!), an easy way to store & access them is by doing something like this:
-
-```java
-public class App extends ApplicationAdapter {
-
-    @Override
-    public void create() {
-        /*
-        First thing to do here!
-        These values should also be passed in the DesktopLauncher's config width and height.
-        */
-        final int worldWidth = 700;
-        final int worldHeight = 300;
-        WorldDimensions.set(worldWidth, worldHeight);
-        // ...
-    }
-}
-```
-
-### Resource Management
-Keeping your assets organized.
-#### Image Manager
-This is made to be used with [TextureAtlases](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.html). Information on how to use the TexturePacker to pack many smaller images onto larger images can be found [here](https://github.com/libgdx/libgdx/wiki/Texture-packer).
-
-Say we've got `myPack.png` and `myPack.pack` from the Texture Packer inside our `assets` folder - we'll use that as an example.
-
-- `ImageManager.loadAtlas("myPack", "myPack.pack")` - Loads "myPack.pack" onto the app and keys it as "myPack".
-- `ImageManager.loadAtlas("myPack", "myPack.pack", true)` - Loading + setting it as the default atlas.
-- `ImageManager.getAtlas("myPack")` - Getting the "myPack" atlas.
-- `ImageManager.take("regionName")` - Getting a region that's inside the default atlas.
-- `ImageManager.take("regionName", "otherAtlasKey")` - Getting a region that's inside another (loaded) atlas.
-
-#### Audio Manager
-Once again with an example, say we've got ourselves a sound file called `beep.ogg` located at `assets/sounds`.
-With the [AudioManager](https://github.com/ImXico/HandyGDX/blob/master/source/AudioManager/AudioManager.java) we can:
-
-- `AudioManager.loadSong("beep", "sounds/beep.ogg")` - Loads "beep.ogg" and keys it as "beep".
-- `AudioManager.playSound("beep")` - Plays the "beep" sound at a default volume.
-- `AudioManager.playSound("beep", 0.3f)` - Plays the "beep" sound at volume = 0.3f.
-- `AudioManager.stopSound("beep")` - Stops the "beep" sound.
-- `AudioManager.pauseSound("beep")` - Pauses the "beep" sound.
-- `AudioManager.resumeSound("beep")` - Resumes the "beep" sound.
-- `AudioManager.loopSound("beep")` - Loops the "beep" sound at a default volume.
-- `AudioManager.loopSound("beep", 0.7f)` - Loops the "beep" sound at volume = 0.7f.
-
---
-
-*Note: When it comes to assets, alongside the classes above, I'd recommend marking all assets' names with constants. It's common to use the same assets in multiple parts of the project - saving their names/paths in constants will make them alot more bearable to change around.*
-
+## The Core
 ### State Management
 #### State
 States are, in some aspects, similar to Stages in [Scene2D](https://github.com/libgdx/libgdx/wiki/Scene2d).
@@ -113,44 +70,55 @@ The [StateManager](https://github.com/ImXico/HandyGDX/blob/master/source/State/S
 - `void resize(int width, int height)` -  Resizes the current + next state and the Viewport (passed on init(...)).
 - `void dispose()` - Diposes the current (and also next, if it exists) state.
 
-#### Root App
-Now that we know how to load and access assets, how states work, and how the state manager controls the states flow, we can use all this to easily setup our root/base class - the one that extends [ApplicationAdapter](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/ApplicationAdapter.html).
+#### State Transitions
+Currently there are only two transitions available:
 
-More on the root class and the life cycle of a libGDX app can be seen [here](https://github.com/libgdx/libgdx/wiki/The-life-cycle).
+- `FadingTransition`
 
-This is how it generally will look like, using the States + StateManager approach:
+![gif](https://zippy.gfycat.com/GlamorousExhaustedFrilledlizard.gif)
+
+- `HorizontalSlideTransition` - Left-to-Right or Right-to-Left. Watch in 60 fps [here](https://gfycat.com/HiddenTartIzuthrush).
+
+![gif](https://zippy.gfycat.com/HiddenTartIzuthrush.gif)
+
+But it's easy to make your own - just make sure you implement [Transition](https://github.com/ImXico/HandyGDX/blob/master/source/Transition/Transition.java)!
+
+### World Coordinates
+To keep a consistent app that's independent of real device size or asset size, it's a good idea to:
+- Define a virtual resolution (here it's called world dimensions) that can be whatever you want.
+- Set a [Camera](https://github.com/libgdx/libgdx/wiki/Orthographic-camera) to use that resolution.
+- Use a [Viewport](https://github.com/libgdx/libgdx/wiki/Viewports) to adapt the game screen to the different physical devices.
+
+These virtual dimensions will, thus, be the *boundaries* of our game screen - they'll influence all of the game's rendering.
+Because of this, we will have to define a `WORLD_WIDTH` and `WORLD_HEIGHT` somewhere - this will be done in the next section, the [Base App](#base-app).
+
+### Base App
+This is the final element of the core - our root/base class - the one that extends [ApplicationAdapter](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/ApplicationAdapter.html). More on the life-cycle of a libGDX app can be seen [here](https://github.com/libgdx/libgdx/wiki/The-life-cycle).
+
+Now that we know about world coordinates, states, how the state manager controls the states flow, we can easily set it up.
 
 ````java
 // ... imports ...
 
 public class App extends ApplicationAdapter {
 
+    /*
+    Step 1: Defining the world coordinates.
+    Make them public so you can pass them over at the desktop config.
+    */
+    public static final int WORLD_WIDTH = 700;
+    public static final int WORLD_HEIGHT = 300;
+
     @Override
     public void create() {
-        /*
-        Step 1: Initialize the world dimensions.
-        These values should also be passed in the DesktopLauncher's config width and height.
-        */
-        final int worldWidth = 700;
-        final int worldHeight = 300;
-        WorldDimensions.set(worldWidth, worldHeight);
-        
         /*
         Step 2: Initialize the StateManager with a Camera and a Viewport.
         In this example, an ExtendedViewport is used.
         */
-        final Camera camera = new OrthographicCamera(worldWidth, worldHeight);
+        final Camera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
-        final Viewport viewport = new ExtendViewport(worldWidth, worldHeight, camera);
+        final Viewport viewport = new ExtendViewport(WORLD_HEIGHT, WORLD_HEIGHT, camera);
         StateManager.init(camera, viewport);
-        
-        /*
-        Step 2.5: Optionally load the assets here.
-        You may prefer to load them somewhere else, or maybe lazily.
-        */
-        ImageManager.loadAtlas("myPack", "myPack.pack");
-        ImageManager.loadAtlas("myOtherPack", "myOtherPack.pack");
-        AudioManager.loadSound("mySound", "sounds/mySound.ogg");
         
         /*
         Step 3: Create and set an initial state, that will be shown when the app launches.
@@ -190,18 +158,32 @@ public class App extends ApplicationAdapter {
 }
 ```
 
-#### State Transitions
-Currently there are only two transitions available:
+## The Extensions
+### Image Manager
+This is made to be used with [TextureAtlases](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.html). Information on how to use the TexturePacker to pack many smaller images onto larger images can be found [here](https://github.com/libgdx/libgdx/wiki/Texture-packer).
 
-- `FadingTransition`
+Say we've got `myPack.png` and `myPack.pack` from the Texture Packer inside our `assets` folder - we'll use that as an example.
 
-![gif](https://zippy.gfycat.com/GlamorousExhaustedFrilledlizard.gif)
+- `ImageManager.loadAtlas("myPack", "myPack.pack")` - Loads "myPack.pack" onto the app and keys it as "myPack".
+- `ImageManager.loadAtlas("myPack", "myPack.pack", true)` - Loading + setting it as the default atlas.
+- `ImageManager.getAtlas("myPack")` - Getting the "myPack" atlas.
+- `ImageManager.take("regionName")` - Getting a region that's inside the default atlas.
+- `ImageManager.take("regionName", "otherAtlasKey")` - Getting a region that's inside another (loaded) atlas.
 
-- `HorizontalSlideTransition` - Left-to-Right or Right-to-Left. Watch in 60 fps [here](https://gfycat.com/HiddenTartIzuthrush).
+**Note**: When it comes to assets, alongside the classes above, I'd recommend marking all assets' names with constants. It's common to use the same assets in multiple parts of the project - saving their names/paths in constants will make them alot more bearable to change around. This is shown in the example project.
 
-![gif](https://zippy.gfycat.com/HiddenTartIzuthrush.gif)
+### Audio Manager
+Once again with an example, say we've got ourselves a sound file called `beep.ogg` located at `assets/sounds`.
+With the [AudioManager](https://github.com/ImXico/HandyGDX/blob/master/source/AudioManager/AudioManager.java) we can:
 
-But it's easy to make your own - just make sure you implement [Transition](https://github.com/ImXico/HandyGDX/blob/master/source/Transition/Transition.java).
+- `AudioManager.loadSong("beep", "sounds/beep.ogg")` - Loads "beep.ogg" and keys it as "beep".
+- `AudioManager.playSound("beep")` - Plays the "beep" sound at a default volume.
+- `AudioManager.playSound("beep", 0.3f)` - Plays the "beep" sound at volume = 0.3f.
+- `AudioManager.stopSound("beep")` - Stops the "beep" sound.
+- `AudioManager.pauseSound("beep")` - Pauses the "beep" sound.
+- `AudioManager.resumeSound("beep")` - Resumes the "beep" sound.
+- `AudioManager.loopSound("beep")` - Loops the "beep" sound at a default volume.
+- `AudioManager.loopSound("beep", 0.7f)` - Loops the "beep" sound at volume = 0.7f.
 
 ### Camera Styles
 There are a few camera styles available on-the-go. Here are a few:
@@ -218,7 +200,7 @@ There are a few camera styles available on-the-go. Here are a few:
 
 ![gif](https://fat.gfycat.com/DirtyInbornIberianbarbel.gif)
 
-*Note: The assets used here and in the example project are from [Kenney Assets](http://kenney.nl/assets).*
+**Note**: The assets used here and in the example project are from [Kenney Assets](http://kenney.nl/assets). They are also available on the [example's assets folder](https://github.com/ImXico/HandyGDX/tree/master/example/assets).
 
 ### Text Helper
 A bunch of helper functions that return `Vector2` coordinates.
