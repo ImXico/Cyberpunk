@@ -3,7 +3,6 @@ package source.TextHelper;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.math.Vector2;
-import source.WorldDimensions.WorldDimensions;
 
 /**
  * @author Xico
@@ -13,14 +12,16 @@ public class TextHelper {
     /**
      * Centers a piece of text in the screen and returns it's coordinates under a {@link Vector2}.
      *
-     * @param font {@link BitmapFont} used.
-     * @param text text to be centered.
+     * @param font        {@link BitmapFont} used.
+     * @param text        text to be centered.
+     * @param worldWidth  width of the world (world coordinates).
+     * @param worldHeight height of the world (world coorinates).
      * @return centered coordinates.
      */
-    public static Vector2 centerOnScreen(BitmapFont font, String text) {
+    public static Vector2 centerOnScreen(BitmapFont font, String text, int worldWidth, int worldHeight) {
         final GlyphLayout layout = new GlyphLayout(font, text);
-        final float x = (WorldDimensions.WORLD_WIDTH - layout.width) / 2;
-        final float y = (WorldDimensions.WORLD_HEIGHT - layout.height) / 2;
+        final float x = (worldWidth - layout.width) / 2;
+        final float y = (worldHeight - layout.height) / 2;
         return new Vector2(x, y);
     }
 
@@ -28,14 +29,15 @@ public class TextHelper {
      * Centers a piece of text horizontally, given the world's width. The text's Y is defined by
      * the given parameter.
      *
-     * @param font {@link BitmapFont} used.
-     * @param text text to be centered.
-     * @param y    text's target Y.
+     * @param font       {@link BitmapFont} used.
+     * @param text       text to be centered.
+     * @param y          text's target Y.
+     * @param worldWidth width of the world (world coordinates).
      * @return centered coordinates.
      */
-    public static Vector2 centerHorizontally(BitmapFont font, String text, float y) {
+    public static Vector2 centerHorizontally(BitmapFont font, String text, float y, int worldWidth) {
         final GlyphLayout layout = new GlyphLayout(font, text);
-        final float x = (WorldDimensions.WORLD_WIDTH - layout.width) / 2;
+        final float x = (worldWidth - layout.width) / 2;
         return new Vector2(x, y);
     }
 

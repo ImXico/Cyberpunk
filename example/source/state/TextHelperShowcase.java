@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import example.source.App;
 import example.source.PackValues;
 import source.ImageManager.ImageManager;
 import source.State.AbstractState;
-import source.State.StateManager;
 import source.TextHelper.TextHelper;
 
 public class TextHelperShowcase extends AbstractState {
@@ -37,10 +37,10 @@ public class TextHelperShowcase extends AbstractState {
         font.setColor(Color.BLACK);
         /* Centered text. */
         centeredText = "Centered Text!";
-        centeredCoordinates = TextHelper.centerOnScreen(font, centeredText);
+        centeredCoordinates = TextHelper.centerOnScreen(font, centeredText, App.WORLD_WIDTH, App.WORLD_HEIGHT);
         /* Horizonatlly centered text, arbitrary Y. */
         centeredHorizonatllyText = "Horizontally Centered Text, Y = 200";
-        centeredHorizontallyCoordinates = TextHelper.centerHorizontally(font, centeredHorizonatllyText, 200f);
+        centeredHorizontallyCoordinates = TextHelper.centerHorizontally(font, centeredHorizonatllyText, 200f, App.WORLD_WIDTH);
         /* Text centered inside some image. */
         sampleImage = ImageManager.take(PackValues.BLANK_QUAD);
         centeredOnImageText = "Centered!";

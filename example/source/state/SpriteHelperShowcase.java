@@ -3,10 +3,10 @@ package example.source.state;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import example.source.App;
 import source.ImageManager.ImageManager;
 import source.SpriteHelper.SpriteHelper;
 import source.State.AbstractState;
-import source.State.StateManager;
 
 import static example.source.PackValues.*;
 
@@ -35,13 +35,13 @@ public class SpriteHelperShowcase extends AbstractState {
     public SpriteHelperShowcase() {
         /* Green alien + its position. */
         alienGreen = ImageManager.take(ALIEN_GREEN);
-        alienGreenPos = SpriteHelper.centerOnScreen(ALIEN_WIDTH, ALIEN_HEIGHT);
+        alienGreenPos = SpriteHelper.centerOnScreen(ALIEN_WIDTH, ALIEN_HEIGHT, App.WORLD_WIDTH, App.WORLD_HEIGHT);
         /* Blue alien + its position. */
         alienBlue = ImageManager.take(ALIEN_BLUE);
-        alienBluePos = SpriteHelper.centerOnScreenX(ALIEN_WIDTH, 220f);
+        alienBluePos = SpriteHelper.centerOnScreenX(ALIEN_WIDTH, 220f, App.WORLD_WIDTH);
         /* Pink alien + its position. */
         alienPink = ImageManager.take(ALIEN_PINK);
-        alienPinkPos = SpriteHelper.centerOnScreenY(ALIEN_HEIGHT, 70f);
+        alienPinkPos = SpriteHelper.centerOnScreenY(ALIEN_HEIGHT, 70f, App.WORLD_HEIGHT);
         /* Beige alien + its position + a sample quad image - the beige alien will be centered on it. */
         sampleQuad = ImageManager.take(BLANK_QUAD);
         quadWidth = 70f;

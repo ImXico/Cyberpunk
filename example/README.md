@@ -4,9 +4,9 @@ Getting our basic app running on both desktop and android.
 ## Table of Contents
 
 - [Part 1: Setting Up](#part-1-setting-up)
+  - [Root App Setup](#root-app-setup)
   - [Desktop Config](#desktop-config)
   - [Android Config](#android-config)
-  - [Root App Setup](#root-app-setup)
 - [Part 2: Loading Assets](#part-2-loading-assets)
 - [Part 3: MenuState](#menu-state)
 - [Part 4: PlayState](#play-state)
@@ -15,11 +15,69 @@ Getting our basic app running on both desktop and android.
 
 ### Part 1: Setting up
 We won't dive into much detail here; check out the [official docs](https://github.com/libgdx/libgdx/wiki/Starter-classes-&-configuration) if you're interested.
+
+#### Root App Setup
+This is the first thing to do - setting up our `App` class.
+This is out it would generally look like.
+
+```java
+// ... imports ...
+
+public class App extends ApplicationAdapter {
+
+    /**
+     * Setting the world dimensions.
+     */
+    public static final int WORLD_WIDTH = 700;
+    public static final int WORLD_HEIGHT = 300;
+
+    @Override
+    public void create() {
+        /* Initializing the StateManager with a camera + viewport. */
+        final Camera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
+        final Viewport viewport = new ExtendViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+        StateManager.init(camera, viewport, WORLD_WIDTH, WORLD_HEIGHT);
+
+        /* The MenuState doesn't exist yet - we will make it later! */
+        StateManager.getInstance().setState(new MenuState());
+    }
+
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(200 / 255f, 200 / 255f, 200 / 255f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        StateManager.getInstance().update(Gdx.graphics.getDeltaTime());
+        StateManager.getInstance().render();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        StateManager.getInstance().resize(width, height);
+    }
+
+    @Override
+    public void pause() {
+        StateManager.getInstance().pause();
+    }
+
+    @Override
+    public void resume() {
+        StateManager.getInstance().resume();
+    }
+
+    @Override
+    public void dispose() {
+        StateManager.getInstance().dispose();
+    }
+}
+```
+
 #### Desktop Config
 
 All we have to do in the `DesktopLauncher` is set up the following:
-- `config.width` - Should be the same as `WorldDimensions.WORLD_WIDTH`
-- `config.height` - Should be the same as `WorldDimensions.WORLD_HEIGHT`
+- `config.width` - Should be the same as `App.WORLD_WIDTH`
+- `config.height` - Should be the same as `App.WORLD_HEIGHT`
 
 Optionally, give it a `config.title`.
 
@@ -34,8 +92,8 @@ public class DesktopLauncher {
 
     public static void main(String[] arg) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        config.width = 700;
-        config.height = 300;
+        config.width = App.WORLD_WIDTH;
+        config.height = App.WORLD_HEIGHT;
         config.title = "Handy!";
         new LwjglApplication(new App(), config);
     }
@@ -81,62 +139,6 @@ public class AndroidLauncher extends AndroidApplication {
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
-    }
-}
-```
-
-#### Root App Setup
-This is the last thing we need to get our app 100% ready - setting up our `App` class.
-This is out it would generally look like.
-
-```java
-// ... imports ...
-
-public class App extends ApplicationAdapter {
-
-    @Override
-    public void create() {
-        /* Setting the world dimensions. */
-        final int worldWidth = 700;
-        final int worldHeight = 300;
-        WorldDimensions.set(worldWidth, worldHeight);
-        
-        /* Initializing the StateManager with a camera + viewport. */
-        final Camera camera = new OrthographicCamera(worldWidth, worldHeight);
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
-        final Viewport viewport = new ExtendViewport(worldWidth, worldHeight, camera);
-        StateManager.init(camera, viewport);
-        
-        /* The MenuState doesn't exist yet - we will make it later! */
-        StateManager.getInstance().setState(new MenuState());
-    }
-
-    @Override
-    public void render() {
-        Gdx.gl.glClearColor(200 / 255f, 200 / 255f, 200 / 255f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        StateManager.getInstance().update(Gdx.graphics.getDeltaTime());
-        StateManager.getInstance().render();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        StateManager.getInstance().resize(width, height);
-    }
-
-    @Override
-    public void pause() {
-        StateManager.getInstance().pause();
-    }
-
-    @Override
-    public void resume() {
-        StateManager.getInstance().resume();
-    }
-
-    @Override
-    public void dispose() {
-        StateManager.getInstance().dispose();
     }
 }
 ```

@@ -7,12 +7,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import source.Camera.CameraStyles;
 import source.Transition.Transition;
-import source.WorldDimensions.WorldDimensions;
 
 /**
  * Manages the {@link State}s.
@@ -67,11 +65,23 @@ public class StateManager {
     private final Viewport viewport;
 
     /**
+     * These two fields will be used in the transitions' code, as the transitions between states are
+     * still part of the core.
+     * This way there won't be the need to explicitly pass the world coordinates when using transitions.
+     */
+    private final int worldWidth;
+    private final int worldHeight;
+
+    /**
      * Constructor for the {@link StateManager}.
      *
+     * @param camera      camera that will use a virtual resolution.
+     * @param viewport    viewport that will adapt the game screen to the different physical devices.
+     * @param worldWidth  virtual world width - used in the {@link Transition}s.
+     * @param worldHeight virtual world height - used in the {@link Transition}s.
      * @see Pixmap.Format
      */
-    private StateManager(Camera camera, Viewport viewport) {
+    private StateManager(Camera camera, Viewport viewport, int worldWidth, int worldHeight) {
         /* Initialize both states as null. */
         currentState = null;
         transition = null;
@@ -84,6 +94,9 @@ public class StateManager {
         this.camera = camera;
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         this.viewport = viewport;
+        /* Initialize the world coordinates. */
+        this.worldWidth = worldWidth;
+        this.worldHeight = worldHeight;
         /* Initialize the batch. */
         batch = new SpriteBatch();
     }
@@ -91,11 +104,13 @@ public class StateManager {
     /**
      * Call this once, in the beggining of the app.
      *
-     * @param camera   camera used in-game.
-     * @param viewport viewport for the camera.
+     * @param camera      camera that will use a virtual resolution.
+     * @param viewport    viewport that will adapt the game screen to the different physical devices.
+     * @param worldWidth  virtual world width - used in the {@link Transition}s.
+     * @param worldHeight virtual world height - used in the {@link Transition}s.
      */
-    public static void init(Camera camera, Viewport viewport) {
-        instance = new StateManager(camera, viewport);
+    public static void init(Camera camera, Viewport viewport, int worldWidth, int worldHeight) {
+        instance = new StateManager(camera, viewport, worldWidth, worldHeight);
     }
 
     public static StateManager getInstance() {
@@ -108,6 +123,14 @@ public class StateManager {
 
     public Viewport getViewport() {
         return viewport;
+    }
+
+    public int getWorldWidth() {
+        return worldWidth;
+    }
+
+    public int getWorldHeight() {
+        return worldHeight;
     }
 
     /**

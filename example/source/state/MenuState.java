@@ -4,12 +4,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
+import example.source.App;
 import source.State.AbstractState;
 import source.State.StateManager;
 import source.TextHelper.TextHelper;
-import source.Transition.FadingTransition;
-import source.Transition.HorizontalSlideTransition.Motion;
 import source.Transition.HorizontalSlideTransition;
+import source.Transition.HorizontalSlideTransition.Motion;
 import source.Transition.Transition;
 
 public class MenuState extends AbstractState {
@@ -22,7 +22,7 @@ public class MenuState extends AbstractState {
     public MenuState() {
         font = new BitmapFont();
         font.setColor(Color.BLACK);
-        textPosition = TextHelper.centerOnScreen(font, SAMPLE_TEXT);
+        textPosition = TextHelper.centerOnScreen(font, SAMPLE_TEXT, App.WORLD_WIDTH, App.WORLD_HEIGHT);
     }
 
     @Override

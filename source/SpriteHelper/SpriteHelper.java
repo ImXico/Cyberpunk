@@ -1,7 +1,6 @@
 package source.SpriteHelper;
 
 import com.badlogic.gdx.math.Vector2;
-import source.WorldDimensions.WorldDimensions;
 
 /**
  * @author Xico
@@ -12,37 +11,41 @@ public class SpriteHelper {
     /**
      * Centers a [imgWidth x imgHeight] image on the screen.
      *
-     * @param imgWidth  image-to-center's width.
-     * @param imgHeight image-to-center's height.
+     * @param imgWidth    image-to-center's width.
+     * @param imgHeight   image-to-center's height.
+     * @param worldWidth  width of the world (world coordinates).
+     * @param worldHeight height of the world (world coordinates).
      * @return centered coordinates.
      */
-    public static Vector2 centerOnScreen(float imgWidth, float imgHeight) {
-        final float x = (WorldDimensions.WORLD_WIDTH - imgWidth) / 2;
-        final float y = ((WorldDimensions.WORLD_HEIGHT - imgHeight) / 2);
+    public static Vector2 centerOnScreen(float imgWidth, float imgHeight, int worldWidth, int worldHeight) {
+        final float x = (worldWidth - imgWidth) / 2;
+        final float y = ((worldHeight - imgHeight) / 2);
         return new Vector2(x, y);
     }
 
     /**
      * Centers a [imgWidth x ?] image horizontally, keeping the original Y.
      *
-     * @param imgWidth image-to-center's width.
-     * @param y        image-to-center's Y.
+     * @param imgWidth   image-to-center's width.
+     * @param y          image-to-center's Y.
+     * @param worldWidth width of the world (world coordinates).
      * @return centered coordinates.
      */
-    public static Vector2 centerOnScreenX(float imgWidth, float y) {
-        final float x = (WorldDimensions.WORLD_WIDTH - imgWidth) / 2;
+    public static Vector2 centerOnScreenX(float imgWidth, float y, int worldWidth) {
+        final float x = (worldWidth - imgWidth) / 2;
         return new Vector2(x, y);
     }
 
     /**
      * Centers a [? x imgHeight] image vertically, keeping the original X.
      *
-     * @param imgHeight image-to-center's height.
-     * @param x         image-to-center's X.
+     * @param imgHeight   image-to-center's height.
+     * @param x           image-to-center's X.
+     * @param worldHeight height of the world (world coordinates).
      * @return centered coordinates.
      */
-    public static Vector2 centerOnScreenY(float imgHeight, float x) {
-        final float y = ((WorldDimensions.WORLD_HEIGHT - imgHeight) / 2);
+    public static Vector2 centerOnScreenY(float imgHeight, float x, int worldHeight) {
+        final float y = ((worldHeight - imgHeight) / 2);
         return new Vector2(x, y);
     }
 

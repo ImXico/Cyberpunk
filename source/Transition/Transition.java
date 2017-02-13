@@ -4,12 +4,16 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.Texture;
+import source.State.StateManager;
 
 /**
  * @author Xico
  */
 
 public interface Transition {
+
+    int WORLD_WIDTH = StateManager.getInstance().getWorldWidth();
+    int WORLD_HEIGHT = StateManager.getInstance().getWorldHeight();
 
     /**
      * Starts the transition.

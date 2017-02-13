@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
-import source.WorldDimensions.WorldDimensions;
 
 /**
  * Transition where two {@link source.State}s are slided simultaneously in the same motion.
@@ -22,14 +21,14 @@ public class HorizontalSlideTransition implements Transition {
 
         RIGHT_TO_LEFT(
                 new Vector2(0f, 0f),
-                new Vector2(WorldDimensions.WORLD_WIDTH, 0f),
-                new Vector2(-WorldDimensions.WORLD_WIDTH, 0f),
+                new Vector2(WORLD_WIDTH, 0f),
+                new Vector2(-WORLD_WIDTH, 0f),
                 new Vector2(0f, 0f)
         ),
         LEFT_TO_RIGHT(
                 new Vector2(0f, 0f),
-                new Vector2(-WorldDimensions.WORLD_WIDTH, 0f),
-                new Vector2(WorldDimensions.WORLD_WIDTH, 0f),
+                new Vector2(-WORLD_WIDTH, 0f),
+                new Vector2(WORLD_WIDTH, 0f),
                 new Vector2(0f, 0f)
         );
 
@@ -106,8 +105,8 @@ public class HorizontalSlideTransition implements Transition {
     @Override
     public void render(Batch batch, TextureRegion current, TextureRegion next) {
         batch.begin();
-        batch.draw(current, currentStateCurrentPos.x, currentStateCurrentPos.y, WorldDimensions.WORLD_WIDTH, WorldDimensions.WORLD_HEIGHT);
-        batch.draw(next, nextStateCurrentPos.x, nextStateCurrentPos.y, WorldDimensions.WORLD_WIDTH, WorldDimensions.WORLD_HEIGHT);
+        batch.draw(current, currentStateCurrentPos.x, currentStateCurrentPos.y, WORLD_WIDTH, WORLD_HEIGHT);
+        batch.draw(next, nextStateCurrentPos.x, nextStateCurrentPos.y, WORLD_WIDTH, WORLD_HEIGHT);
         batch.end();
     }
 }

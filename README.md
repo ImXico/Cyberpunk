@@ -118,7 +118,7 @@ public class App extends ApplicationAdapter {
         final Camera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         final Viewport viewport = new ExtendViewport(WORLD_HEIGHT, WORLD_HEIGHT, camera);
-        StateManager.init(camera, viewport);
+        StateManager.init(camera, viewport, WORLD_WIDTH, WORLD_HEIGHT);
         
         /*
         Step 3: Create and set an initial state, that will be shown when the app launches.
@@ -205,8 +205,8 @@ There are a few camera styles available on-the-go. Here are a few:
 ### Text Helper
 A bunch of helper functions that return `Vector2` coordinates.
 
-- `TextHelper.centerHorizontally(font, "Horizontally Centered Text, Y = 200", 200)`
-- `TextHelper.centerOnScreen(font, "Centered Text!")`
+- `TextHelper.centerHorizontally(font, "Horizontally Centered Text, Y = 200", 200, App.WORLD_WIDTH)`
+- `TextHelper.centerOnScreen(font, "Centered Text!", App.WORLD_WIDTH, App.WORLD_HEIGHT)`
 - `TextHelper.centerOnImage(font, "Centered!", imageWidth, imageHeight, imagePosition)`
 
 ![img](https://i.gyazo.com/da82a22d207f6c07785f65026efff612.png)
@@ -214,9 +214,9 @@ A bunch of helper functions that return `Vector2` coordinates.
 ### Sprite Helper
 A bunch of helper functions that return `Vector2` coordinates.
 
-- `SpriteHelper.centerOnScreen(imageWidth, imageHeight)`
-- `SpriteHelper.centerOnScreenX(imageWidth, y)`
-- `SpriteHelper.centerOnScreenY(imageHeight, x)`
+- `SpriteHelper.centerOnScreen(imageWidth, imageHeight, App.WORLD_WIDTH, App.WORLD_HEIGHT)`
+- `SpriteHelper.centerOnScreenX(imageWidth, y, App.WORLD_WIDTH)`
+- `SpriteHelper.centerOnScreenY(imageHeight, x, App.WORLD_HEIGHT)`
 - `SpriteHelper.centerOnImage(width, height, imagePosition, imageWidth, imageHeight)`
 
 ![img](https://i.gyazo.com/b2b826b4cd321b6aa03a3cf97c36aa6b.png)

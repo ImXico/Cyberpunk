@@ -45,6 +45,13 @@ alien-green
   orig: 70, 70
   offset: 0, 0
   index: -1
+alien-pink
+  rotate: false
+  xy: 378, 185
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
 blank-quad
   rotate: false
   xy: 1, 32

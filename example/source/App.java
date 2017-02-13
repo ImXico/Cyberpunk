@@ -10,28 +10,22 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import example.source.state.MenuState;
 import source.ImageManager.ImageManager;
 import source.State.StateManager;
-import source.WorldDimensions.WorldDimensions;
 
 public class App extends ApplicationAdapter {
 
+    public static final int WORLD_WIDTH = 700;
+    public static final int WORLD_HEIGHT = 300;
+
     @Override
     public void create() {
-       /*
-        Step 1: Initialize the world dimensions.
-        These values should also be passed in the DesktopLauncher's config width and height.
-        */
-        final int worldWidth = 700;
-        final int worldHeight = 300;
-        WorldDimensions.set(worldWidth, worldHeight);
-
         /*
         Step 2: Initialize the StateManager with a Camera and a Viewport.
         In this example, an ExtendedViewport is used.
         */
-        final Camera camera = new OrthographicCamera(worldWidth, worldHeight);
+        final Camera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
-        final Viewport viewport = new ExtendViewport(worldWidth, worldHeight, camera);
-        StateManager.init(camera, viewport);
+        final Viewport viewport = new ExtendViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+        StateManager.init(camera, viewport, WORLD_WIDTH, WORLD_HEIGHT);
 
         /*
         Step 2.5: Optionally load the assets here.

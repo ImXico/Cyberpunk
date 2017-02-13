@@ -2,7 +2,6 @@ package source.Transition;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import source.WorldDimensions.WorldDimensions;
 
 /**
  * @author Xico
@@ -10,18 +9,21 @@ import source.WorldDimensions.WorldDimensions;
 
 public class FadingTransition implements Transition {
 
-    /** The default fading speed. */
+    /**
+     * The default fading speed.
+     */
     private static final float DEFAULT_SPEED = 0.5f;
-
     private static final float DEFAULT_ALPHA_INC = 0.05f;
 
     private boolean running;
     private float speed;
 
-    private float alpha;
-    /** Alpha increment at each frame. */
+    /**
+     * Alpha increment at each frame.
+     */
     private float alphaInc;
     private float maxAlpha;
+    private float alpha;
 
     /**
      * Constructor for {@link FadingTransition} where the speed is specified.
@@ -42,7 +44,7 @@ public class FadingTransition implements Transition {
      * @see {@value DEFAULT_SPEED}
      */
     public FadingTransition() {
-       this(DEFAULT_SPEED);
+        this(DEFAULT_SPEED);
     }
 
     /**
@@ -88,9 +90,9 @@ public class FadingTransition implements Transition {
     public void render(Batch batch, TextureRegion current, TextureRegion next) {
         batch.begin();
         batch.setColor(1f, 1f, 1f, 1f - alpha);
-        batch.draw(current, 0, 0, WorldDimensions.WORLD_WIDTH, WorldDimensions.WORLD_HEIGHT);
+        batch.draw(current, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
         batch.setColor(1f, 1f, 1f, alpha);
-        batch.draw(next, 0, 0, WorldDimensions.WORLD_WIDTH, WorldDimensions.WORLD_HEIGHT);
+        batch.draw(next, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
         batch.end();
     }
 }
