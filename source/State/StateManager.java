@@ -47,6 +47,12 @@ public class StateManager {
      */
     private FrameBuffer currentFBO;
     private FrameBuffer nextFBO;
+    
+     /**
+     * TextureRegions for the {@link FrameBuffer}.
+     */
+    private TextureRegion currentFlippedRegion;
+    private TextureRegion nextFlippedRegion;
 
     /**
      * Batch that's used to render everything.
@@ -90,6 +96,13 @@ public class StateManager {
         final int height = Gdx.graphics.getHeight();
         currentFBO = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
         nextFBO = new FrameBuffer(Pixmap.Format.RGBA8888, width, height, false);
+        
+        currentFlippedRegion = new TextureRegion(currentFBO.getColorBufferTexture());
+        currentFlippedRegion.flip(false, true);
+
+        nextFlippedRegion = new TextureRegion(nextFBO.getColorBufferTexture());
+        nextFlippedRegion.flip(false, true);
+        
         /* Initialize the viewport and respective camera. */
         this.camera = camera;
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
@@ -212,10 +225,10 @@ public class StateManager {
                 nextFBO.begin();
                 nextState.render(batch);
                 nextFBO.end();
-                final TextureRegion currentFlippedRegion = new TextureRegion(currentFBO.getColorBufferTexture());
-                currentFlippedRegion.flip(false, true);
-                final TextureRegion nextFlippedRegion = new TextureRegion(nextFBO.getColorBufferTexture());
-                nextFlippedRegion.flip(false, true);
+                
+                currentFlippedRegion.setTexture(currentFBO.getColorBufferTexture());
+                nextFlippedRegion.setTexture(nextFBO.getColorBufferTexture());
+                
                 transition.render(batch, currentFlippedRegion, nextFlippedRegion);
             }
         }
