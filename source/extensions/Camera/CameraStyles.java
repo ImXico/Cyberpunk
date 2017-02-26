@@ -1,4 +1,4 @@
-package source.Camera;
+package source.extensions.Camera;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;

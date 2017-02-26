@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import example.source.App;
 import example.source.PackValues;
-import source.ImageManager.ImageManager;
+import source.extensions.ImageManager.ImageManager;
 
 public class Ground {
 

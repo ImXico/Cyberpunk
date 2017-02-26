@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import example.source.state.MenuState;
-import source.ImageManager.ImageManager;
-import source.State.StateManager;
+import source.extensions.ImageManager.ImageManager;
+import source.core.State.StateManager;
 
 public class App extends ApplicationAdapter {
 

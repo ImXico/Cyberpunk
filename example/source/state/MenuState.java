@@ -5,12 +5,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import example.source.App;
-import source.State.AbstractState;
-import source.State.StateManager;
-import source.TextHelper.TextHelper;
-import source.Transition.HorizontalSlideTransition;
-import source.Transition.HorizontalSlideTransition.Motion;
-import source.Transition.Transition;
+import source.core.State.AbstractState;
+import source.core.State.StateManager;
+import source.extensions.TextHelper.TextHelper;
+import source.core.Transition.HorizontalSlideTransition;
+import source.core.Transition.HorizontalSlideTransition.Motion;
+import source.core.Transition.Transition;
 
 public class MenuState extends AbstractState {
 

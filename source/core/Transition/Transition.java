@@ -1,10 +1,10 @@
-package source.Transition;
+package source.core.Transition;
 
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.Texture;
-import source.State.StateManager;
+import source.core.State.StateManager;
 
 /**
  * @author Xico

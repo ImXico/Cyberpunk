@@ -1,4 +1,4 @@
-package source.Transition;
+package source.core.Transition;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

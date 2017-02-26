@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import example.source.App;
 import example.source.PackValues;
-import source.ImageManager.ImageManager;
-import source.State.AbstractState;
-import source.TextHelper.TextHelper;
+import source.extensions.ImageManager.ImageManager;
+import source.core.State.AbstractState;
+import source.extensions.TextHelper.TextHelper;
 
 public class TextHelperShowcase extends AbstractState {
 

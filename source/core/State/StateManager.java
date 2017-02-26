@@ -1,4 +1,4 @@
-package source.State;
+package source.core.State;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -9,8 +9,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import source.Camera.CameraStyles;
-import source.Transition.Transition;
+import source.extensions.Camera.CameraStyles;
+import source.core.Transition.Transition;
 
 /**
  * Manages the {@link State}s.
@@ -38,7 +38,7 @@ public class StateManager {
     private State nextState;
 
     /**
-     * {@link source.Transition.Transition} used to go from one state to another. May be {@code null}.
+     * {@link source.core.Transition.Transition} used to go from one state to another. May be {@code null}.
      */
     private Transition transition;
 
@@ -48,7 +48,7 @@ public class StateManager {
     private FrameBuffer currentFBO;
     private FrameBuffer nextFBO;
     
-     /**
+    /**
      * TextureRegions for the {@link FrameBuffer}.
      */
     private TextureRegion currentFlippedRegion;
@@ -147,7 +147,7 @@ public class StateManager {
     }
 
     /**
-     * Sets the currently running {@link State} with a {@link source.Transition}.
+     * Sets the currently running {@link State} with a {@link source.core.Transition}.
      *
      * @param state      new current state.
      * @param transition transition used to go from the previous state to the next one.
@@ -183,7 +183,7 @@ public class StateManager {
 
     /**
      * Updates the current {@link State}, if there is one.
-     * Also updates any on-going {@link source.Transition.Transition}.
+     * Also updates any on-going {@link source.core.Transition.Transition}.
      *
      * @param delta time elapsed between this moment and the last update call.
      */

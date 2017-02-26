@@ -1,4 +1,4 @@
-package source.SpriteHelper;
+package source.extensions.SpriteHelper;
 
 import com.badlogic.gdx.math.Vector2;
 

@@ -5,9 +5,9 @@ import com.badlogic.gdx.math.Vector2;
 import example.source.background.Background;
 import example.source.background.Ground;
 import example.source.hero.Hero;
-import source.Camera.CameraStyles;
-import source.State.AbstractState;
-import source.State.StateManager;
+import source.extensions.Camera.CameraStyles;
+import source.core.State.AbstractState;
+import source.core.State.StateManager;
 
 public class PlayState extends AbstractState {
 

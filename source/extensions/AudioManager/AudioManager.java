@@ -1,4 +1,4 @@
-package source.AudioManager;
+package source.extensions.AudioManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;

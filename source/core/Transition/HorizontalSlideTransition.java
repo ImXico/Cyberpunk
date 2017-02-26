@@ -1,4 +1,4 @@
-package source.Transition;
+package source.core.Transition;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Transition where two {@link source.State}s are slided simultaneously in the same motion.
+ * Transition where two {@link source.core.State}s are slided simultaneously in the same motion.
  *
  * @author Xico
  */

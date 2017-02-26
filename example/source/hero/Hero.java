@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.Color;
 
 import example.source.PackValues;
-import source.ImageManager.ImageManager;
+import source.extensions.ImageManager.ImageManager;
 
 public class Hero {
 

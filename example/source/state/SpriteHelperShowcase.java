@@ -4,9 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import example.source.App;
-import source.ImageManager.ImageManager;
-import source.SpriteHelper.SpriteHelper;
-import source.State.AbstractState;
+import source.extensions.ImageManager.ImageManager;
+import source.extensions.SpriteHelper.SpriteHelper;
+import source.core.State.AbstractState;
 
 import static example.source.PackValues.*;
 

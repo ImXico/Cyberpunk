@@ -1,4 +1,4 @@
-package source.TextHelper;
+package source.extensions.TextHelper;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
