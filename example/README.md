@@ -8,8 +8,8 @@ Getting our basic app running on both desktop and android.
   - [Desktop Config](#desktop-config)
   - [Android Config](#android-config)
 - [Part 2: Loading Assets](#part-2-loading-assets)
-- [Part 3: MenuState](#menu-state)
-- [Part 4: PlayState](#play-state)
+- [Part 3: MenuState](#part-3-menu-state)
+- [Part 4: PlayState](#part-4-play-state)
 
 --
 

@@ -119,7 +119,6 @@ public class App extends ApplicationAdapter {
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         final Viewport viewport = new ExtendViewport(WORLD_HEIGHT, WORLD_HEIGHT, camera);
         StateManager.init(camera, viewport, WORLD_WIDTH, WORLD_HEIGHT);
-        
         /*
         Step 3: Create and set an initial state, that will be shown when the app launches.
         Here a TestState is used - it's just an empty state that doesn't do/show anything at all.
