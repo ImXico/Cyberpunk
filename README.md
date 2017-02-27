@@ -32,6 +32,7 @@ A very simple example project (that will contain most of the topics below in act
 - [Camera Styles](#camera-styles)
 - [Text Helper](#text-helper)
 - [Sprite Helper](#sprite-helper)
+- [Physics](#physics)
 
 --
 
@@ -42,7 +43,7 @@ States are, in some aspects, similar to Stages in [Scene2D](https://github.com/l
 In a game there would typically be a Play state, a Menu state, Game-Over state, etc, etc.
 The most important information about the State is that it is capable of:
 - Handling input (touches, key presses, ...).
-  - And the touch input can be converted between *screen* <--> *world* coordinates.
+  - And the touch input can be converted between *screen* <-> *world* coordinates.
 - Updating its logic.
 - Rendering its internal components.
 - Disposing resources when their not needed anymore.
@@ -81,7 +82,7 @@ Currently there are only two transitions available:
 
 ![gif](https://zippy.gfycat.com/HiddenTartIzuthrush.gif)
 
-But it's easy to make your own - just make sure you implement [Transition](https://github.com/ImXico/HandyGDX/blob/master/source/Transition/Transition.java)!
+But it's easy to make your own - just make sure you implement the [Transition](https://github.com/ImXico/HandyGDX/blob/master/source/Transition/Transition.java) interface!
 
 ### World Coordinates
 To keep a consistent app that's independent of real device size or asset size, it's a good idea to:
@@ -219,3 +220,91 @@ A bunch of helper functions that return `Vector2` coordinates.
 - `SpriteHelper.centerOnImage(width, height, imagePosition, imageWidth, imageHeight)`
 
 ![img](https://i.gyazo.com/b2b826b4cd321b6aa03a3cf97c36aa6b.png)
+
+### Physics
+The physics extension is a small *wrapper* around [libGDX' Box2D](https://github.com/libgdx/libgdx/wiki/Box2d) - thus, it requires having the Box2D dependency in the project, which can be done in two ways:
+ - Simply checking the Box2D checkbox on the [setup jar](https://libgdx.badlogicgames.com/download.html).
+ - Via gradle - more on that can be seen [here](https://github.com/libgdx/libgdx/wiki/Dependency-management-with-Gradle#box2d-gradle).
+ 
+The extension is (currently) composed of the following components: 
+ - [Utils](#utils)
+ - [Physics Debugger](#physics-debugger)
+ - [Physics World](#physics-world)
+ - [Builders](#builders)
+   - [BodyDefBuilder](#body-def-builder)
+   - [FixtureDefBuilder](#fixture-def-builder)
+   - [BodyBuilder](#body-builder)
+
+#### Utils
+The [Utils](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/Utils.java) class simply contains utility conversion methods: from Box2D units to pixels and from pixels to Box2D units.
+
+By using a pixels-to-meters conversion metric, we can **keep using pixel units in methods**, which is pretty useful.
+These conversions are done *under the hood*, meaning that you probably won't need to call any of this class' methods.
+
+#### Physics Debugger
+The [PhysicsDebugger](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/PhysicsDebugger.java) is used to debug a given **PhysicsWorld** (seen below), and is essentially a *wrapper* around [Box2DDebugRenderer](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Box2DDebugRenderer.html).
+
+Besides having an instance of Box2DDebugRenderer and calling its render method, the PhysicsDebugger also contains a dedicated [Camera](https://github.com/libgdx/libgdx/wiki/Orthographic-camera) and [Viewport](https://github.com/libgdx/libgdx/wiki/Viewports), which means that the debug renderer will still look good even after resize events.
+
+#### Physics World
+The [PhysicsWorld](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/PhysicsWorld.java) encapsulates a [Box2D World](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/World.html).
+
+By calling `setDebugging(boolean)`, you can toggle whether or not you want a PhysicsDebugger to debug your world. Usually you'll want to have the `debugging` flag set to `false` on a released version of your app, as having the debugger running can be a bit CPU-heavy, especially on mobile devices.
+
+#### Builders
+This is how, in Box2D, we'd generally create a ball **body**, given a position, radius and restitution (bouncyness):
+
+```java
+// Create a body def...
+final BodyDef bodyDef = new BodyDef();
+bodyDef.type = BodyDef.BodyType.DyamicBody;
+bodyDef.position = some position
+
+// Create a shape...
+final CircleShape circleShape = new CircleShape();
+circleShape.radius = some radius;
+
+// Create a fixture def...
+final FixtureDef fixtureDef = new FixtureDef();
+fixtureDef.restitution = some restitution;
+
+// Attach the shape to the fixture def...
+fixtureDef.shape = circleShape;
+
+// Create a body...
+final Body myBody = world.createBody(bodyDef);
+myBody.createFixture(fixtureDef);
+
+// Dispose the shape...
+circleShape.dispose();
+```
+
+It feels a bit messy and confusing - to make this slightly more bearable, you can use the [BodyBuilder](#body-builder).
+
+The body builder depends on two other builders: `BodyDefBuilder` and `FixtureDefBuilder`.
+
+##### Body Def Builder
+The [BodyDefBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyDefBuilder.java) lets you build a customizable [BodyDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/BodyDef.html).
+
+##### Fixture Def Builder
+The [FixtureDefBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/FixtureDefBuilder.java) lets you build a customizable [FixtureDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/FixtureDef.html).
+
+##### Body Builder
+The [BodyBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyBuilder.java) lets you build a customizable body, with **one** body def and **one or more** fixture defs.
+
+It's important to note that the `BodyBuilder`'s constructor takes in a `PhysicsWorld` - this means that all bodies created with a given instance of `BodyBuilder` will be hosted in that `PhysicsWorld`. it is possible to change the current world by calling `setPhysicsWorld(physicsWorld)`.
+
+That being said, the above code could be rewritten like so:
+
+```java
+myBody = bodyBuilder
+		.withBodyDef(new BodyDefBuilder()
+			.position(some position)
+			.type(BodyDef.BodyType.DyamicBody))
+		.withFixtureDef(new FixtureDefBuilder()
+			.circleShape(some radius)
+			.restitution(some restitution))
+		.build();
+```
+This feels a lot more compact, and still gives you the **same** level of customization of the first version - **note**: still needs stuff like bit filtering, user data, etc... - soon!
+
