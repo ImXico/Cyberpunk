@@ -37,6 +37,24 @@ public class FixtureDefBuilder {
     }
 
     /**
+     * Generates a {@link PolygonShape} given its vertices.
+     *
+     * @param vertices shape's vertices, in pixels.
+     * @return this instance.
+     * @see PolygonShape
+     */
+    public FixtureDefBuilder polygonShape(Vector2[] vertices) {
+        for (Vector2 vertex : vertices) {
+            /* Same effect as calling toB2DUnits. */
+            vertex.scl(1 / Utils.PPM);
+        }
+        final PolygonShape polygonShape = new PolygonShape();
+        polygonShape.set(vertices);
+        fixtureDef.shape = polygonShape;
+        return this;
+    }
+
+    /**
      * Generates a {@link PolygonShape} and sets it as a box, given its dimensions.
      *
      * @param width  shape's total width, in pixels.

@@ -12,21 +12,29 @@ import com.badlogic.gdx.utils.Array;
 public class BodyBuilder {
 
     private BodyDef bodyDef;
-    private Array<FixtureDef> fixtureDefs;
+    private Object userData;
+
+    private final Array<FixtureDef> fixtureDefs;
+    private final Array<Object> fixturesUserData;
 
     private PhysicsWorld physicsWorld;
 
     public BodyBuilder(PhysicsWorld world) {
         this.physicsWorld = world;
-        this.cleanup();
+        bodyDef = new BodyDef();
+        userData = null;
+        fixtureDefs = new Array<FixtureDef>();
+        fixturesUserData = new Array<Object>();
     }
 
     private void cleanup() {
         bodyDef = new BodyDef();
-        fixtureDefs = new Array<FixtureDef>();
+        userData = null;
         for (FixtureDef fixtureDef : fixtureDefs) {
             fixtureDef.shape.dispose();
         }
+        fixtureDefs.clear();
+        fixturesUserData.clear();
     }
 
     public void setPhysicsWorld(PhysicsWorld world) {
@@ -48,13 +56,25 @@ public class BodyBuilder {
     /**
      * Add a fixture def to this body, by calling {@link FixtureDefBuilder} functions.
      *
+     * @param builder         {@link FixtureDefBuilder}.
+     * @param fixtureUserData user data for the fixture that will be return after calling body#createFixture
+     * @return this instance.
+     */
+    public BodyBuilder withFixtureDef(FixtureDefBuilder builder, Object fixtureUserData) {
+        fixtureDefs.add(builder.build());
+        fixturesUserData.add(fixtureUserData);
+        return this;
+    }
+
+    /**
+     * Add a fixture def to this body, by calling {@link FixtureDefBuilder} functions.
+     *
      * @param builder {@link FixtureDefBuilder}.
      * @return this instance.
      * @see FixtureDefBuilder
      */
     public BodyBuilder withFixtureDef(FixtureDefBuilder builder) {
-        fixtureDefs.add(builder.build());
-        return this;
+        return this.withFixtureDef(builder, null);
     }
 
     /**
@@ -65,9 +85,11 @@ public class BodyBuilder {
      */
     public Body build() {
         final Body body = this.physicsWorld.getWorld().createBody(this.bodyDef);
-        for (FixtureDef fixtureDef : fixtureDefs) {
-            body.createFixture(fixtureDef);
+        for (int i = 0; i < fixtureDefs.size; i++) {
+            final Fixture fixture = body.createFixture(fixtureDefs.get(i));
+            fixture.setUserData(fixturesUserData.get(i));
         }
+        body.setUserData(userData);
         this.cleanup();
         return body;
     }

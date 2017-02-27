@@ -22,8 +22,8 @@ public class PhysicsDebugger {
 
     public PhysicsDebugger(int worldWidth, int worldHeight) {
         renderer = new Box2DDebugRenderer();
-        final float vpWidth = Utils.toB2DUnits((float) worldWidth);
-        final float vpHeight = Utils.toB2DUnits((float) worldHeight);
+        final float vpWidth = Utils.toB2DUnits(worldWidth);
+        final float vpHeight = Utils.toB2DUnits(worldHeight);
         b2dCamera = new OrthographicCamera();
         b2dCamera.setToOrtho(false, vpWidth, vpHeight);
         b2dViewport = new ExtendViewport(vpWidth, vpHeight, b2dCamera);

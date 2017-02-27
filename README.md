@@ -306,5 +306,8 @@ myBody = bodyBuilder
 			.restitution(some restitution))
 		.build();
 ```
-This feels a lot more compact, and still gives you the **same** level of customization of the first version - **note**: still needs stuff like bit filtering, user data, etc... - soon!
+This feels a lot more compact, and still gives you the **same** level of customization of the first version!
 
+### License and Contributing
+This project is under the MIT license - you can see the full license [here](https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md).
+That being said, please feel free to contribute; contributions are more than welcome to make this project grow!

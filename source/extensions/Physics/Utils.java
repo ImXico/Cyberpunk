@@ -23,6 +23,8 @@ public class Utils {
      */
     static final float PPM = 100f;
 
+    private static final Vector2 cachedVector = new Vector2();
+
     /**
      * Turns pixel values into B2D units.
      *
@@ -42,7 +44,7 @@ public class Utils {
     static Vector2 toB2DUnits(Vector2 value) {
         final float x = value.x / PPM;
         final float y = value.y / PPM;
-        return new Vector2(x, y);
+        return cachedVector.set(x, y);
     }
 
     /**
@@ -64,7 +66,7 @@ public class Utils {
     static Vector2 toPixels(Vector2 value) {
         final float x = value.x * PPM;
         final float y = value.y * PPM;
-        return new Vector2(x, y);
+        return cachedVector.set(x, y);
     }
 }
 
