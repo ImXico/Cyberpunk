@@ -19,10 +19,6 @@ A very simple example project (that will contain most of the topics below in act
 
 ### The Core
 - [State Management](#state-management)
-  - [State](#state)
-  - [Abstract State](#abstract-state)
-  - [State Manager](#state-manager)
-  - [State Transitions](#state-transitions)
 - [World Coordinates](#world-coordinates)
 - [Base App](#base-app)
 
@@ -231,9 +227,6 @@ The extension is (currently) composed of the following components:
  - [Physics Debugger](#physics-debugger)
  - [Physics World](#physics-world)
  - [Builders](#builders)
-   - [BodyDefBuilder](#body-def-builder)
-   - [FixtureDefBuilder](#fixture-def-builder)
-   - [BodyBuilder](#body-builder)
 
 #### Utils
 The [Utils](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/Utils.java) class simply contains utility conversion methods: from Box2D units to pixels and from pixels to Box2D units.
