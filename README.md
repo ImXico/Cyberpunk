@@ -1,21 +1,22 @@
-# HandyGDX
+![alt text](https://github.com/ImXico/HandyGDX/blob/master/logo.png?raw=true)
+
 A bunch of libraries for [libGDX](http://libgdx.badlogicgames.com/), aiming to be a useful resource for both experienced developers and newcomers.
 
 ## How is HandyGDX structured?
-Essentially in two parts:
+Essentially in two parts, that are fully independent of each other:
 
-- The **core** is the base structure of the app - it handles states, how they are managed and the base app. This is useful to get up and running quickly, without having to deal with these
-aspects.
+- **The core** is the base structure of the application (the skeleton) - it handles states, how they are managed and the base application. It's layed out intuitively, and is useful to get you up and running quickly, without having to deal with these aspects yourself.
 
-- The **extensions** are the libs and mini-libs that you can fetch as you need. From asset managers to aesthetic utilities, it ranges between a (hopefully increasing) number
-of different fields. It's important to references that *every* extension lib is **totally independent** of the core, meaning that you can use any extension without having
-the core.
+- **The extensions** are the libraries and mini-libraries that you can fetch as you need. From asset managers to aesthetic utilities, it ranges between a (hopefully increasing) number of different fields. 
+
+*Note:* Every extension library is **totally independent** of the core, meaning that you can use any extension without having
+the core in your project.
 
 ## Table of Contents
 Each section here will have a small overview, and some will have examples.
 A very simple example project (that will contain most of the topics below in action) can be found [here](https://github.com/ImXico/HandyGDX/tree/master/example). It also contains the assets used and a small walkthrough.
 
-**Note:** There will be references to the [official libGDX wiki](https://github.com/libgdx/libgdx). It is really complete and well-written, and there's also loads of documentation over its various APIs.
+*Note:* There will be references to the [official libGDX wiki](https://github.com/libgdx/libgdx). It is really complete and well-written, and there's also loads of documentation over its various APIs.
 
 ### The Core
 - [State Management](#state-management)
@@ -30,8 +31,6 @@ A very simple example project (that will contain most of the topics below in act
 - [Sprite Helper](#sprite-helper)
 - [Physics](#physics)
 
---
-
 ## The Core
 ### State Management
 #### State
@@ -39,15 +38,12 @@ States are, in some aspects, similar to Stages in [Scene2D](https://github.com/l
 In a game there would typically be a Play state, a Menu state, Game-Over state, etc, etc.
 The most important information about the State is that it is capable of:
 - Handling input (touches, key presses, ...).
-  - And the touch input can be converted between *screen* <-> *world* coordinates.
 - Updating its logic.
 - Rendering its internal components.
 - Disposing resources when their not needed anymore.
 
 #### Abstract State
-A convenience implementation of the State interface.
-
-Every concrete state would be a subclass of [AbstractState](https://github.com/ImXico/HandyGDX/blob/master/source/State/AbstractState.java).
+A convenience implementation of the State interface. Every concrete state would be a subclass of [AbstractState](https://github.com/ImXico/HandyGDX/blob/master/source/State/AbstractState.java).
 Thus, every concrete state will necessarily implement **atleast** the following methods:
 ```java
 public void update(float delta) { ... }
@@ -59,16 +55,16 @@ public void dispose() { ... }
 The [StateManager](https://github.com/ImXico/HandyGDX/blob/master/source/State/StateManager.java) is exactly that - an entity that manages the states flow. Because it is a singleton, there is global access to it, making it easy to use.
 
 - `static void init(Camera camera, Viewport viewport)` - Initializes the StateManager - call this once.
-- `static StateManager getInstance()` - This is the way to access the StateManager (only after init(...) was called).
-- `void setState(State nextState)` - Instantly change the current state to a given next state.
+- `static StateManager getInstance()` - This is the way to access the StateManager (only after #init was called).
+- `void setState(State nextState)` - Instantly changes the current state to a given next state.
 - `void setState(State nextState, Transition transition)` - Smoothly change the current state with a transition.
-- `void update(float delta)` - Updates the currently running state and and any on-going transition, if there is one.
+- `void update(float delta)` - Updates the currently running state and any on-going transition, if there is one.
 - `void render()` - Renders the currenly running state and any on-going transition, if there is one.
-- `void resize(int width, int height)` -  Resizes the current + next state and the Viewport (passed on init(...)).
-- `void dispose()` - Diposes the current (and also next, if it exists) state.
+- `void resize(int width, int height)` - Resizes the current + next state and the Viewport (passed on #init).
+- `void dispose()` - Diposes the current (and also next, if it exists) state(s).
 
 #### State Transitions
-Currently there are only two transitions available:
+State transitions make up for a smoother UX - instead of changing states abruptely, you can use a transition, like the ones below:
 
 - `FadingTransition`
 
@@ -82,7 +78,7 @@ But it's easy to make your own - just make sure you implement the [Transition](h
 
 ### World Coordinates
 To keep a consistent app that's independent of real device size or asset size, it's a good idea to:
-- Define a virtual resolution (here it's called world dimensions) that can be whatever you want.
+- Define a virtual resolution (here it's called world dimensions), that can be whatever you want.
 - Set a [Camera](https://github.com/libgdx/libgdx/wiki/Orthographic-camera) to use that resolution.
 - Use a [Viewport](https://github.com/libgdx/libgdx/wiki/Viewports) to adapt the game screen to the different physical devices.
 
@@ -99,27 +95,26 @@ Now that we know about world coordinates, states, how the state manager controls
 
 public class App extends ApplicationAdapter {
 
-    /*
-    Step 1: Defining the world coordinates.
-    Make them public so you can pass them over at the desktop config.
-    */
+    // Step 1: Defining the world coordinates.
+    // Make them public so you can pass them over at the desktop config.
+    
     public static final int WORLD_WIDTH = 700;
     public static final int WORLD_HEIGHT = 300;
 
     @Override
     public void create() {
-        /*
-        Step 2: Initialize the StateManager with a Camera and a Viewport.
-        In this example, an ExtendedViewport is used.
-        */
+        
+        // Step 2: Initialize the StateManager with a Camera and a Viewport.
+        // In this example, an ExtendedViewport is used.
+        
         final Camera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         final Viewport viewport = new ExtendViewport(WORLD_HEIGHT, WORLD_HEIGHT, camera);
         StateManager.init(camera, viewport, WORLD_WIDTH, WORLD_HEIGHT);
-        /*
-        Step 3: Create and set an initial state, that will be shown when the app launches.
-        Here a TestState is used - it's just an empty state that doesn't do/show anything at all.
-        */
+        
+        // Step 3: Create and set an initial state, that will be shown when the app launches.
+        // Here a TestState is used - it's just an empty state that doesn't do/show anything at all.
+        
         final State myTestState = new TestState();
         StateManager.getInstance().setState(myTestState);
     }
@@ -166,7 +161,7 @@ Say we've got `myPack.png` and `myPack.pack` from the Texture Packer inside our 
 - `ImageManager.take("regionName")` - Getting a region that's inside the default atlas.
 - `ImageManager.take("regionName", "otherAtlasKey")` - Getting a region that's inside another (loaded) atlas.
 
-**Note**: When it comes to assets, alongside the classes above, I'd recommend marking all assets' names with constants. It's common to use the same assets in multiple parts of the project - saving their names/paths in constants will make them alot more bearable to change around. This is shown in the example project.
+*Note*: When it comes to assets, alongside the classes above, it's a good idea to mark all assets' names with constants. It's common to use the same assets in multiple parts of the project - saving their names/paths in constants will make them alot more bearable to change around. This is done in the example project.
 
 ### Audio Manager
 Once again with an example, say we've got ourselves a sound file called `beep.ogg` located at `assets/sounds`.
@@ -231,8 +226,7 @@ The extension is (currently) composed of the following components:
 #### Utils
 The [Utils](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/Utils.java) class simply contains utility conversion methods: from Box2D units to pixels and from pixels to Box2D units.
 
-By using a pixels-to-meters conversion metric, we can **keep using pixel units in methods**, which is pretty useful.
-These conversions are done *under the hood*, meaning that you probably won't need to call any of this class' methods.
+By using a pixels-to-meters conversion metric, we can **keep using pixel units in methods**, which is pretty useful. These conversions are done *under the hood*, meaning that you probably won't need to call any of this class' methods.
 
 #### Physics Debugger
 The [PhysicsDebugger](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/PhysicsDebugger.java) is used to debug a given **PhysicsWorld** (seen below), and is essentially a *wrapper* around [Box2DDebugRenderer](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Box2DDebugRenderer.html).
@@ -272,35 +266,29 @@ myBody.createFixture(fixtureDef);
 circleShape.dispose();
 ```
 
-It feels a bit messy and confusing - to make this slightly more bearable, you can use the [BodyBuilder](#body-builder).
+It feels a bit messy and confusing, and that's where the [BodyBuilder](#body-builder) can be benefitial.
 
-The body builder depends on two other builders: `BodyDefBuilder` and `FixtureDefBuilder`.
-
-##### Body Def Builder
-The [BodyDefBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyDefBuilder.java) lets you build a customizable [BodyDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/BodyDef.html).
-
-##### Fixture Def Builder
-The [FixtureDefBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/FixtureDefBuilder.java) lets you build a customizable [FixtureDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/FixtureDef.html).
+The body builder depends on two other builders:
+- [BodyDefBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyDefBuilder.java), that lets you build a customizable [BodyDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/BodyDef.html).
+- [FixtureDefBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/FixtureDefBuilder.java), that lets you build a customizable [FixtureDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/FixtureDef.html).
 
 ##### Body Builder
-The [BodyBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyBuilder.java) lets you build a customizable body, with **one** body def and **one or more** fixture defs.
-
-It's important to note that the `BodyBuilder`'s constructor takes in a `PhysicsWorld` - this means that all bodies created with a given instance of `BodyBuilder` will be hosted in that `PhysicsWorld`. it is possible to change the current world by calling `setPhysicsWorld(physicsWorld)`.
+The [BodyBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyBuilder.java) lets you build a customizable body, with **one** body def and **one or more** fixture defs. It's important to note that the `BodyBuilder`'s constructor takes in a `PhysicsWorld` - this means that all bodies created with a given instance of `BodyBuilder` will be hosted in that `PhysicsWorld`. it is possible to change the current world by calling `setPhysicsWorld(physicsWorld)`.
 
 That being said, the above code could be rewritten like so:
 
 ```java
 myBody = bodyBuilder
-		.withBodyDef(new BodyDefBuilder()
-			.position(some position)
-			.type(BodyDef.BodyType.DyamicBody))
-		.withFixtureDef(new FixtureDefBuilder()
-			.circleShape(some radius)
-			.restitution(some restitution))
-		.build();
+            .withBodyDef(new BodyDefBuilder()
+                .position(some position)
+                .type(BodyDef.BodyType.DyamicBody))
+            .withFixtureDef(new FixtureDefBuilder()
+                .circleShape(some radius)
+                .restitution(some restitution))
+            .build();
 ```
 This feels a lot more compact, and still gives you the **same** level of customization of the first version!
 
 ### License and Contributing
 This project is under the MIT license - you can see the full license [here](https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md).
-That being said, please feel free to contribute; contributions are more than welcome to make this project grow!
+That being said, please feel free to contribute!
