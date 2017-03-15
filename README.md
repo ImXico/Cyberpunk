@@ -90,7 +90,7 @@ This is the final element of the core - our root/base class - the one that exten
 
 Now that we know about world coordinates, states, how the state manager controls the states flow, we can easily set it up.
 
-````java
+```java
 // ... imports ...
 
 public class App extends ApplicationAdapter {
