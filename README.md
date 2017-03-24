@@ -1,5 +1,5 @@
 # Handy GDX
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md)
 
 A bunch of libraries for [libGDX](http://libgdx.badlogicgames.com/), aiming to be a useful resource for both experienced developers and newcomers.
 
