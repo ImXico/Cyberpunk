@@ -6,9 +6,9 @@ A bunch of libraries for [libGDX](http://libgdx.badlogicgames.com/), aiming to b
 ## How is HandyGDX structured?
 Essentially in two parts, that are fully independent of each other:
 
-- **The core** is the base structure of the application (the skeleton) - it handles states, how they are managed and the base application. It's layed out intuitively, and is useful to get you up and running quickly, without having to deal with these aspects yourself.
+The **core** is the base structure of the application (the skeleton) - it handles states, how they are managed and the base application. It's layed out intuitively, and is useful to get you up and running quickly, without having to deal with these aspects yourself.
 
-- **The extensions** are the libraries and mini-libraries that you can fetch as you need. From asset managers to aesthetic utilities, it ranges between a (hopefully increasing) number of different fields. 
+The **extensions** are the libraries and mini-libraries that you can fetch as you need. From asset managers to aesthetic utilities, it ranges between a (hopefully increasing) number of different fields. 
 
 *Note:* Every extension library is **totally independent** of the core, meaning that you can use any extension without having
 the core in your project.
@@ -17,14 +17,12 @@ the core in your project.
 Each section here will have a small overview, and some will have examples.
 A very simple example project (that will contain most of the topics below in action) can be found [here](https://github.com/ImXico/HandyGDX/tree/master/example). It also contains the assets used and a small walkthrough.
 
-*Note:* There will be references to the [official libGDX wiki](https://github.com/libgdx/libgdx). It is really complete and well-written, and there's also loads of documentation over its various APIs.
-
-### The Core
+### [I. Core](#core)
 - [State Management](#state-management)
 - [World Coordinates](#world-coordinates)
 - [Base App](#base-app)
 
-### The Extensions
+### [II. Extensions](#extensions)
 - [Image Manager](#image-manager)
 - [Audio Manager](#audio-manager)
 - [Camera Styles](#camera-styles)
@@ -32,11 +30,13 @@ A very simple example project (that will contain most of the topics below in act
 - [Sprite Helper](#sprite-helper)
 - [Physics](#physics)
 
-## The Core
+## Core
 ### State Management
+Three key principles: **state**, **abstract state** and **state manager**.
+
 #### State
-States are, in some aspects, similar to Stages in [Scene2D](https://github.com/libgdx/libgdx/wiki/Scene2d).
-In a game there would typically be a Play state, a Menu state, Game-Over state, etc, etc.
+States are, in some aspects, similar to *Stages* in [Scene2D](https://github.com/libgdx/libgdx/wiki/Scene2d).
+In a game there would typically be a *Play-State*, a *Menu-State*, *Game-Over-State*, and so on.
 The most important information about the State is that it is capable of:
 - Handling input (touches, key presses, ...).
 - Updating its logic.
@@ -46,26 +46,27 @@ The most important information about the State is that it is capable of:
 #### Abstract State
 A convenience implementation of the State interface. Every concrete state would be a subclass of [AbstractState](https://github.com/ImXico/HandyGDX/blob/master/source/State/AbstractState.java).
 Thus, every concrete state will necessarily implement **atleast** the following methods:
+
 ```java
-public void update(float delta) { ... }
-public void render(Batch batch) { ... }
-public void dispose() { ... }
+public void update(float delta)
+public void render(Batch batch)
+public void dispose()
 ```
 
 #### State Manager
 The [StateManager](https://github.com/ImXico/HandyGDX/blob/master/source/State/StateManager.java) is exactly that - an entity that manages the states flow. Because it is a singleton, there is global access to it, making it easy to use.
 
 - `static void init(Camera camera, Viewport viewport)` - Initializes the StateManager - call this once.
-- `static StateManager getInstance()` - This is the way to access the StateManager (only after #init was called).
+- `static StateManager getInstance()` - This is the way to access the StateManager (only after `#init` was called).
 - `void setState(State nextState)` - Instantly changes the current state to a given next state.
 - `void setState(State nextState, Transition transition)` - Smoothly change the current state with a transition.
 - `void update(float delta)` - Updates the currently running state and any on-going transition, if there is one.
 - `void render()` - Renders the currenly running state and any on-going transition, if there is one.
-- `void resize(int width, int height)` - Resizes the current + next state and the Viewport (passed on #init).
+- `void resize(int width, int height)` - Resizes the current + next state and the Viewport (passed on `#init`).
 - `void dispose()` - Diposes the current (and also next, if it exists) state(s).
 
 #### State Transitions
-State transitions make up for a smoother UX - instead of changing states abruptely, you can use a transition, like the ones below:
+State transitions make up for a smoother *UX* - instead of changing states abruptely, you can use a transition, like the ones below:
 
 - `FadingTransition`
 
@@ -91,66 +92,69 @@ This is the final element of the core - our root/base class - the one that exten
 
 Now that we know about world coordinates, states, how the state manager controls the states flow, we can easily set it up.
 
+**Step 1:** Defining the world coordinates - making them public will let us use them over at the `desktop config`.
 ```java
-// ... imports ...
-
 public class App extends ApplicationAdapter {
-
-    // Step 1: Defining the world coordinates.
-    // Make them public so you can pass them over at the desktop config.
-    
     public static final int WORLD_WIDTH = 700;
     public static final int WORLD_HEIGHT = 300;
+```
 
-    @Override
-    public void create() {
-        
-        // Step 2: Initialize the StateManager with a Camera and a Viewport.
-        // In this example, an ExtendedViewport is used.
-        
-        final Camera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
-        final Viewport viewport = new ExtendViewport(WORLD_HEIGHT, WORLD_HEIGHT, camera);
-        StateManager.init(camera, viewport, WORLD_WIDTH, WORLD_HEIGHT);
-        
-        // Step 3: Create and set an initial state, that will be shown when the app launches.
-        // Here a TestState is used - it's just an empty state that doesn't do/show anything at all.
-        
-        final State myTestState = new TestState();
-        StateManager.getInstance().setState(myTestState);
-    }
+**Step 2:** Initializing the StateManager with a `Camera` and a `Viewport`.
+```java
+@Override 
+public void create() {
+    final Camera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
+    camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
     
-    @Override
-    public void render() {
-        Gdx.gl.glClearColor(200 / 255f, 200 / 255f, 200 / 255f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        StateManager.getInstance().update(Gdx.graphics.getDeltaTime());
-        StateManager.getInstance().render();
-    }
-    
-    @Override
-    public void resize(int width, int height) {
-        StateManager.getInstance().resize(width, height);
-    }
-    
-    @Override
-    public void pause() {
-        StateManager.getInstance().pause();
-    }
-    
-    @Override
-    public void resume() {
-        StateManager.getInstance().resume();
-    }
-    
-    @Override
-    public void dispose() {
-        StateManager.getInstance().dispose();
-    }
+    final Viewport viewport = new ExtendViewport(WORLD_HEIGHT, WORLD_HEIGHT, camera);
+    StateManager.init(camera, viewport, WORLD_WIDTH, WORLD_HEIGHT);
+    ...
+```
+
+**Step 3:** Creating and setting an initial `state` that will be shown when the app launches.
+```java
+    ...
+    final State myTestState = new TestState();
+    StateManager.getInstance().setState(myTestState);
+}
+```
+That's it for the `create` method - let's keep on going!
+
+**Step 4:** Implementing the `render` method.
+```java
+@Override
+public void render() {
+    Gdx.gl.glClearColor(200 / 255f, 200 / 255f, 200 / 255f, 1f);
+    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    StateManager.getInstance().update(Gdx.graphics.getDeltaTime());
+    StateManager.getInstance().render();
 }
 ```
 
-## The Extensions
+**Step 5:** Implementing the `resize`, `pause`, `resume` and `dispose` methods.
+```java
+@Override 
+public void resize(int width, int height) {
+    StateManager.getInstance().resize(width, height);
+}
+
+@Override 
+public void pause() {
+    StateManager.getInstance().pause();
+}
+
+@Override 
+public void resume() {
+    StateManager.getInstance().resume();
+}
+    
+@Override 
+public void dispose() {
+    StateManager.getInstance().dispose();
+}
+```
+
+## Extensions
 ### Image Manager
 This is made to be used with [TextureAtlases](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.html). Information on how to use the TexturePacker to pack many smaller images onto larger images can be found [here](https://github.com/libgdx/libgdx/wiki/Texture-packer).
 
@@ -267,13 +271,13 @@ myBody.createFixture(fixtureDef);
 circleShape.dispose();
 ```
 
-It feels a bit messy and confusing, and that's where the [BodyBuilder](#body-builder) can be benefitial.
+It feels a bit messy and confusing, and that's where the [BodyBuilder](#body-builder) can come in *handy* (pun intended).
 
+##### Body Builder
 The body builder depends on two other builders:
 - [BodyDefBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyDefBuilder.java), that lets you build a customizable [BodyDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/BodyDef.html).
 - [FixtureDefBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/FixtureDefBuilder.java), that lets you build a customizable [FixtureDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/FixtureDef.html).
 
-##### Body Builder
 The [BodyBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyBuilder.java) lets you build a customizable body, with **one** body def and **one or more** fixture defs. It's important to note that the `BodyBuilder`'s constructor takes in a `PhysicsWorld` - this means that all bodies created with a given instance of `BodyBuilder` will be hosted in that `PhysicsWorld`. it is possible to change the current world by calling `setPhysicsWorld(physicsWorld)`.
 
 That being said, the above code could be rewritten like so:
@@ -290,6 +294,7 @@ myBody = bodyBuilder
 ```
 This feels a lot more compact, and still gives you the **same** level of customization of the first version!
 
+---
 ### License and Contributing
 This project is under the MIT license - you can see the full license [here](https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md).
 That being said, please feel free to contribute!
