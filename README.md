@@ -32,7 +32,7 @@ A very simple example project (that will contain most of the topics below in act
 
 ## Core
 ### State Management
-Three key principles: **state**, **abstract state** and **state manager**.
+Four key principles: **state**, **abstract state**, **state transitions** and **state manager**.
 
 #### State
 States are, in some aspects, similar to *Stages* in [Scene2D](https://github.com/libgdx/libgdx/wiki/Scene2d).
@@ -90,7 +90,7 @@ Because of this, we will have to define a `WORLD_WIDTH` and `WORLD_HEIGHT` somew
 ### Base App
 This is the final element of the core - our root/base class - the one that extends [ApplicationAdapter](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/ApplicationAdapter.html). More on the life-cycle of a libGDX app can be seen [here](https://github.com/libgdx/libgdx/wiki/The-life-cycle).
 
-Now that we know about world coordinates, states, how the state manager controls the states flow, we can easily set it up.
+Now that we know about world coordinates, states, how the state manager controls the states flow, we can easily set it up in **5 easy steps**.
 
 **Step 1:** Defining the world coordinates - making them public will let us use them over at the `desktop config`.
 ```java
