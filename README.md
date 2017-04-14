@@ -198,7 +198,7 @@ A bunch of helper functions to help you position your text on the screen. All of
 
 ![img](https://i.gyazo.com/da82a22d207f6c07785f65026efff612.png)
 
-### Sprite Helper
+## Sprite Helper
 A bunch of helper functions to help you position your sprites on the screen. Same as the text helper, these methods return `Vector2` coordinates.
 ```java
 #centerOnScreen(imageWidth, imageHeight, App.WORLD_WIDTH, App.WORLD_HEIGHT)
