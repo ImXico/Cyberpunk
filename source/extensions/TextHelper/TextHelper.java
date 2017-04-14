@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * @author Xico
  */
+
 public class TextHelper {
 
     /**

@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.util.HashMap;
 import java.util.Map;
 
-/** @author Xico */
+/**
+ * @author Xico
+ */
 
 public class ImageManager {
 
