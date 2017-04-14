@@ -1,21 +1,20 @@
 # Handy GDX
+![java](https://img.shields.io/badge/java-100%25-orange.svg)
+![image](https://img.shields.io/badge/made%20with-love-red.svg)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md)
 
-A bunch of libraries for [libGDX](http://libgdx.badlogicgames.com/), aiming to be a useful resource for both experienced developers and newcomers.
+**Handy** provides a set of libraries to use on top of [libgdx](http://libgdx.badlogicgames.com/), aiming to speed up development and be a useful resource for both experienced developers and newcomers.
 
-## How is HandyGDX structured?
-Essentially in two parts, that are fully independent of each other:
+It is structured in two parts:
+- The **core** is the base structure - it handles states, how they are managed and the base application. It's layed out intuitively, and is useful to get you up and running quickly, without having to deal with these aspects yourself.
+- The **extensions** are the libraries and mini-libraries that you can fetch as you need. From asset managers to aesthetic utilities, it ranges between a (hopefully increasing) number of different fields.
 
-The **core** is the base structure of the application (the skeleton) - it handles states, how they are managed and the base application. It's layed out intuitively, and is useful to get you up and running quickly, without having to deal with these aspects yourself.
+Note that every extension library is **totally independent** of the core, meaning that you can use any extension without having used
+the core in your project. The extensions themselves are also independent of each other; you can *pick 'n drop 'em* just like that!
 
-The **extensions** are the libraries and mini-libraries that you can fetch as you need. From asset managers to aesthetic utilities, it ranges between a (hopefully increasing) number of different fields. 
-
-*Note:* Every extension library is **totally independent** of the core, meaning that you can use any extension without having
-the core in your project.
-
-## Table of Contents
+## Contents
 Each section here will have a small overview, and some will have examples.
-A very simple example project (that will contain most of the topics below in action) can be found [here](https://github.com/ImXico/HandyGDX/tree/master/example). It also contains the assets used and a small walkthrough.
+A very simple example project (that will contain most of the topics below in action) can be found [here](https://github.com/ImXico/handy-gdx/tree/master/example). It also contains the assets used and a small walkthrough.
 
 ### [I. Core](#core)
 - [State Management](#state-management)
@@ -31,54 +30,48 @@ A very simple example project (that will contain most of the topics below in act
 - [Physics](#physics)
 
 ## Core
-### State Management
-Four key principles: **state**, **abstract state**, **state transitions** and **state manager**.
+## State Management
+**States** are, in some aspects, similar to Stages in [Scene2D](https://github.com/libgdx/libgdx/wiki/Scene2d).
+All states should be capable of:
+- Handling input (like touches and key presses).
+- Updating their inner logic.
+- Rendering their internal components.
+- Disposing resources when they're not needed anymore.
 
-#### State
-States are, in some aspects, similar to *Stages* in [Scene2D](https://github.com/libgdx/libgdx/wiki/Scene2d).
-In a game there would typically be a *Play-State*, a *Menu-State*, *Game-Over-State*, and so on.
-The most important information about the State is that it is capable of:
-- Handling input (touches, key presses, ...).
-- Updating its logic.
-- Rendering its internal components.
-- Disposing resources when their not needed anymore.
-
-#### Abstract State
-A convenience implementation of the State interface. Every concrete state would be a subclass of [AbstractState](https://github.com/ImXico/HandyGDX/blob/master/source/State/AbstractState.java).
+**AbstractState** is a convenience implementation of the State interface. Every concrete state would be a subclass of [AbstractState](https://github.com/ImXico/HandyGDX/blob/master/source/State/AbstractState.java).
 Thus, every concrete state will necessarily implement **atleast** the following methods:
 
 ```java
-public void update(float delta)
-public void render(Batch batch)
-public void dispose()
+#update(delta)
+#render(batch)
+#dispose()
 ```
 
-#### State Manager
-The [StateManager](https://github.com/ImXico/HandyGDX/blob/master/source/State/StateManager.java) is exactly that - an entity that manages the states flow. Because it is a singleton, there is global access to it, making it easy to use.
+**StateManager** is an entity that manages the states flow. You have global access to it, making it easy to use.
+```java
+#init(camera, viewport)       // Initializes the StateManager - call this once.
+#getInstance()                // This is the way to access the StateManager (only after `#init` was called).
+#setState(state)              // Instantly (abruptely) changes the current state to a given next state.
+#setState(state, transition)  // Smoothly change the current state with a transition.
+#update(delta)                // Updates the currently running state and any existant on-going transition.
+#render()                     // Renders the currenly running state and any existant on-going transition.
+#resize(width, height)        // Resizes the current + next state and the Viewport (passed on #init).
+#dispose()                    // Diposes the current (and also next, if it exists) state(s).
+```
 
-- `static void init(Camera camera, Viewport viewport)` - Initializes the StateManager - call this once.
-- `static StateManager getInstance()` - This is the way to access the StateManager (only after `#init` was called).
-- `void setState(State nextState)` - Instantly changes the current state to a given next state.
-- `void setState(State nextState, Transition transition)` - Smoothly change the current state with a transition.
-- `void update(float delta)` - Updates the currently running state and any on-going transition, if there is one.
-- `void render()` - Renders the currenly running state and any on-going transition, if there is one.
-- `void resize(int width, int height)` - Resizes the current + next state and the Viewport (passed on `#init`).
-- `void dispose()` - Diposes the current (and also next, if it exists) state(s).
+**State transitions** make up for a smoother UX - instead of changing states abruptely, you can use a transition:
 
-#### State Transitions
-State transitions make up for a smoother *UX* - instead of changing states abruptely, you can use a transition, like the ones below:
-
-- `FadingTransition`
+- FadingTransition
 
 ![gif](https://zippy.gfycat.com/GlamorousExhaustedFrilledlizard.gif)
 
-- `HorizontalSlideTransition` - Left-to-Right or Right-to-Left. Watch in 60 fps [here](https://gfycat.com/HiddenTartIzuthrush).
+- HorizontalSlideTransition: Left-to-Right or Right-to-Left. Watch in 60 fps [here](https://gfycat.com/HiddenTartIzuthrush).
 
 ![gif](https://zippy.gfycat.com/HiddenTartIzuthrush.gif)
 
-But it's easy to make your own - just make sure you implement the [Transition](https://github.com/ImXico/HandyGDX/blob/master/source/Transition/Transition.java) interface!
+Thankfully, it's easy to make your own transitions - just make sure you implement the [Transition](https://github.com/ImXico/HandyGDX/blob/master/source/Transition/Transition.java) interface!
 
-### World Coordinates
+## World Coordinates
 To keep a consistent app that's independent of real device size or asset size, it's a good idea to:
 - Define a virtual resolution (here it's called world dimensions), that can be whatever you want.
 - Set a [Camera](https://github.com/libgdx/libgdx/wiki/Orthographic-camera) to use that resolution.
@@ -87,19 +80,19 @@ To keep a consistent app that's independent of real device size or asset size, i
 These virtual dimensions will, thus, be the *boundaries* of our game screen - they'll influence all of the game's rendering.
 Because of this, we will have to define a `WORLD_WIDTH` and `WORLD_HEIGHT` somewhere - this will be done in the next section, the [Base App](#base-app).
 
-### Base App
+## Base App
 This is the final element of the core - our root/base class - the one that extends [ApplicationAdapter](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/ApplicationAdapter.html). More on the life-cycle of a libGDX app can be seen [here](https://github.com/libgdx/libgdx/wiki/The-life-cycle).
 
-Now that we know about world coordinates, states, how the state manager controls the states flow, we can easily set it up in **5 easy steps**.
+Now that we know about world coordinates, states, how states flow, we can easily set it up very easily.
 
-**Step 1:** Defining the world coordinates - making them public will let us use them over at the `desktop config`.
+**1:** Start by defining the world coordinates - making them public will let us use them over at the `desktop config`.
 ```java
 public class App extends ApplicationAdapter {
     public static final int WORLD_WIDTH = 700;
     public static final int WORLD_HEIGHT = 300;
 ```
 
-**Step 2:** Initializing the StateManager with a `Camera` and a `Viewport`.
+**2:** Next up, initialize the `StateManager`, passing it a `Camera` and a `Viewport`.
 ```java
 @Override 
 public void create() {
@@ -111,16 +104,15 @@ public void create() {
     ...
 ```
 
-**Step 3:** Creating and setting an initial `state` that will be shown when the app launches.
+**3:** Create and set an initial `state` that will be shown when the app launches.
 ```java
     ...
     final State myTestState = new TestState();
     StateManager.getInstance().setState(myTestState);
 }
 ```
-That's it for the `create` method - let's keep on going!
 
-**Step 4:** Implementing the `render` method.
+**4:** The `#render` method can come next!
 ```java
 @Override
 public void render() {
@@ -131,7 +123,7 @@ public void render() {
 }
 ```
 
-**Step 5:** Implementing the `resize`, `pause`, `resume` and `dispose` methods.
+**5:** Implementing the `#resize`, `#pause`, `#resume` and `#dispose` methods.
 ```java
 @Override 
 public void resize(int width, int height) {
@@ -155,96 +147,99 @@ public void dispose() {
 ```
 
 ## Extensions
-### Image Manager
+## Image Manager
 This is made to be used with [TextureAtlases](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.html). Information on how to use the TexturePacker to pack many smaller images onto larger images can be found [here](https://github.com/libgdx/libgdx/wiki/Texture-packer).
 
-Say we've got `myPack.png` and `myPack.pack` from the Texture Packer inside our `assets` folder - we'll use that as an example.
-
-- `ImageManager.loadAtlas("myPack", "myPack.pack")` - Loads "myPack.pack" onto the app and keys it as "myPack".
-- `ImageManager.loadAtlas("myPack", "myPack.pack", true)` - Loading + setting it as the default atlas.
-- `ImageManager.getAtlas("myPack")` - Getting the "myPack" atlas.
-- `ImageManager.take("regionName")` - Getting a region that's inside the default atlas.
-- `ImageManager.take("regionName", "otherAtlasKey")` - Getting a region that's inside another (loaded) atlas.
+Say we've got `myPack.png` and `myPack.pack` from the Texture Packer inside our `assets` folder:
+```java
+#loadAtlas("myPack", "myPack.pack")         // Loads "myPack.pack" onto the app and keys it as "myPack".
+#loadAtlas("myPack", "myPack.pack", true)   // Loading + setting it as the default atlas.
+#getAtlas("myPack")                         // Fetching the "myPack" atlas.
+#take("regionName")                         // Getting a region that's inside the default atlas.
+#take("regionName", "otherAtlasKey")        // Getting a region that's inside another (loaded) atlas.
+```
 
 *Note*: When it comes to assets, alongside the classes above, it's a good idea to mark all assets' names with constants. It's common to use the same assets in multiple parts of the project - saving their names/paths in constants will make them alot more bearable to change around. This is done in the example project.
 
-### Audio Manager
-Once again with an example, say we've got ourselves a sound file called `beep.ogg` located at `assets/sounds`.
-With the [AudioManager](https://github.com/ImXico/HandyGDX/blob/master/source/AudioManager/AudioManager.java) we can:
+## Audio Manager
+Say we've got ourselves a sound file called `beep.ogg` located at `assets/sounds`. With the [AudioManager](https://github.com/ImXico/HandyGDX/blob/master/source/AudioManager/AudioManager.java) we can:
+```java
+#loadSong("beep", "sounds/beep.ogg")    // Loads "beep.ogg" and keys it as "beep".
+#playSound("beep")                      // Plays the "beep" sound at a default volume.
+#playSound("beep", 0.3f)                // Plays the "beep" sound at volume = 0.3.
+#stopSound("beep")                      // Stops the "beep" sound.
+#pauseSound("beep")                     // Pauses the "beep" sound.
+#resumeSound("beep")                    // Resumes the "beep" sound.
+#loopSound("beep")                      // Loops the "beep" sound at a default volume.
+#loopSound("beep", 0.7f)                // Loops the "beep" sound at volume = 0.7.
+```
 
-- `AudioManager.loadSong("beep", "sounds/beep.ogg")` - Loads "beep.ogg" and keys it as "beep".
-- `AudioManager.playSound("beep")` - Plays the "beep" sound at a default volume.
-- `AudioManager.playSound("beep", 0.3f)` - Plays the "beep" sound at volume = 0.3f.
-- `AudioManager.stopSound("beep")` - Stops the "beep" sound.
-- `AudioManager.pauseSound("beep")` - Pauses the "beep" sound.
-- `AudioManager.resumeSound("beep")` - Resumes the "beep" sound.
-- `AudioManager.loopSound("beep")` - Loops the "beep" sound at a default volume.
-- `AudioManager.loopSound("beep", 0.7f)` - Loops the "beep" sound at volume = 0.7f.
+## Camera Styles
+There are a few camera styles available on-the-go:
 
-### Camera Styles
-There are a few camera styles available on-the-go. Here are a few:
-
-- `CameraStyles.centerOnScreen(camera)` - Watch in 60 fps [here](https://gfycat.com/GiantPowerfulGoa).
+`CameraStyles.centerOnScreen(camera)` - Watch in 60 fps [here](https://gfycat.com/GiantPowerfulGoa).
 
 ![gif](https://zippy.gfycat.com/GiantPowerfulGoa.gif)
 
-- `CameraStyles.lockOnTarget(camera, targetPosition)` - Watch in 60 fps [here](https://gfycat.com/HauntingCleverBarracuda).
+`CameraStyles.lockOnTarget(camera, targetPosition)` - Watch in 60 fps [here](https://gfycat.com/HauntingCleverBarracuda).
 
 ![gif](https://zippy.gfycat.com/HauntingCleverBarracuda.gif)
 
-- `CameraStyles.lerpToTarget(camera, target, lerp)` - Watch in 60 fps [here](https://gfycat.com/DirtyInbornIberianbarbel).
+`CameraStyles.lerpToTarget(camera, target, lerp)` - Watch in 60 fps [here](https://gfycat.com/DirtyInbornIberianbarbel).
 
 ![gif](https://fat.gfycat.com/DirtyInbornIberianbarbel.gif)
 
-**Note**: The assets used here and in the example project are from [Kenney Assets](http://kenney.nl/assets). They are also available on the [example's assets folder](https://github.com/ImXico/HandyGDX/tree/master/example/assets).
+*Note*: The assets used here and in the example project are from [Kenney Assets](http://kenney.nl/assets). They are also available on the [example's assets folder](https://github.com/ImXico/HandyGDX/tree/master/example/assets).
 
-### Text Helper
-A bunch of helper functions that return `Vector2` coordinates.
-
-- `TextHelper.centerHorizontally(font, "Horizontally Centered Text, Y = 200", 200, App.WORLD_WIDTH)`
-- `TextHelper.centerOnScreen(font, "Centered Text!", App.WORLD_WIDTH, App.WORLD_HEIGHT)`
-- `TextHelper.centerOnImage(font, "Centered!", imageWidth, imageHeight, imagePosition)`
+## Text Helper
+A bunch of helper functions to help you position your text on the screen. All of these methods return a `Vector2` object, which you will then use to draw the text.
+```java
+#centerHorizontally(font, text, y, App.WORLD_WIDTH)
+#centerOnScreen(font, text, App.WORLD_WIDTH, App.WORLD_HEIGHT)
+#centerOnImage(font, text, imageWidth, imageHeight, imagePosition)
+```
 
 ![img](https://i.gyazo.com/da82a22d207f6c07785f65026efff612.png)
 
 ### Sprite Helper
-A bunch of helper functions that return `Vector2` coordinates.
-
-- `SpriteHelper.centerOnScreen(imageWidth, imageHeight, App.WORLD_WIDTH, App.WORLD_HEIGHT)`
-- `SpriteHelper.centerOnScreenX(imageWidth, y, App.WORLD_WIDTH)`
-- `SpriteHelper.centerOnScreenY(imageHeight, x, App.WORLD_HEIGHT)`
-- `SpriteHelper.centerOnImage(width, height, imagePosition, imageWidth, imageHeight)`
+A bunch of helper functions to help you position your sprites on the screen. Same as the text helper, these methods return `Vector2` coordinates.
+```java
+#centerOnScreen(imageWidth, imageHeight, App.WORLD_WIDTH, App.WORLD_HEIGHT)
+#centerOnScreenX(imageWidth, y, App.WORLD_WIDTH)
+#centerOnScreenY(imageHeight, x, App.WORLD_HEIGHT)
+#centerOnImage(width, height, imagePosition, imageWidth, imageHeight)
+```
 
 ![img](https://i.gyazo.com/b2b826b4cd321b6aa03a3cf97c36aa6b.png)
 
-### Physics
-The physics extension is a small *wrapper* around [libGDX' Box2D](https://github.com/libgdx/libgdx/wiki/Box2d) - thus, it requires having the Box2D dependency in the project, which can be done in two ways:
- - Simply checking the Box2D checkbox on the [setup jar](https://libgdx.badlogicgames.com/download.html).
- - Via gradle - more on that can be seen [here](https://github.com/libgdx/libgdx/wiki/Dependency-management-with-Gradle#box2d-gradle).
+## Physics
+The physics extension is a small wrapper around [libGDX' Box2D](https://github.com/libgdx/libgdx/wiki/Box2d) - thus, it requires having the Box2D dependency in the project.
  
 The extension is (currently) composed of the following components: 
- - [Utils](#utils)
- - [Physics Debugger](#physics-debugger)
- - [Physics World](#physics-world)
- - [Builders](#builders)
+ - [Utils](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/Utils.java)
+ - [Physics Debugger](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/PhysicsDebugger.java)
+ - [Physics World](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/PhysicsWorld.java)
+ - [Body Builder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyBuilder.java)
+ - [Body Def Builder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyDefBuilder.java)
+ - [Fixture Def Builder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/FixtureDefBuilder.java)
 
-#### Utils
-The [Utils](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/Utils.java) class simply contains utility conversion methods: from Box2D units to pixels and from pixels to Box2D units.
+**Utils** contains utility conversion methods: from Box2D units to pixels and from pixels to Box2D units.
+By using a pixels-to-meters conversion metric, we can **keep using pixel units in methods**, which is pretty useful. These conversions are done under the hood, meaning that you *probably* won't need to call any of this class' methods.
 
-By using a pixels-to-meters conversion metric, we can **keep using pixel units in methods**, which is pretty useful. These conversions are done *under the hood*, meaning that you probably won't need to call any of this class' methods.
-
-#### Physics Debugger
-The [PhysicsDebugger](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/PhysicsDebugger.java) is used to debug a given **PhysicsWorld** (seen below), and is essentially a *wrapper* around [Box2DDebugRenderer](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Box2DDebugRenderer.html).
-
+**PhysicsDebugger** is used to debug a given physics world (seen below), and is essentially a wrapper around [Box2DDebugRenderer](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/Box2DDebugRenderer.html).
 Besides having an instance of Box2DDebugRenderer and calling its render method, the PhysicsDebugger also contains a dedicated [Camera](https://github.com/libgdx/libgdx/wiki/Orthographic-camera) and [Viewport](https://github.com/libgdx/libgdx/wiki/Viewports), which means that the debug renderer will still look good even after resize events.
 
-#### Physics World
-The [PhysicsWorld](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/PhysicsWorld.java) encapsulates a [Box2D World](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/World.html).
+**PhysicsWorld** encapsulates a [Box2D World](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/World.html). By calling `setDebugging(boolean)`, you can toggle whether or not you want a PhysicsDebugger to debug your world. Usually you'll want to have the `debugging` flag set to `false` on a released version of your app, as having the debugger running can be a bit CPU-heavy, especially on mobile devices.
 
-By calling `setDebugging(boolean)`, you can toggle whether or not you want a PhysicsDebugger to debug your world. Usually you'll want to have the `debugging` flag set to `false` on a released version of your app, as having the debugger running can be a bit CPU-heavy, especially on mobile devices.
+**Body Builder** lets you build a customizable body, with **one** body def and **one or more** fixture defs. It's important to note that the `BodyBuilder`'s constructor takes in a `PhysicsWorld` - this means that all bodies created with a given instance of `BodyBuilder` will be hosted in that `PhysicsWorld`. it is possible to change the current world by calling `setPhysicsWorld(physicsWorld)`.
 
-#### Builders
-This is how, in Box2D, we'd generally create a ball **body**, given a position, radius and restitution (bouncyness):
+It depends on two other builders:
+- **BodyDefBuilder**, that lets you build a customizable [BodyDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/BodyDef.html).
+- **FixtureDefBuilder**, that lets you build a customizable [FixtureDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/FixtureDef.html).
+
+This is how, in Box2D, we'd generally create a circle-shaped body, given a position, radius and restitution:
+
+- **Without** the body builder:
 
 ```java
 // Create a body def...
@@ -271,16 +266,7 @@ myBody.createFixture(fixtureDef);
 circleShape.dispose();
 ```
 
-It feels a bit messy and confusing, and that's where the [BodyBuilder](#body-builder) can come in *handy* (pun intended).
-
-##### Body Builder
-The body builder depends on two other builders:
-- [BodyDefBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyDefBuilder.java), that lets you build a customizable [BodyDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/BodyDef.html).
-- [FixtureDefBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/FixtureDefBuilder.java), that lets you build a customizable [FixtureDef](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/physics/box2d/FixtureDef.html).
-
-The [BodyBuilder](https://github.com/ImXico/HandyGDX/blob/master/source/extensions/Physics/BodyBuilder.java) lets you build a customizable body, with **one** body def and **one or more** fixture defs. It's important to note that the `BodyBuilder`'s constructor takes in a `PhysicsWorld` - this means that all bodies created with a given instance of `BodyBuilder` will be hosted in that `PhysicsWorld`. it is possible to change the current world by calling `setPhysicsWorld(physicsWorld)`.
-
-That being said, the above code could be rewritten like so:
+- **With** the body builder:
 
 ```java
 myBody = bodyBuilder
@@ -292,9 +278,14 @@ myBody = bodyBuilder
                 .restitution(some restitution))
             .build();
 ```
-This feels a lot more compact, and still gives you the **same** level of customization of the first version!
+This feels a lot more compact, and gives you (*almost!* - see below) the same level of customization of the first version!
 
----
-### License and Contributing
-This project is under the MIT license - you can see the full license [here](https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md).
-That being said, please feel free to contribute!
+*Note:* The physics library is still WIP - it's functional enough to be used for simple Box2D creations, but it's still lacking some functionality.
+
+## Contributions
+Feel free to use, ask, fork, star, report bugs, fix them, suggest enhancements, add functionality and point out any mistakes. Thanks!
+
+## Authors
+Developed and maintained by [Xico](https://github.com/ImXico).
+
+Released under the [MIT License](https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md).
