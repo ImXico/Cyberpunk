@@ -1,9 +1,14 @@
-# Handy GDX
-![java](https://img.shields.io/badge/java-100%25-orange.svg)
-![image](https://img.shields.io/badge/made%20with-love-red.svg)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md)
+<p align="center">
+  <img src="https://github.com/ImXico/handy-gdx/blob/temp/cleaning-readme/logo.png" />
+</p>
 
-**Handy** provides a set of libraries to use on top of [libgdx](http://libgdx.badlogicgames.com/), aiming to speed up development and be a useful resource for both experienced developers and newcomers.
+<p align="center">
+  <img src="https://img.shields.io/badge/made%20with-love-red.svg">
+  <img src="https://img.shields.io/badge/java-100%25-orange.svg">
+  <a href="https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
+</p>
+
+**Handy** provides a set of libraries to use on top of [libGDX](http://libgdx.badlogicgames.com/), aiming to speed up development and be a useful resource for both experienced developers and newcomers.
 
 It is structured in two parts:
 - The **core** is the base structure - it handles states, how they are managed and the base application. It's layed out intuitively, and is useful to get you up and running quickly, without having to deal with these aspects yourself.
