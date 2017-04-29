@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/ImXico/handy-gdx/blob/temp/cleaning-readme/logo.png" />
+  <img src="https://github.com/ImXico/handy-gdx/blob/master/logo.png" />
 </p>
 
 <p align="center">
