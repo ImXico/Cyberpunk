@@ -8,14 +8,17 @@
   <a href="https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
 </p>
 
-**Handy** provides a set of libraries to use on top of [libGDX](http://libgdx.badlogicgames.com/), aiming to speed up development and be a useful resource for both experienced developers and newcomers.
+> 🎲 A bunch of libraries for libGDX development.
 
-It is structured in two parts:
+Handy is a collection of independent, pure-Java libraries to use on top of [libGDX](http://libgdx.badlogicgames.com/), aiming to speed up development and  be a useful resource for both experienced developers and newcomers.
+
+## Structure
+The project is divided into two parts: core and extensions.
 - The **core** is the base structure - it handles states, how they are managed and the base application. It's layed out intuitively, and is useful to get you up and running quickly, without having to deal with these aspects yourself.
 - The **extensions** are the libraries and mini-libraries that you can fetch as you need. From asset managers to aesthetic utilities, it ranges between a (hopefully increasing) number of different fields.
 
-Note that every extension library is **totally independent** of the core, meaning that you can use any extension without having used
-the core in your project. The extensions themselves are also independent of each other; you can select *grab 'n go* whatever you want, at any time just like that, no dependency constraints!
+Every extension library is **totally independent** of the core, meaning that you can use any extension without having used
+the core in your project. The extensions themselves are also independent of each other - *handy*, huh?
 
 ## Contents
 Each section here will have a small overview, and some will have examples.
