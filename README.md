@@ -12,6 +12,29 @@
 
 Handy is a collection of independent, pure-Java libraries to use on top of [libGDX](http://libgdx.badlogicgames.com/), aiming to speed up development and  be a useful resource for both experienced developers and newcomers.
 
+---
+
+## IMPORTANT - as of June, 30th
+
+#### I. General API Rebuild
+In the upcoming time, a big portion of this project will be essentially rebuilt from the ground up. This means that every single API will be reviewed, modified and have new additions to it.
+
+#### II. Migration to Kotlin, but with Java in mind
+I'll be porting the source code over to [Kotlin](https://kotlinlang.org/). I'm well aware that the majority of the LibGDX community uses Java - this is quite a big change, but I most definitely think it's for the best. I've been a big fan of the language for a while, and [seeing it mature](https://blog.jetbrains.com/kotlin/2017/05/kotlin-on-android-now-official/) this much made me think that this is the time to do it. If you haven't taken a look at it already I'd *strongly* suggest you doing so. But even with Java, you'll be granted total access to the whole API:
+
+- Kotlin developers can profit directly from all of the awesome features of the language, like [these](https://frozenfractal.com/blog/2017/2/10/10-cool-things-about-kotlin/).
+- Java developers will still be able to use **100% of the API**, thanks to the awesome [Java-Kotlin Interoperability!](https://kotlinlang.org/docs/reference/java-to-kotlin-interop.html)
+
+There will also be **complete, working example mock projects** written in both languages. 
+
+#### IV. Better Documentation
+It's also planned to get a much better documentation with a dedicated wiki.
+
+#### III. Many new features!
+With these updates there will be many new features, focusing on fields such as screen flow, transitions, GUI elements and general utilities.
+
+---
+
 ## Structure
 The project is divided into two parts: core and extensions.
 - The **core** is the base structure - it handles states, how they are managed and the base application. It's layed out intuitively, and is useful to get you up and running quickly, without having to deal with these aspects yourself.
