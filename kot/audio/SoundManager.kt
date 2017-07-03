@@ -12,7 +12,7 @@ object SoundManager {
   private val sounds: MutableMap<String, Sound> = mutableMapOf()
 
   /**
-   * Loads a [Sound] onto the [sounds] structure.
+   * Creates and loads a [Sound] onto the [sounds] structure.
    *
    * @param soundName key that will identify this sound in the map.
    * @param path      sounds's path inside the assets folder.
