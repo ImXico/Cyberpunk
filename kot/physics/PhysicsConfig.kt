@@ -17,13 +17,13 @@ private val DEFAULT_TIMESTEP: Float = 1 / 60f
  * For the velocity constraint solver.
  * @see World#step
  */
-private val DEFAULT_VELOCITY_ITERATIONS: Float = 6f
+private val DEFAULT_VELOCITY_ITERATIONS: Int = 6
 
 /**
  * For the position constraint solver.
  * @see World#step
  */
-private val DEFAULT_POSITION_ITERATIONS: Float = 2f
+private val DEFAULT_POSITION_ITERATIONS: Int = 2
 
 /**
  * Configuration class to use when instantiating a new [PhysicsWorld].
@@ -34,6 +34,6 @@ private val DEFAULT_POSITION_ITERATIONS: Float = 2f
 data class PhysicsConfig(
         val gravity: Vector2 = DEFAULT_GRAVITY,
         val timestep: Float = DEFAULT_TIMESTEP,
-        val velocityIterations: Float = DEFAULT_VELOCITY_ITERATIONS,
-        val positionIterations: Float = DEFAULT_POSITION_ITERATIONS
+        val velocityIterations: Int = DEFAULT_VELOCITY_ITERATIONS,
+        val positionIterations: Int = DEFAULT_POSITION_ITERATIONS
 )
