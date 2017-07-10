@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.viewport.Viewport
 
 internal class PhysicsDebugger(worldWidth: Int, worldHeight: Int) {
 
-  // TODO: Accept the injection of a different viewports.
+  // TODO: Accept the injection of different viewports.
   // TODO: They will need to have their dimensions converted to B2D units, though.
 
   /**
