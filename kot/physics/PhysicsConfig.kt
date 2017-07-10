@@ -5,25 +5,25 @@ import com.badlogic.gdx.math.Vector2
 /**
  * Default value for the [World] gravity.
  */
-val DEFAULT_GRAVITY: Vector2 = Vector2(0f, -9.8f)
+private val DEFAULT_GRAVITY: Vector2 = Vector2(0f, -9.8f)
 
 /**
  * The amount of time to simulate, this should not vary.
  * @see World#step
  */
-val DEFAULT_TIMESTEP: Float = 1 / 60f
+private val DEFAULT_TIMESTEP: Float = 1 / 60f
 
 /**
  * For the velocity constraint solver.
  * @see World#step
  */
-val DEFAULT_VELOCITY_ITERATIONS: Float = 6f
+private val DEFAULT_VELOCITY_ITERATIONS: Float = 6f
 
 /**
  * For the position constraint solver.
  * @see World#step
  */
-val DEFAULT_POSITION_ITERATIONS: Float = 2f
+private val DEFAULT_POSITION_ITERATIONS: Float = 2f
 
 /**
  * Configuration class to use when instantiating a new [PhysicsWorld].

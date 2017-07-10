@@ -2,7 +2,11 @@ package kot.physics
 
 import com.badlogic.gdx.math.Vector2
 
-// TODO: PPM from the PhysicsConfig class
+/**
+ * Scaling: 100 pixels = 1 meter.
+ */
+@JvmField
+internal var PPM: Float = 100f
 
 /**
  * Takes in a [Float] value in pixels and returns the equivalent value of
@@ -10,7 +14,7 @@ import com.badlogic.gdx.math.Vector2
  *
  * @return corresponding Box2D units, based on the [PPM] scaling.
  */
-internal fun Float.asBox2DUnits(): Float = this / 100f
+internal fun Float.asBox2DUnits(): Float = this / PPM
 
 /**
  * Takes in a [Float] value in Box2D units and returns the equivalent value of
@@ -18,7 +22,7 @@ internal fun Float.asBox2DUnits(): Float = this / 100f
  *
  * @return corresponding pixel units, based on the [PPM] scaling.
  */
-internal fun Float.asPixels(): Float = this * 100f
+internal fun Float.asPixels(): Float = this * PPM
 
 /**
  * Takes in a [Vector2] value in pixels and returns the equivalent value of
@@ -28,7 +32,7 @@ internal fun Float.asPixels(): Float = this * 100f
  *
  * @return corresponding Box2D units, based on the [PPM] scaling.
  */
-internal fun Vector2.asBox2DUnits(): Vector2 = this.cpy().scl(1 / 100f)
+internal fun Vector2.asBox2DUnits(): Vector2 = this.cpy().scl(1 / PPM)
 
 /**
  * Takes in a [Vector2] value in Box2D units and returns the equivalent value
@@ -38,4 +42,4 @@ internal fun Vector2.asBox2DUnits(): Vector2 = this.cpy().scl(1 / 100f)
  *
  * @return corresponding pixel units, based on the [PPM] scaling.
  */
-internal fun Vector2.asPixels(): Vector2 = this.cpy().scl(100f)
+internal fun Vector2.asPixels(): Vector2 = this.cpy().scl(PPM)
