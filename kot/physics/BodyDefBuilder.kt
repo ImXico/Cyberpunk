@@ -39,7 +39,7 @@ class BodyDefBuilder {
    * Sets the linear velocity of the body's origin, in world coordinates.
    * If not called explicitly, the default value is (0,0).
    *
-   * @param velocity desired [BodyDef.linearVelocity], in the form of a [Vector2].
+   * @param velocity the desired [BodyDef.linearVelocity], in the form of a [Vector2].
    * @return this [BodyDefBuilder] instance.
    */
   fun linearVelocity(velocity: Vector2): BodyDefBuilder {
@@ -50,8 +50,8 @@ class BodyDefBuilder {
    * Sets the linear velocity of the body's origin, in world coordinates.
    * If not called explicitly, the default value is (0,0).
    *
-   * @param x desired [BodyDef.linearVelocity] X.
-   * @param y desired [BodyDef.linearVelocity] Y.
+   * @param x the desired [BodyDef.linearVelocity] X.
+   * @param y the desired [BodyDef.linearVelocity] Y.
    * @return this [BodyDefBuilder] instance.
    */
   fun linearVelocity(x: Float, y: Float): BodyDefBuilder {
@@ -59,8 +59,10 @@ class BodyDefBuilder {
   }
 
   /**
+   * Sets the angular velocity of the body.
+   * If not called explicitly, the default value is 0.
    *
-   * @param velocity
+   * @param velocity the desired [BodyDef.angularVelocity].
    * @return this [BodyDefBuilder] instance.
    */
   fun angularVelocity(velocity: Float): BodyDefBuilder {
@@ -68,8 +70,10 @@ class BodyDefBuilder {
   }
 
   /**
+   * Sets the linear damping of the body.
+   * If not called explicitly, the default value is 0.
    *
-   * @param damping
+   * @param damping the desired [BodyDef.linearDamping].
    * @return this [BodyDefBuilder] instance.
    */
   fun linearDamping(damping: Float): BodyDefBuilder {
@@ -77,8 +81,10 @@ class BodyDefBuilder {
   }
 
   /**
+   * Sets the angular damping of the body.
+   * If not called explicitly, the default value is 0.
    *
-   * @param damping
+   * @param damping the desired [BodyDef.angularDamping]-
    * @return this [BodyDefBuilder] instance.
    */
   fun angularDamping(damping: Float): BodyDefBuilder {
@@ -86,6 +92,8 @@ class BodyDefBuilder {
   }
 
   /**
+   * Never fall asleep - please note that this WILL increase CPU usage.
+   * The default value is false (i.e. the body can fall asleep).
    *
    * @return this [BodyDefBuilder] instance.
    */
@@ -94,6 +102,8 @@ class BodyDefBuilder {
   }
 
   /**
+   * Sets this body to not be awake on spawn.
+   * The default value is true (i.e. the body is awake on spawn).
    *
    * @return this [BodyDefBuilder] instance.
    */
@@ -102,6 +112,8 @@ class BodyDefBuilder {
   }
 
   /**
+   * Sets this body to not be active on spawn.
+   * The default value is true (i.e. the body is active on spawn).
    *
    * @return this [BodyDefBuilder] instance.
    */
@@ -110,6 +122,8 @@ class BodyDefBuilder {
   }
 
   /**
+   * Prevent this body from rotating.
+   * The default value is false (i.e. the body can rotate).
    *
    * @return this [BodyDefBuilder] instance.
    */
@@ -127,7 +141,7 @@ class BodyDefBuilder {
 
   /**
    *
-   * @param scale
+   * @param scale the desired [BodyDef.gravityScale].
    * @return this [BodyDefBuilder] instance.
    */
   fun gravityScale(scale: Float): BodyDefBuilder {
@@ -136,7 +150,7 @@ class BodyDefBuilder {
 
   /**
    *
-   * @param bodyPosition
+   * @param bodyPosition the desired [BodyDef.position].
    * @return this [BodyDefBuilder] instance.
    */
   fun position(bodyPosition: Vector2): BodyDefBuilder {
@@ -145,8 +159,8 @@ class BodyDefBuilder {
 
   /**
    *
-   * @param x
-   * @param y
+   * @param x the desired [BodyDef.position] X.
+   * @param y the desired [BodyDef.position] Y.
    * @return this [BodyDefBuilder] instance.
    */
   fun position(x: Float, y: Float): BodyDefBuilder {
