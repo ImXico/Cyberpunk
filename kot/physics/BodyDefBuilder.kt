@@ -21,7 +21,9 @@ class BodyDefBuilder {
    * @see [BodyDef.BodyType]
    */
   fun type(bodyType: BodyDef.BodyType): BodyDefBuilder {
-    return this.apply { bodyDef.type = bodyType }
+    return this.apply {
+      bodyDef.type = bodyType
+    }
   }
 
   /**
@@ -32,7 +34,9 @@ class BodyDefBuilder {
    * @return this [BodyDefBuilder] instance.
    */
   fun angle(bodyAngle: Float): BodyDefBuilder {
-    return this.apply { bodyDef.angle = bodyAngle }
+    return this.apply {
+      bodyDef.angle = bodyAngle
+    }
   }
 
   /**
@@ -43,7 +47,9 @@ class BodyDefBuilder {
    * @return this [BodyDefBuilder] instance.
    */
   fun linearVelocity(velocity: Vector2): BodyDefBuilder {
-    return this.apply { bodyDef.linearVelocity.set(velocity) }
+    return this.apply {
+      bodyDef.linearVelocity.set(velocity)
+    }
   }
 
   /**
@@ -55,7 +61,9 @@ class BodyDefBuilder {
    * @return this [BodyDefBuilder] instance.
    */
   fun linearVelocity(x: Float, y: Float): BodyDefBuilder {
-    return this.apply { bodyDef.linearVelocity.set(Vector2(x, y)) }
+    return this.apply {
+      bodyDef.linearVelocity.set(Vector2(x, y))
+    }
   }
 
   /**
@@ -66,7 +74,9 @@ class BodyDefBuilder {
    * @return this [BodyDefBuilder] instance.
    */
   fun angularVelocity(velocity: Float): BodyDefBuilder {
-    return this.apply { bodyDef.angularVelocity = velocity }
+    return this.apply {
+      bodyDef.angularVelocity = velocity
+    }
   }
 
   /**
@@ -77,7 +87,9 @@ class BodyDefBuilder {
    * @return this [BodyDefBuilder] instance.
    */
   fun linearDamping(damping: Float): BodyDefBuilder {
-    return this.apply { bodyDef.linearDamping = damping }
+    return this.apply {
+      bodyDef.linearDamping = damping
+    }
   }
 
   /**
@@ -88,17 +100,21 @@ class BodyDefBuilder {
    * @return this [BodyDefBuilder] instance.
    */
   fun angularDamping(damping: Float): BodyDefBuilder {
-    return this.apply { bodyDef.angularDamping = damping }
+    return this.apply {
+      bodyDef.angularDamping = damping
+    }
   }
 
   /**
-   * Never fall asleep - please note that this WILL increase CPU usage.
+   * Never fall asleep - note that this WILL increase CPU usage.
    * The default value is false (i.e. the body can fall asleep).
    *
    * @return this [BodyDefBuilder] instance.
    */
   fun noSleep(): BodyDefBuilder {
-    return this.apply { bodyDef.allowSleep = false }
+    return this.apply {
+      bodyDef.allowSleep = false
+    }
   }
 
   /**
@@ -108,7 +124,9 @@ class BodyDefBuilder {
    * @return this [BodyDefBuilder] instance.
    */
   fun notAwakeOnSpawn(): BodyDefBuilder {
-    return this.apply { bodyDef.awake = false }
+    return this.apply {
+      bodyDef.awake = false
+    }
   }
 
   /**
@@ -118,58 +136,85 @@ class BodyDefBuilder {
    * @return this [BodyDefBuilder] instance.
    */
   fun notActiveOnSpawn(): BodyDefBuilder {
-    return this.apply { bodyDef.active = false }
+    return this.apply {
+      bodyDef.active = false
+    }
   }
 
   /**
-   * Prevent this body from rotating.
+   * Prevents this body from rotating.
    * The default value is false (i.e. the body can rotate).
    *
    * @return this [BodyDefBuilder] instance.
    */
   fun fixedRotation(): BodyDefBuilder {
-    return this.apply { bodyDef.fixedRotation = true }
+    return this.apply {
+      bodyDef.fixedRotation = true
+    }
   }
 
   /**
+   * Turns this flah on in case this is a fast moving body
+   * that should be prevented from tunneling through other moving bodies.
+   * Note that this WILL increase CPU usage.
+   * The default value is false.
    *
    * @return this [BodyDefBuilder] instance.
    */
   fun asBullet(): BodyDefBuilder {
-    return this.apply { bodyDef.bullet = true }
+    return this.apply {
+      bodyDef.bullet = true
+    }
   }
 
   /**
+   * Scales the gravity that will be applied to this body.
+   * The default value is 1f.
    *
    * @param scale the desired [BodyDef.gravityScale].
    * @return this [BodyDefBuilder] instance.
    */
   fun gravityScale(scale: Float): BodyDefBuilder {
-    return this.apply { bodyDef.gravityScale = scale }
+    return this.apply {
+      bodyDef.gravityScale = scale
+    }
   }
 
   /**
+   * Sets the *world* position of the body.
+   * The conversion from screen to world coordinates is made implicitly,
+   * so you can simply pass a [Vector2] of screen coordinates.
    *
    * @param bodyPosition the desired [BodyDef.position].
    * @return this [BodyDefBuilder] instance.
    */
   fun position(bodyPosition: Vector2): BodyDefBuilder {
-    return this.apply { bodyDef.position.set(bodyPosition.asBox2DUnits()) }
+    return this.apply {
+      bodyDef.position.set(bodyPosition.asBox2DUnits())
+    }
   }
 
   /**
+   * Sets the *world* position of the body.
+   * The conversion from screen to world coordinates is made implicitly,
+   * so you can simply pass an X and Y in screen coordinates.
    *
    * @param x the desired [BodyDef.position] X.
    * @param y the desired [BodyDef.position] Y.
    * @return this [BodyDefBuilder] instance.
    */
   fun position(x: Float, y: Float): BodyDefBuilder {
-    return this.apply { bodyDef.position.set(Vector2(x, y)) }
+    return this.apply {
+      bodyDef.position.set(Vector2(x, y))
+    }
   }
 
   /**
+   * Finish building this [BodyDef].
+   * The [bodyDef] instance will be cleaned up,
+   * making it suitable for reuse later.
    *
-   * @return
+   * @return the [BodyDef] that has been worked on.
    */
   fun build(): BodyDef {
     val result = bodyDef
@@ -178,7 +223,8 @@ class BodyDefBuilder {
   }
 
   /**
-   *
+   * Cleans up this class' [bodyDef], making it
+   * suitable for reuse later.
    */
   private fun cleanup() {
     bodyDef = BodyDef()
