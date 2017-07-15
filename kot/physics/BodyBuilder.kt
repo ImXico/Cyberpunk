@@ -28,6 +28,14 @@ class BodyBuilder(private var world: PhysicsWorld) {
   private val fixturesProps: MutableMap<FixtureDef, JvmType.Object?> = mutableMapOf()
 
   /**
+   * Change the currently attached [PhysicsWorld].
+   * All bodies created will be placed onto the current [world].
+   */
+  fun changeWorld(newWorld: PhysicsWorld) {
+    world = newWorld
+  }
+
+  /**
    * Adds a [BodyDef] to this body, by chaining the [BodyDefBuilder] methods.
    *
    * @param builder [BodyDefBuilder].
