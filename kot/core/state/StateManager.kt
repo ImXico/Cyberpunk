@@ -63,7 +63,7 @@ object StateManager {
   /**
    *
    */
-  fun render(batch: Batch) {
+  fun render() {
     if (nextState == null) {
       currentState?.render(batch)
     } else {
@@ -74,6 +74,8 @@ object StateManager {
           it.finish()
           currentState?.render(batch)
           Gdx.input.inputProcessor = currentState
+        } else {
+
         }
       }
     }

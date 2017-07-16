@@ -35,7 +35,7 @@ public class App extends ApplicationAdapter {
     public void create() {
         /* Initializing the StateManager with a camera + viewport. */
         final Camera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
+        camera.pos1.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         final Viewport viewport = new ExtendViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         StateManager.init(camera, viewport, WORLD_WIDTH, WORLD_HEIGHT);
 

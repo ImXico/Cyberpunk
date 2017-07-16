@@ -16,7 +16,7 @@ import com.badlogic.gdx.math.Vector2
 fun center(font: BitmapFont, text: String, worldWidth: Int, worldHeight: Int): Vector2 {
   val layout: GlyphLayout = GlyphLayout(font, text)
   val x: Float = (worldWidth - layout.width) / 2f
-  val y: Float = (worldHeight - layout.height) / 2f
+  val y: Float = (worldHeight + layout.height) / 2f
   return Vector2(x, y)
 }
 
@@ -48,7 +48,7 @@ fun centerX(font: BitmapFont, text: String, worldWidth: Int, y: Float): Vector2 
  */
 fun centerY(font: BitmapFont, text: String, worldHeight: Int, x: Float): Vector2 {
   val layout: GlyphLayout = GlyphLayout(font, text)
-  val y: Float = (worldHeight - layout.height) / 2f
+  val y: Float = (worldHeight + layout.height) / 2f
   return Vector2(x, y)
 }
 

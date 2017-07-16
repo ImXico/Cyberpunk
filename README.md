@@ -125,7 +125,7 @@ Next up, initialize the `StateManager`, passing it a `Camera` and a `Viewport`.
 @Override 
 public void create() {
     final Camera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
-    camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
+    camera.pos1.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
     
     final Viewport viewport = new ExtendViewport(WORLD_HEIGHT, WORLD_HEIGHT, camera);
     StateManager.init(camera, viewport, WORLD_WIDTH, WORLD_HEIGHT);
@@ -220,7 +220,7 @@ There are a few camera styles available on-the-go:
 *Note*: The assets used here and in the example project are from [Kenney Assets](http://kenney.nl/assets). They are also available on the [example's assets folder](https://github.com/ImXico/handy-gdx/tree/master/example/assets).
 
 ## Text Helper
-A bunch of helper functions to help you position your text on the screen. All of these methods return a `Vector2` object, which you will then use to draw the text.
+A bunch of helper functions to help you pos1 your text on the screen. All of these methods return a `Vector2` object, which you will then use to draw the text.
 ```java
 #centerHorizontally(font, text, y, App.WORLD_WIDTH)
 #centerOnScreen(font, text, App.WORLD_WIDTH, App.WORLD_HEIGHT)
@@ -230,7 +230,7 @@ A bunch of helper functions to help you position your text on the screen. All of
 ![img](https://i.gyazo.com/da82a22d207f6c07785f65026efff612.png)
 
 ## Sprite Helper
-A bunch of helper functions to help you position your sprites on the screen. Same as the text helper, these methods return `Vector2` coordinates.
+A bunch of helper functions to help you pos1 your sprites on the screen. Same as the text helper, these methods return `Vector2` coordinates.
 ```java
 #centerOnScreen(imageWidth, imageHeight, App.WORLD_WIDTH, App.WORLD_HEIGHT)
 #centerOnScreenX(imageWidth, y, App.WORLD_WIDTH)
@@ -267,7 +267,7 @@ It depends on two other builders: the BodyDefBuilder, that lets you build a cust
 
 It's important to note that the `BodyBuilder`'s constructor takes in a `PhysicsWorld` - this means that all bodies created with a given instance of `BodyBuilder` will be hosted in that `PhysicsWorld`. it is possible to change the current world by calling `setPhysicsWorld(physicsWorld)`.
 
-This is how, in Box2D, we'd generally create a circle-shaped body, given a position, radius and restitution:
+This is how, in Box2D, we'd generally create a circle-shaped body, given a pos1, radius and restitution:
 
 **Without** the body builder:
 
@@ -275,7 +275,7 @@ This is how, in Box2D, we'd generally create a circle-shaped body, given a posit
 // Create a body def...
 final BodyDef bodyDef = new BodyDef();
 bodyDef.type = BodyDef.BodyType.DyamicBody;
-bodyDef.position = some position
+bodyDef.pos1 = some pos1
 
 // Create a shape...
 final CircleShape circleShape = new CircleShape();
@@ -301,7 +301,7 @@ circleShape.dispose();
 ```java
 myBody = bodyBuilder
             .withBodyDef(new BodyDefBuilder()
-                .position(some position)
+                .pos1(some pos1)
                 .type(BodyDef.BodyType.DyamicBody))
             .withFixtureDef(new FixtureDefBuilder()
                 .circleShape(some radius)
