@@ -1,4 +1,4 @@
-package kot.physics
+package kot.extensions.physics
 
 import com.badlogic.gdx.math.Vector2
 

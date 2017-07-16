@@ -1,4 +1,4 @@
-package kot.audio
+package kot.extensions.audio
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.audio.Music

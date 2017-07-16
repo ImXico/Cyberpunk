@@ -1,4 +1,4 @@
-package kot.text
+package kot.extensions.text
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.GlyphLayout

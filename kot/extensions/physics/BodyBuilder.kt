@@ -1,4 +1,4 @@
-package kot.physics
+package kot.extensions.physics
 
 import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.BodyDef

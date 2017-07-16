@@ -1,4 +1,4 @@
-package kot.camera
+package kot.extensions.camera
 
 import com.badlogic.gdx.graphics.Camera
 import com.badlogic.gdx.math.Vector2

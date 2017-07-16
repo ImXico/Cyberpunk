@@ -1,4 +1,4 @@
-package kot.physics
+package kot.extensions.physics
 
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer

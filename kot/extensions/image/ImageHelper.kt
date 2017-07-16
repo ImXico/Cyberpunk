@@ -1,4 +1,4 @@
-package kot.image
+package kot.extensions.image
 
 import com.badlogic.gdx.math.Vector2
 

@@ -1,11 +1,11 @@
-package kot.state
+package kot.core.state
 
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.math.Vector2
 
-abstract class AbstractState : State {
+abstract class StateAdapter : State {
 
- /* State methods that absolutely must be overriden. */
+  /* State methods that absolutely must be overriden. */
 
   override abstract fun update(delta: Float)
   override abstract fun render(batch: Batch)
@@ -21,13 +21,11 @@ abstract class AbstractState : State {
   /* State input conversion methods - can't be overriden. */
 
   final override fun unproject(screenCoordinates: Vector2): Vector2 {
-    // TODO
-    return Vector2()
+    return StateManager.viewport.unproject(screenCoordinates)
   }
 
   final override fun unproject(screenX: Float, screenY: Float): Vector2 {
-    // TODO
-    return Vector2()
+    return this.unproject(Vector2(screenX, screenY))
   }
 
   /* InputProcessor methods that may or may not be overriden. */

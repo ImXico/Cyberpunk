@@ -1,10 +1,10 @@
-package kot.state
+package kot.core.state
 
 import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.math.Vector2
 
-internal interface State : InputProcessor {
+interface State : InputProcessor {
 
   /**
    * Updates the state.

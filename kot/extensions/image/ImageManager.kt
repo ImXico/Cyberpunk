@@ -1,4 +1,4 @@
-package kot.image
+package kot.extensions.image
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
