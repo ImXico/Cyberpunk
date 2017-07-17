@@ -45,12 +45,14 @@ object StateManager {
    * Game's [Camera] - should remain immutable.
    * To modify the behavior of the camera, use the CameraStyles API.
    */
-  lateinit var camera: Camera private set
+  lateinit var camera: Camera
+    private set
 
   /**
    * Game's [Viewport] - manages the [Camera] and should also remain immutable.
    */
-  lateinit var viewport: Viewport private set
+  lateinit var viewport: Viewport
+    private set
 
   /**
    * Initializes the [StateManager], passing it a [Camera], [Viewport] and,
