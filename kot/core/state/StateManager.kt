@@ -173,14 +173,14 @@ object StateManager {
   }
 
   /**
-   * Utility extension function to wrap any [action] inside the
+   * Utility extension function to wrap any [block] inside the
    * [FrameBuffer.begin] and [FrameBuffer.end] calls, for shortness.
    *
-   * @param action a [Unit] returning function.
+   * @param block a [Unit] returning function.
    */
-  private inline fun FrameBuffer.wrap(action: () -> Unit) {
+  private inline fun FrameBuffer.wrap(block: () -> Unit) {
     this.begin()
-    action()
+    block()
     this.end()
   }
 

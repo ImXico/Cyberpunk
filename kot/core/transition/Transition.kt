@@ -3,35 +3,40 @@ package kot.core.transition
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 
-/**
- * The state manager will take care of the [Transition] management, meaning that
- * you must probably won't need to explicitly call any of these functions.
- */
 interface Transition {
+
+  /**
+   * Abstract property - override in concrete implementations.
+   */
+  var running: Boolean
 
   /**
    * Starts the transition.
    */
-  fun start()
+  fun start() {
+    running = true
+  }
 
   /**
    * Finishes the transition.
    */
-  fun finish()
+  fun finish() {
+    running = false
+  }
 
   /**
    * Checks whether or not this [Transition] is running.
    *
    * @return true if it is running, false otherwise.
    */
-  fun running(): Boolean
+  fun running(): Boolean = running
 
   /**
    * Checks whether or not this [Transition] is completed.
    *
    * @return true if it is completed, false otherwise.
    */
-  fun completed(): Boolean
+  fun completed(): Boolean = !running
 
   /**
    * Updates the [Transition].
