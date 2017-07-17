@@ -11,6 +11,7 @@ import kot.core.transition.Transition
 class Fade(private var speed: Float = DEFAULT_SPEED) : Transition {
 
   @JvmField val MAX_ALPHA: Float = 1f
+  @JvmField val DEFAULT_ALPHA_INC: Float = 0.05f
 
   /**
    * Overrides the property defined at the [Transition] interface.
@@ -27,12 +28,17 @@ class Fade(private var speed: Float = DEFAULT_SPEED) : Transition {
   private var alpha: Float = 0f
 
   /**
+   * Alpha increment to be used at each frame
+   */
+  private val alphaInc: Float = calculateAlphaInc()
+
+  /**
    * @see [Transition.update]
    */
   override fun update(delta: Float) {
     if (!running) return
     if (alpha <= MAX_ALPHA) {
-      alpha += 0.05f
+      alpha += alphaInc
     } else {
       running = false
     }
@@ -49,4 +55,11 @@ class Fade(private var speed: Float = DEFAULT_SPEED) : Transition {
     batch.draw(next, 0f, 0f, WORLD_WIDTH.toFloat(), WORLD_HEIGHT.toFloat())
     batch.end()
   }
+
+  /**
+   * Calculates the alpha increment to be used at each frame based on the [speed] property.
+   *
+   * @return alpha increment.
+   */
+  private fun calculateAlphaInc(): Float = this.speed * DEFAULT_ALPHA_INC / DEFAULT_SPEED
 }
