@@ -22,7 +22,7 @@ class Main : ApplicationAdapter() {
     ImageManager.load("NormalPack", "NormalPack.pack", true)
     ImageManager.load("HeroWalkingPack", "HeroWalkingPack.pack")
 
-    StateManager.setup(camera, viewport, PlayState())
+    StateManager.setup(camera, viewport, StateA())
   }
 
   override fun render() {

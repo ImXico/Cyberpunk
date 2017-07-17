@@ -8,11 +8,12 @@ import com.badlogic.gdx.math.Vector2
 import kot.core.WORLD_HEIGHT
 import kot.core.state.StateAdapter
 import kot.core.state.StateManager
+import kot.core.transition.types.Fade
 import kot.extensions.image.ImageManager
 import kot.extensions.image.centerOnImage
 import kot.extensions.image.centerY
 
-class PlayState : StateAdapter() {
+class StateA : StateAdapter() {
 
   private val tex1: TextureRegion?
   private val pos1: Vector2
@@ -28,6 +29,12 @@ class PlayState : StateAdapter() {
     pos2 = centerY(150f, WORLD_HEIGHT, 100f)
     tex1 = ImageManager.take("alien-green")
     pos1 = centerOnImage(50f, 50f, 150f, 150f, pos2)
+  }
+
+  override fun keyDown(keycode: Int): Boolean {
+    println("Changing state...")
+    StateManager.to(StateB(), Fade())
+    return true
   }
 
   override fun update(delta: Float) {
