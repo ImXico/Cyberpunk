@@ -1,9 +1,8 @@
 <p align="center">
-  <img src="https://github.com/ImXico/handy-gdx/blob/feature/kotlin/logo.png" width="300" height="200" />
+  <img src="https://github.com/ImXico/handy-gdx/blob/feature/kotlin/logo.png" />
 </p>
 
 <p align="center">
-  <img src="...libGDX version...">
   <a href="http://libgdx.badlogicgames.com/"><img src="https://img.shields.io/badge/libgdx-1.6.5-brightgreen.svg"></a>
   <a href="https://kotlinlang.org/"><img src="https://img.shields.io/badge/kotlin-1.1.0-orange.svg"></a>
   <a href="https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
