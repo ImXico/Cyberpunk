@@ -3,9 +3,10 @@ package kot.extensions.physics
 import com.badlogic.gdx.math.Vector2
 
 /**
- * Scaling: 100 pixels = 1 meter.
+ * Default scaling: 150 pixels = 1 meter.
+ * Change this as you want.
  */
-@JvmField val PPM: Float = 100f
+@JvmField val PPM: Float = 150f
 
 /**
  * Takes in a [Float] value in pixels and returns the equivalent value of
