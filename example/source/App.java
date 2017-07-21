@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import example.source.state.B2DState;
 import example.source.state.MenuState;
 import kot.core.state.StateManager;
 import source.extensions.ImageManager.ImageManager;
@@ -34,12 +35,12 @@ public class App extends ApplicationAdapter {
         ImageManager.loadAtlas("HeroWalkingPack", "HeroWalkingPack.pack");
 
         /* Step 3: Create and set the initial state. */
-        StateManager.INSTANCE.setup(camera, viewport, new MenuState());
+        StateManager.INSTANCE.setup(camera, viewport, new B2DState());
     }
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(200 / 255f, 200 / 255f, 200 / 255f, 1f);
+        Gdx.gl.glClearColor(30 / 255f, 30 / 255f, 30 / 255f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         StateManager.INSTANCE.update(Gdx.graphics.getDeltaTime());
         StateManager.INSTANCE.render();

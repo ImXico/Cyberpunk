@@ -33,7 +33,7 @@ class StateB : StateAdapter() {
 
   override fun keyDown(keycode: Int): Boolean {
     println("Changing state...")
-    StateManager.to(StateA(), Fade())
+    StateManager.go(StateA(), Fade())
     return true
   }
 

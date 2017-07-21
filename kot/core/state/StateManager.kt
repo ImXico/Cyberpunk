@@ -68,7 +68,7 @@ object StateManager {
     this.viewport = viewport
     camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0f)
     setupFBOs()
-    initialState?.let { to(it) }
+    initialState?.let { go(it) }
   }
 
   /**
@@ -79,7 +79,7 @@ object StateManager {
    * @param transition  optional transition used to move from states.
    */
   @JvmOverloads
-  fun to(state: State, transition: Transition? = null) {
+  fun go(state: State, transition: Transition? = null) {
     if (currentState == null) {
       currentState = state
       Gdx.input.inputProcessor = currentState

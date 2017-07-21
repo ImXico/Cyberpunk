@@ -31,7 +31,7 @@ public class MenuState extends StateAdapter {
 //        final Transition transition = new FadingTransition();
         /* Transition 2: HorizontalSlide transition, left-to-right. */
 //        final Transition transition = new HorizontalSlideTransition(Motion.LEFT_TO_RIGHT, 0.2f);
-        StateManager.INSTANCE.to(new PlayState(), new HorizontalSlide(Motion.LEFT_RIGHT, 0.2f));
+        StateManager.INSTANCE.go(new PlayState(), new HorizontalSlide(Motion.LEFT_RIGHT, 0.2f));
         return true;
     }
 
