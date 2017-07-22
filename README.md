@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/ImXico/handy-gdx/blob/feature/kotlin/logo.png" width="250" />
+  <img src="https://github.com/ImXico/handy-gdx/blob/master/logo.png" width="250" />
 </p>
 
 <p align="center">
@@ -14,10 +14,10 @@ Punk is a collection of independent, modular, pure-Kotlin libraries to use on to
 various (mostly un-opinionated!) utilities and boilerplates, it aims to speed up development and ease the making of prototypes and MVPs. Hopefully a useful resource for both experienced developers and newcomers!
 
 ### Get Started
-- [Why Kotlin?](...)
-- [Explore the Wiki/Docs](...)
-- [Mock project in Java](...)
-- [Mock project in Kotlin](...)
+- [Why Kotlin?](https://github.com/ImXico/punk/wiki/Why-Kotlin%3F)
+- [Explore the Wiki](https://github.com/ImXico/punk/wiki)
+- [Mock project in Java - soon](...)
+- [Mock project in Kotlin- soon](...)
 
 ### Report Issues
 Something not working quite as expected? Do you need a feature that has not been implemented yet? Feel free to report bugs, fix them, suggest enhancements, add functionality and point out any mistakes!
