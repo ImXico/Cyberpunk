@@ -7,9 +7,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import example.source.state.B2DState;
 import example.source.state.MenuState;
+import kot.core.state.StateManager;
 import source.extensions.ImageManager.ImageManager;
-import source.core.State.StateManager;
 
 public class App extends ApplicationAdapter {
 
@@ -25,7 +26,6 @@ public class App extends ApplicationAdapter {
         final Camera camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         final Viewport viewport = new ExtendViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
-        StateManager.init(camera, viewport, WORLD_WIDTH, WORLD_HEIGHT);
 
         /*
         Step 2.5: Optionally load the assets here.
@@ -35,34 +35,34 @@ public class App extends ApplicationAdapter {
         ImageManager.loadAtlas("HeroWalkingPack", "HeroWalkingPack.pack");
 
         /* Step 3: Create and set the initial state. */
-        StateManager.getInstance().setState(new MenuState());
+        StateManager.INSTANCE.setup(camera, viewport, new B2DState());
     }
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(200 / 255f, 200 / 255f, 200 / 255f, 1f);
+        Gdx.gl.glClearColor(30 / 255f, 30 / 255f, 30 / 255f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        StateManager.getInstance().update(Gdx.graphics.getDeltaTime());
-        StateManager.getInstance().render();
+        StateManager.INSTANCE.update(Gdx.graphics.getDeltaTime());
+        StateManager.INSTANCE.render();
     }
 
     @Override
     public void resize(int width, int height) {
-        StateManager.getInstance().resize(width, height);
+        StateManager.INSTANCE.resize(width, height);
     }
 
     @Override
     public void pause() {
-        StateManager.getInstance().pause();
+        StateManager.INSTANCE.pause();
     }
 
     @Override
     public void resume() {
-        StateManager.getInstance().resume();
+        StateManager.INSTANCE.resume();
     }
 
     @Override
     public void dispose() {
-        StateManager.getInstance().dispose();
+        StateManager.INSTANCE.dispose();
     }
 }

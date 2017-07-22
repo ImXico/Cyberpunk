@@ -5,11 +5,12 @@ import com.badlogic.gdx.math.Vector2;
 import example.source.background.Background;
 import example.source.background.Ground;
 import example.source.hero.Hero;
-import source.extensions.Camera.CameraStyles;
-import source.core.State.AbstractState;
-import source.core.State.StateManager;
+import kot.core.state.StateAdapter;
+import kot.core.state.StateManager;
+import kot.extensions.camera.CameraStylesKt;
+import org.jetbrains.annotations.NotNull;
 
-public class PlayState extends AbstractState {
+public class PlayState extends StateAdapter {
 
     private final Hero hero;
     private final Background background;
@@ -41,12 +42,13 @@ public class PlayState extends AbstractState {
         /* Style 2: Lock on target, ridigly. */
 //        CameraStyles.lockOnTarget(StateManager.getInstance().getCamera(), hero.getPosition());
         /* Style 3: Smoothly lerp to target with a lerp amount = 0.075f. */
-        CameraStyles.lerpToTarget(StateManager.getInstance().getCamera(), hero.getPosition(), 0.075f);
+//        CameraStyles.lerpToTarget(StateManager.getInstance().getCamera(), hero.getPosition(), 0.075f);
+        CameraStylesKt.lerpTo(StateManager.INSTANCE.getCamera(), hero.getPosition(), 0.075f);
     }
 
     @Override
-    public void render(Batch batch) {
-        batch.setProjectionMatrix(StateManager.getInstance().getCamera().combined);
+    public void render(@NotNull Batch batch) {
+        batch.setProjectionMatrix(StateManager.INSTANCE.getCamera().combined);
         batch.begin();
         background.render(batch);
         ground.render(batch);
