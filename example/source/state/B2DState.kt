@@ -2,14 +2,13 @@ package example.source.state
 
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.BodyDef
 import kot.core.WORLD_HEIGHT
 import kot.core.WORLD_WIDTH
 import kot.core.state.StateAdapter
-import kot.extensions.physics.BodyBuilder
-import kot.extensions.physics.BodyDefBuilder
-import kot.extensions.physics.FixtureDefBuilder
+import kot.extensions.physics.builder.BodyBuilder
+import kot.extensions.physics.builder.BodyDefBuilder
+import kot.extensions.physics.builder.FixtureDefBuilder
 import kot.extensions.physics.PhysicsWorld
 
 class B2DState : StateAdapter() {

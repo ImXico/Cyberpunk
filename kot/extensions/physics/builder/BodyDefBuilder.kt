@@ -1,7 +1,8 @@
-package kot.extensions.physics
+package kot.extensions.physics.builder
 
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
+import kot.extensions.physics.asBox2DUnits
 
 class BodyDefBuilder {
 
