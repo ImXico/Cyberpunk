@@ -1,3 +1,5 @@
+@file:JvmName("TextHelper")
+
 package source.extensions.text
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont

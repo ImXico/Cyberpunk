@@ -1,3 +1,5 @@
+@file:JvmName("CameraStyles")
+
 package source.extensions.camera
 
 import com.badlogic.gdx.graphics.Camera

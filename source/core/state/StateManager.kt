@@ -45,13 +45,13 @@ object StateManager {
    * Game's [Camera] - should remain immutable.
    * To modify the behavior of the camera, use the CameraStyles API.
    */
-  lateinit var camera: Camera
+  @JvmStatic lateinit var camera: Camera
     private set
 
   /**
    * Game's [Viewport] - manages the [Camera] and should also remain immutable.
    */
-  lateinit var viewport: Viewport
+  @JvmStatic lateinit var viewport: Viewport
     private set
 
   /**
@@ -62,6 +62,7 @@ object StateManager {
    * @param viewport      viewport that will adapt the game screen to the physical devices.
    * @param initialState  optional initial state, that will be set straight away.
    */
+  @JvmStatic
   @JvmOverloads
   fun setup(camera: Camera, viewport: Viewport, initialState: State? = null) {
     this.camera = camera
@@ -78,6 +79,7 @@ object StateManager {
    * @param state       new current state.
    * @param transition  optional transition used to move from states.
    */
+  @JvmStatic
   @JvmOverloads
   fun go(state: State, transition: Transition? = null) {
     if (currentState == null) {
@@ -98,6 +100,7 @@ object StateManager {
    *
    * @param delta time elapsed between this moment and the last update call.
    */
+  @JvmStatic
   fun update(delta: Float) {
     currentState?.update(delta)
     transition?.let { if (it.running()) it.update(delta) }
@@ -109,6 +112,7 @@ object StateManager {
    * II. Transition was ongoing but just completed.
    * III. Transition is still in progress.
    */
+  @JvmStatic
   fun render() {
     if (nextState == null) {
       currentState?.render(batch)
@@ -138,6 +142,7 @@ object StateManager {
    * @param width  new screen width.
    * @param height new screen height.
    */
+  @JvmStatic
   fun resize(width: Int, height: Int) {
     viewport.update(width, height)
     batch.projectionMatrix = camera.combined
@@ -149,6 +154,7 @@ object StateManager {
   /**
    * Pauses the [currentState] and the [nextState].
    */
+  @JvmStatic
   fun pause() {
     currentState?.pause()
     nextState?.pause()
@@ -157,6 +163,7 @@ object StateManager {
   /**
    * Resumes the [currentState] and the [nextState].
    */
+  @JvmStatic
   fun resume() {
     currentState?.resume()
     nextState?.resume()
@@ -165,6 +172,7 @@ object StateManager {
   /**
    * Disposes the [currentState], [nextState] and the [FrameBuffer] objects.
    */
+  @JvmStatic
   fun dispose() {
     currentState?.dispose()
     nextState?.dispose()

@@ -18,6 +18,7 @@ object MusicManager {
    * @param trackName key that will identify this track in the map.
    * @param path      track's path inside the assets folder.
    */
+  @JvmStatic
   fun load(trackName: String, path: String) {
     val track: Music = Gdx.audio.newMusic(Gdx.files.internal(path))
     tracks.put(trackName, track)
@@ -32,6 +33,7 @@ object MusicManager {
    * @param trackName key that identifies the track in the map.
    * @param volume    audio volume; ranges between [0, 1] and it's optional.
    */
+  @JvmStatic
   @JvmOverloads
   fun play(trackName: String, volume: Float = 1f) {
     tracks[trackName]?.let {
@@ -45,6 +47,7 @@ object MusicManager {
    *
    * @param trackName key that identifies the track in the map.
    */
+  @JvmStatic
   fun pause(trackName: String) = tracks[trackName]?.pause()
 
   /**
@@ -52,6 +55,7 @@ object MusicManager {
    *
    * @param trackName key that identifies the track in the map.
    */
+  @JvmStatic
   fun stop(trackName: String) = tracks[trackName]?.stop()
 
   /**
@@ -59,6 +63,7 @@ object MusicManager {
    *
    * @param trackName key that identifies the track in the map.
    */
+  @JvmStatic
   fun loop(trackName: String) {
     tracks[trackName]?.isLooping = true
   }
@@ -69,6 +74,7 @@ object MusicManager {
    * @param trackName key that identifies the track in the map.
    * @return whether or not the given track is playing.
    */
+  @JvmStatic
   fun isPlaying(trackName: String): Boolean = tracks[trackName]?.isPlaying ?: false
 
   /**
@@ -77,6 +83,7 @@ object MusicManager {
    * @param trackName key that identifies the track in the map.
    * @return whether or not the given track is looping.
    */
+  @JvmStatic
   fun isLooping(trackName: String): Boolean = tracks[trackName]?.isLooping ?: false
 
   /**
@@ -85,6 +92,7 @@ object MusicManager {
    * @param trackName key that identifies the track in the map.
    * @return this track's current position in seconds.
    */
+  @JvmStatic
   fun getPosition(trackName: String): Float = tracks[trackName]?.position ?: -1f
 
   /**
@@ -93,6 +101,7 @@ object MusicManager {
    * @param trackName key that identifies the track in the map.
    * @param position  target position in seconds.
    */
+  @JvmStatic
   fun setPosition(trackName: String, position: Float) {
     tracks[trackName]?.position = position
   }
@@ -103,6 +112,7 @@ object MusicManager {
    *
    * @param trackName key that identifies the track in the map.
    */
+  @JvmStatic
   fun dispose(trackName: String) = tracks[trackName]?.dispose()
 
 }

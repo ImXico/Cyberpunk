@@ -17,6 +17,7 @@ object SoundManager {
    * @param soundName key that will identify this sound in the map.
    * @param path      sounds's path inside the assets folder.
    */
+  @JvmStatic
   fun load(soundName: String, path: String) {
     val sound: Sound = Gdx.audio.newSound(Gdx.files.internal(path))
     sounds.put(soundName, sound)
@@ -33,6 +34,7 @@ object SoundManager {
    * @param pan       sound panning; ranges between [-1 (full left), 1 (full right)] and it's optional.
    * @return a [Long], id, which is unique for every call to [play]. In case of failure, returns -1.
    */
+  @JvmStatic
   @JvmOverloads
   fun play(soundName: String, volume: Float = 1f, pitch: Float = 1f, pan: Float = 0f): Long {
     return sounds[soundName]?.play(volume, pitch, pan) ?: -1
@@ -49,6 +51,7 @@ object SoundManager {
    * @param pan       sound panning; ranges between [-1 (full left), 1 (full right)] and it's optional.
    * @return a [Long], id, which is the id of the sound instance, if successful, or -1 on failure.
    */
+  @JvmStatic
   @JvmOverloads
   fun loop(soundName: String, volume: Float = 1f, pitch: Float = 1f, pan: Float = 0f): Long {
     return sounds[soundName]?.loop(volume, pitch, pan) ?: -1
@@ -60,6 +63,7 @@ object SoundManager {
    *
    * @param soundName key that identifies the sound in the map.
    */
+  @JvmStatic
   fun stop(soundName: String) = sounds[soundName]?.stop()
 
   /**
@@ -68,6 +72,7 @@ object SoundManager {
    *
    * @param soundName key that identifies the sound in the map.
    */
+  @JvmStatic
   fun pause(soundName: String) = sounds[soundName]?.pause()
 
   /**
@@ -76,6 +81,7 @@ object SoundManager {
    *
    * @param soundName key that identifies the sound in the map.
    */
+  @JvmStatic
   fun resume(soundName: String) = sounds[soundName]?.resume()
 
   /**
@@ -84,6 +90,7 @@ object SoundManager {
    *
    * @param soundName key that identifies the sound in the map.
    */
+  @JvmStatic
   fun dispose(soundName: String) = sounds[soundName]?.dispose()
 
 }

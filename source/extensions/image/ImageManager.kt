@@ -11,6 +11,7 @@ object ImageManager {
    * It's not unusual to use just one texture atlas. If that's the case, change this field to the desired name,
    * via [load], and [take] can be called without supplying an atlas key.
    */
+  @JvmStatic
   var DEFAULT_ATLAS_KEY: String? = null
     private set
 
@@ -28,6 +29,7 @@ object ImageManager {
    * @param path          path of the atlas, under the assets folder.
    * @param setAsDefault  whether or not this [TextureAtlas] should be set as the [DEFAULT_ATLAS_KEY].
    */
+  @JvmStatic
   @JvmOverloads
   fun load(key: String, path: String, setAsDefault: Boolean = false) {
     val atlas: TextureAtlas = TextureAtlas(Gdx.files.internal(path))
@@ -43,6 +45,7 @@ object ImageManager {
    * @param key key that identifies the [TextureAtlas] in the [atlases] structure.
    * @return the correct [TextureAtlas] or null, in case of failure.
    */
+  @JvmStatic
   fun getAtlas(key: String): TextureAtlas? = atlases[key]
 
   /**
@@ -53,6 +56,7 @@ object ImageManager {
    *
    * @param key key that identifies the [TextureAtlas] in the [atlases] structure.
    */
+  @JvmStatic
   fun disposeAtlas(key: String) = atlases[key]?.dispose()
 
   /**
@@ -64,6 +68,7 @@ object ImageManager {
    * @param key     key that identifies the [TextureAtlas] in the [atlases] structure.
    * @return the [TextureRegion] wanted, or null, in case it was not found.
    */
+  @JvmStatic
   @JvmOverloads
   fun take(region: String, key: String? = DEFAULT_ATLAS_KEY): TextureRegion? = atlases[key]?.findRegion(region)
 

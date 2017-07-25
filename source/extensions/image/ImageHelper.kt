@@ -1,3 +1,5 @@
+@file:JvmName("ImageHelper")
+
 package source.extensions.image
 
 import com.badlogic.gdx.math.Vector2
