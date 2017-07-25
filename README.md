@@ -15,9 +15,8 @@ various (mostly un-opinionated!) utilities and boilerplates, it aims to speed up
 
 ### Get Started
 - [Why Kotlin?](https://github.com/ImXico/punk/wiki/Why-Kotlin%3F)
+- [Project Structure](https://github.com/ImXico/punk/wiki/Structure)
 - [Explore the Wiki](https://github.com/ImXico/punk/wiki)
-- [Mock project in Java - soon](...)
-- [Mock project in Kotlin- soon](...)
 
 ### Report Issues
 Something not working quite as expected? Do you need a feature that has not been implemented yet? Feel free to report bugs, fix them, suggest enhancements, add functionality and point out any mistakes!
