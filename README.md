@@ -17,12 +17,12 @@ Cyberpunk is all about small, independent modules. Because of the Gradle integra
 
 Here are the **current** modules (each one has a *README.md* file):
 
-- audio: Music/Sound asset management and various utilities.
-- camera: Various camera styles on the go.
-- core: States, state management and transitions. Get up and running quickly!
-- image: Image asset management and various utilities.
-- physics: Friendly and practical Box2D constructs.
-- text: Text positioning helpers.
+- [audio](https://github.com/ImXico/Cyberpunk/tree/master/audio): Music/Sound asset management and various utilities.
+- [camera](https://github.com/ImXico/Cyberpunk/tree/master/camera): Various camera styles on the go.
+- [core](https://github.com/ImXico/Cyberpunk/tree/master/core): States, state management and transitions. Get up and running quickly!
+- [image](https://github.com/ImXico/Cyberpunk/tree/master/image): Image asset management and various utilities.
+- [physics](https://github.com/ImXico/Cyberpunk/tree/master/physics): Friendly and practical Box2D constructs.
+- [text](https://github.com/ImXico/Cyberpunk/tree/master/text): Text positioning helpers.
 
 ### Usage
 
