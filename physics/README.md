@@ -92,4 +92,4 @@ builder
   .build()
 ```
 
-This feels a lot easier to readC, and although not fully-featured, still grants a fair amount of customization options.
+This feels a lot easier to read, and although not fully-featured, still grants a fair amount of customization options.
