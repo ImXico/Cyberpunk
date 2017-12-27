@@ -1,0 +1,7 @@
+include 'core'
+include 'audio'
+include 'camera'
+include 'image'
+include 'text'
+include 'physics'
+
