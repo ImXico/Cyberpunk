@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/ImXico/punk/blob/master/logo.png" width="250" />
+  <img src="https://github.com/ImXico/cyberpunk/blob/master/logo.png" height=120 />
 </p>
 
 <p align="center">
