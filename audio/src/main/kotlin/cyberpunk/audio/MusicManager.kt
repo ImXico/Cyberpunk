@@ -58,6 +58,7 @@ object MusicManager {
    * Stops the given track's playback.
    *
    * @param trackName key that identifies the track in the map.
+   * @throws AudioAssetNotFoundException
    */
   @JvmStatic
   @Throws(AudioAssetNotFoundException::class)
