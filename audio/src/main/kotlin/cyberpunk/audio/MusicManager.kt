@@ -32,9 +32,11 @@ object MusicManager {
    *
    * @param trackName key that identifies the track in the map.
    * @param volume    audio volume; ranges between [0, 1] and it's optional.
+   * @throws AudioAssetNotFoundException
    */
   @JvmStatic
   @JvmOverloads
+  @Throws(AudioAssetNotFoundException::class)
   fun play(trackName: String, volume: Float = 1f) {
     val track = tracks[trackName] ?: throw AudioAssetNotFoundException("$trackName not found.")
     track.volume = volume
@@ -45,8 +47,10 @@ object MusicManager {
    * Pauses the given track's playback.
    *
    * @param trackName key that identifies the track in the map.
+   * @throws AudioAssetNotFoundException
    */
   @JvmStatic
+  @Throws(AudioAssetNotFoundException::class)
   fun pause(trackName: String) =
     tracks[trackName]?.pause() ?: throw AudioAssetNotFoundException("$trackName not found.")
 
@@ -56,6 +60,7 @@ object MusicManager {
    * @param trackName key that identifies the track in the map.
    */
   @JvmStatic
+  @Throws(AudioAssetNotFoundException::class)
   fun stop(trackName: String) =
     tracks[trackName]?.stop() ?: throw AudioAssetNotFoundException("$trackName not found.")
 
@@ -63,8 +68,10 @@ object MusicManager {
    * Repeats the given track's playback until [stop] is called.
    *
    * @param trackName key that identifies the track in the map.
+   * @throws AudioAssetNotFoundException
    */
   @JvmStatic
+  @Throws(AudioAssetNotFoundException::class)
   fun loop(trackName: String) {
     val track = tracks[trackName] ?: throw AudioAssetNotFoundException("$trackName not found.")
     track.isLooping = true
@@ -75,8 +82,10 @@ object MusicManager {
    *
    * @param trackName key that identifies the track in the map.
    * @return whether or not the given track is playing.
+   * @throws AudioAssetNotFoundException
    */
   @JvmStatic
+  @Throws(AudioAssetNotFoundException::class)
   fun isPlaying(trackName: String): Boolean =
     tracks[trackName]?.isPlaying ?: throw AudioAssetNotFoundException("$trackName not found.")
 
@@ -85,8 +94,10 @@ object MusicManager {
    *
    * @param trackName key that identifies the track in the map.
    * @return whether or not the given track is looping.
+   * @throws AudioAssetNotFoundException
    */
   @JvmStatic
+  @Throws(AudioAssetNotFoundException::class)
   fun isLooping(trackName: String): Boolean =
     tracks[trackName]?.isLooping ?: throw AudioAssetNotFoundException("$trackName not found.")
 
@@ -95,8 +106,10 @@ object MusicManager {
    *
    * @param trackName key that identifies the track in the map.
    * @return this track's current position in seconds.
+   * @throws AudioAssetNotFoundException
    */
   @JvmStatic
+  @Throws(AudioAssetNotFoundException::class)
   fun getPosition(trackName: String): Float =
     tracks[trackName]?.position ?: throw AudioAssetNotFoundException("$trackName not found.")
 
@@ -105,8 +118,10 @@ object MusicManager {
    *
    * @param trackName key that identifies the track in the map.
    * @param position  target position in seconds.
+   * @throws AudioAssetNotFoundException
    */
   @JvmStatic
+  @Throws(AudioAssetNotFoundException::class)
   fun setPosition(trackName: String, position: Float) {
     val track = tracks[trackName] ?: throw AudioAssetNotFoundException("$trackName not found.")
     track.position = position
@@ -117,8 +132,10 @@ object MusicManager {
    * Accessing the sound after you disposed of it will result in undefined errors.
    *
    * @param trackName key that identifies the track in the map.
+   * @throws AudioAssetNotFoundException
    */
   @JvmStatic
+  @Throws(AudioAssetNotFoundException::class)
   fun dispose(trackName: String) =
     tracks[trackName]?.dispose() ?: throw AudioAssetNotFoundException("$trackName not found.")
 }
