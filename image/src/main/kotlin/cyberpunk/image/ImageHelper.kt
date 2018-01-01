@@ -15,8 +15,8 @@ import com.badlogic.gdx.math.Vector2
  * @return the correct, centered coordinates, in the form of a [Vector2].
  */
 fun center(width: Float, height: Float, worldWidth: Int, worldHeight: Int): Vector2 {
-  val x: Float = (worldWidth - width) / 2f
-  val y: Float = (worldHeight - height) / 2f
+  val x = (worldWidth - width) / 2f
+  val y = (worldHeight - height) / 2f
   return Vector2(x, y)
 }
 
@@ -30,7 +30,7 @@ fun center(width: Float, height: Float, worldWidth: Int, worldHeight: Int): Vect
  * @return the correct, centered coordinates, in the form of a [Vector2].
  */
 fun centerX(width: Float, worldWidth: Int, y: Float): Vector2 {
-  val x: Float = (worldWidth - width) / 2f
+  val x = (worldWidth - width) / 2f
   return Vector2(x, y)
 }
 
@@ -44,7 +44,7 @@ fun centerX(width: Float, worldWidth: Int, y: Float): Vector2 {
  * @return the correct, centered coordinates, in the form of a [Vector2].
  */
 fun centerY(height: Float, worldHeight: Int, x: Float): Vector2 {
-  val y: Float = (worldHeight - height) / 2f
+  val y = (worldHeight - height) / 2f
   return Vector2(x, y)
 }
 
@@ -60,8 +60,8 @@ fun centerY(height: Float, worldHeight: Int, x: Float): Vector2 {
  * @return the correct, centered coordinates, in the form of a [Vector2].
  */
 fun centerOnImage(width: Float, height: Float, otherWidth: Float, otherHeight: Float, otherPosition: Vector2): Vector2 {
-  val x: Float = otherPosition.x + ((otherWidth - width) / 2f)
-  val y: Float = otherPosition.y + ((otherHeight - height) / 2f)
+  val x = otherPosition.x + ((otherWidth - width) / 2f)
+  val y = otherPosition.y + ((otherHeight - height) / 2f)
   return Vector2(x, y)
 }
 

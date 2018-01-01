@@ -67,9 +67,9 @@ class BodyBuilder(private var world: PhysicsWorld) {
    * @return [Body] created.
    */
   fun build(): Body {
-    val body: Body = world.world.createBody(bodyDef)
+    val body = world.world.createBody(bodyDef)
     for ((fixtureDef, fixtureData) in fixturesProps) {
-      val fixture: Fixture = body.createFixture(fixtureDef)
+      val fixture = body.createFixture(fixtureDef)
       fixtureData?.let { fixture.userData = it }
     }
     body.userData = userData

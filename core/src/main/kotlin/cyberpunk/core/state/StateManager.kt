@@ -197,8 +197,8 @@ object StateManager {
    * serve any running [Transition].
    */
   private fun setupFBOs() {
-    val screenWidth: Int = Gdx.graphics.width
-    val screenHeight: Int = Gdx.graphics.height
+    val screenWidth = Gdx.graphics.width
+    val screenHeight = Gdx.graphics.height
     currentFBO = FrameBuffer.createFrameBuffer(Pixmap.Format.RGBA8888, screenWidth, screenHeight, false)
     nextFBO = FrameBuffer.createFrameBuffer(Pixmap.Format.RGBA8888, screenWidth, screenHeight, false)
     currentFlippedRegion = TextureRegion(currentFBO.colorBufferTexture)

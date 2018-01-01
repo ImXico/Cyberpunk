@@ -16,9 +16,9 @@ import com.badlogic.gdx.math.Vector2
  * @return the correct, centered coordinates, in the form of a [Vector2].
  */
 fun center(font: BitmapFont, text: String, worldWidth: Int, worldHeight: Int): Vector2 {
-  val layout: GlyphLayout = GlyphLayout(font, text)
-  val x: Float = (worldWidth - layout.width) / 2f
-  val y: Float = (worldHeight + layout.height) / 2f
+  val layout = GlyphLayout(font, text)
+  val x = (worldWidth - layout.width) / 2f
+  val y = (worldHeight + layout.height) / 2f
   return Vector2(x, y)
 }
 
@@ -33,8 +33,8 @@ fun center(font: BitmapFont, text: String, worldWidth: Int, worldHeight: Int): V
  * @return the correct, centered coordinates, in the form of a [Vector2].
  */
 fun centerX(font: BitmapFont, text: String, worldWidth: Int, y: Float): Vector2 {
-  val layout: GlyphLayout = GlyphLayout(font, text)
-  val x: Float = (worldWidth - layout.width) / 2f
+  val layout = GlyphLayout(font, text)
+  val x = (worldWidth - layout.width) / 2f
   return Vector2(x, y)
 }
 
@@ -49,8 +49,8 @@ fun centerX(font: BitmapFont, text: String, worldWidth: Int, y: Float): Vector2 
  * @return the correct, centered coordinates, in the form of a [Vector2].
  */
 fun centerY(font: BitmapFont, text: String, worldHeight: Int, x: Float): Vector2 {
-  val layout: GlyphLayout = GlyphLayout(font, text)
-  val y: Float = (worldHeight + layout.height) / 2f
+  val layout = GlyphLayout(font, text)
+  val y = (worldHeight + layout.height) / 2f
   return Vector2(x, y)
 }
 
@@ -65,8 +65,8 @@ fun centerY(font: BitmapFont, text: String, worldHeight: Int, x: Float): Vector2
  * @return the correct, centered coordinates, in the form of a [Vector2].
  */
 fun centerOnImage(font: BitmapFont, text: String, width: Float, height: Float, position: Vector2): Vector2 {
-  val layout: GlyphLayout = GlyphLayout(font, text)
-  val x: Float = position.x + ((width - layout.width) / 2f)
-  val y: Float = position.y + ((height / 2f) + (layout.height / 2f))
+  val layout = GlyphLayout(font, text)
+  val x = position.x + ((width - layout.width) / 2f)
+  val y = position.y + ((height / 2f) + (layout.height / 2f))
   return Vector2(x, y)
 }

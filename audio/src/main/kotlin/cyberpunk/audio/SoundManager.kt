@@ -19,7 +19,7 @@ object SoundManager {
    */
   @JvmStatic
   fun load(soundName: String, path: String) {
-    val sound: Sound = Gdx.audio.newSound(Gdx.files.internal(path))
+    val sound = Gdx.audio.newSound(Gdx.files.internal(path))
     sounds.put(soundName, sound)
   }
 
@@ -32,12 +32,13 @@ object SoundManager {
    * @param volume    audio volume; ranges between [0, 1] and it's optional.
    * @param pitch     the pitch multiplier; ranges between [0.5 (slower), 2.0 (faster)] and it's optional.
    * @param pan       sound panning; ranges between [-1 (full left), 1 (full right)] and it's optional.
-   * @return a [Long], id, which is unique for every call to [play]. In case of failure, returns -1.
+   * @return a [Long], id, which is unique for every call to [play].
    */
   @JvmStatic
   @JvmOverloads
   fun play(soundName: String, volume: Float = 1f, pitch: Float = 1f, pan: Float = 0f): Long {
-    return sounds[soundName]?.play(volume, pitch, pan) ?: -1
+    val sound = sounds[soundName] ?: throw AudioAssetNotFoundException("$soundName not found.")
+    return sound.play(volume, pitch, pan)
   }
 
   /**
@@ -49,12 +50,13 @@ object SoundManager {
    * @param volume    audio volume; ranges between [0, 1] and it's optional.
    * @param pitch     the pitch multiplier; ranges between [0.5 (slower), 2.0 (faster)] and it's optional.
    * @param pan       sound panning; ranges between [-1 (full left), 1 (full right)] and it's optional.
-   * @return a [Long], id, which is the id of the sound instance, if successful, or -1 on failure.
+   * @return a [Long], id, which is the id of the sound instance, if successful.
    */
   @JvmStatic
   @JvmOverloads
   fun loop(soundName: String, volume: Float = 1f, pitch: Float = 1f, pan: Float = 0f): Long {
-    return sounds[soundName]?.loop(volume, pitch, pan) ?: -1
+    val sound = sounds[soundName] ?: throw AudioAssetNotFoundException("$soundName not found.")
+    return sound.loop(volume, pitch, pan)
   }
 
   /**
@@ -64,7 +66,8 @@ object SoundManager {
    * @param soundName key that identifies the sound in the map.
    */
   @JvmStatic
-  fun stop(soundName: String) = sounds[soundName]?.stop()
+  fun stop(soundName: String) =
+    sounds[soundName]?.stop() ?: throw AudioAssetNotFoundException("$soundName not found.")
 
   /**
    * Pauses all instances of the sound identified by the given [soundName].
@@ -73,7 +76,8 @@ object SoundManager {
    * @param soundName key that identifies the sound in the map.
    */
   @JvmStatic
-  fun pause(soundName: String) = sounds[soundName]?.pause()
+  fun pause(soundName: String) =
+    sounds[soundName]?.pause() ?: throw AudioAssetNotFoundException("$soundName not found.")
 
   /**
    * Resumes all instances of the sound identified by the given [soundName].
@@ -82,7 +86,8 @@ object SoundManager {
    * @param soundName key that identifies the sound in the map.
    */
   @JvmStatic
-  fun resume(soundName: String) = sounds[soundName]?.resume()
+  fun resume(soundName: String) =
+    sounds[soundName]?.resume() ?: throw AudioAssetNotFoundException("$soundName not found.")
 
   /**
    * Release resources, once you don't need the [Sound] anymore.
@@ -91,6 +96,6 @@ object SoundManager {
    * @param soundName key that identifies the sound in the map.
    */
   @JvmStatic
-  fun dispose(soundName: String) = sounds[soundName]?.dispose()
-
+  fun dispose(soundName: String) =
+    sounds[soundName]?.dispose() ?: throw AudioAssetNotFoundException("$soundName not found.")
 }

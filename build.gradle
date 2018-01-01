@@ -28,6 +28,8 @@ subprojects {
 
     dependencies {
         compileOnly "com.badlogicgames.gdx:gdx:$gdx_version"
+        testCompile "com.badlogicgames.gdx:gdx:$gdx_version"
         testCompile "junit:junit:$junit_version"
+        testCompile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     }
 }

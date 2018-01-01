@@ -177,7 +177,7 @@ class BodyDefBuilder {
    * @return this [BodyDefBuilder] instance.
    */
   fun position(x: Float, y: Float): BodyDefBuilder {
-    val position: Vector2 = Vector2(x.asBox2DUnits(), y.asBox2DUnits())
+    val position = Vector2(x.asBox2DUnits(), y.asBox2DUnits())
     return this.apply { bodyDef.position.set(position) }
   }
 

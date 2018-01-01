@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector3
  * @param worldHeight height of the world (world coordinates).
  */
 fun Camera.center(worldWidth: Int, worldHeight: Int) {
-  val newPosition: Vector3 = Vector3(worldWidth / 2f, worldHeight / 2f, 0f)
+  val newPosition = Vector3(worldWidth / 2f, worldHeight / 2f, 0f)
   this.refresh(newPosition)
 }
 
@@ -24,7 +24,7 @@ fun Camera.center(worldWidth: Int, worldHeight: Int) {
  * @param targetPosition position of the target, where the camera will be also positioned to.
  */
 fun Camera.lockOn(targetPosition: Vector2) {
-  val newPosition: Vector3 = Vector3(targetPosition.x, targetPosition.y, 0f)
+  val newPosition = Vector3(targetPosition.x, targetPosition.y, 0f)
   this.refresh(newPosition)
 }
 
@@ -36,7 +36,7 @@ fun Camera.lockOn(targetPosition: Vector2) {
  * @param yOffset camera's Y offset, relatively to the [targetPosition] Y.
  */
 fun Camera.lockOnX(targetPosition: Vector2, yOffset: Float) {
-  val newPosition: Vector3 = Vector3(targetPosition.x, targetPosition.y + yOffset, 0f)
+  val newPosition = Vector3(targetPosition.x, targetPosition.y + yOffset, 0f)
   this.refresh(newPosition)
 }
 
@@ -48,7 +48,7 @@ fun Camera.lockOnX(targetPosition: Vector2, yOffset: Float) {
  * @param xOffset camera's X offset, relatively to the [targetPosition] X.
  */
 fun Camera.lockOnY(targetPosition: Vector2, xOffset: Float) {
-  val newPosition: Vector3 = Vector3(targetPosition.x + xOffset, targetPosition.y, 0f)
+  val newPosition = Vector3(targetPosition.x + xOffset, targetPosition.y, 0f)
   this.refresh(newPosition)
 }
 
@@ -64,9 +64,9 @@ fun Camera.lockOnY(targetPosition: Vector2, xOffset: Float) {
  */
 @JvmOverloads
 fun Camera.lerpTo(targetPosition: Vector2, lerp: Float, xOffset: Float = 0f, yOffset: Float = 0f) {
-  val newX: Float = this.position.x + ((targetPosition.x - position.x) * lerp) + xOffset
-  val newY: Float = this.position.y + ((targetPosition.y - position.y) * lerp) + yOffset
-  val newPosition: Vector3 = Vector3(newX, newY, 0f)
+  val newX = this.position.x + ((targetPosition.x - position.x) * lerp) + xOffset
+  val newY = this.position.y + ((targetPosition.y - position.y) * lerp) + yOffset
+  val newPosition = Vector3(newX, newY, 0f)
   this.refresh(newPosition)
 }
 

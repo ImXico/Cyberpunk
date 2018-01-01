@@ -29,8 +29,8 @@ internal class PhysicsDebugger(worldWidth: Int, worldHeight: Int) {
 
   init {
     renderer = Box2DDebugRenderer()
-    val viewportWidth: Float = (worldWidth.toFloat()).asBox2DUnits()
-    val viewportHeight: Float = (worldHeight.toFloat()).asBox2DUnits()
+    val viewportWidth = (worldWidth.toFloat()).asBox2DUnits()
+    val viewportHeight = (worldHeight.toFloat()).asBox2DUnits()
     camera = OrthographicCamera().apply {
       setToOrtho(false, viewportWidth, viewportHeight)
     }

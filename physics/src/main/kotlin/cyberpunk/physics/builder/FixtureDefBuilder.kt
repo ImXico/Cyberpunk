@@ -16,7 +16,7 @@ class FixtureDefBuilder {
    * Gets cleaned up after calling [FixtureDefBuilder.build],
    * meaning that the same instance can be recycled.
    */
-  private var fixtureDef: FixtureDef = FixtureDef()
+  private var fixtureDef = FixtureDef()
 
   /**
    * Sets this fixture def's shape to a [CircleShape], given the
@@ -27,8 +27,8 @@ class FixtureDefBuilder {
    * @see CircleShape
    */
   fun circle(radius: Float): FixtureDefBuilder {
-    val radiusB2D: Float = radius.asBox2DUnits()
-    val shape: CircleShape = CircleShape()
+    val radiusB2D = radius.asBox2DUnits()
+    val shape = CircleShape()
     return this.apply {
       shape.radius = radiusB2D
       fixtureDef.shape = shape
@@ -45,8 +45,8 @@ class FixtureDefBuilder {
    * @see PolygonShape
    */
   fun polygon(vertices: Array<Vector2>): FixtureDefBuilder {
-    val verticesB2D: Array<Vector2> = vertices.map { it.asBox2DUnits() }.toTypedArray()
-    val shape: PolygonShape = PolygonShape()
+    val verticesB2D = vertices.map { it.asBox2DUnits() }.toTypedArray()
+    val shape = PolygonShape()
     return this.apply {
       shape.set(verticesB2D)
       fixtureDef.shape = shape
@@ -63,9 +63,9 @@ class FixtureDefBuilder {
    * @see PolygonShape
    */
   fun box(width: Float, height: Float): FixtureDefBuilder {
-    val halfWidth: Float = (width / 2f).asBox2DUnits()
-    val halfHeight: Float = (height / 2f).asBox2DUnits()
-    val shape: PolygonShape = PolygonShape()
+    val halfWidth = (width / 2f).asBox2DUnits()
+    val halfHeight = (height / 2f).asBox2DUnits()
+    val shape = PolygonShape()
     return this.apply {
       shape.setAsBox(halfWidth, halfHeight)
       fixtureDef.shape = shape
@@ -81,8 +81,8 @@ class FixtureDefBuilder {
    * @see ChainShape
    */
   fun chain(vertices: Array<Vector2>): FixtureDefBuilder {
-    val verticesB2D: Array<Vector2> = vertices.map { it.asBox2DUnits() }.toTypedArray()
-    val shape: ChainShape = ChainShape()
+    val verticesB2D = vertices.map { it.asBox2DUnits() }.toTypedArray()
+    val shape = ChainShape()
     return this.apply {
       shape.createChain(verticesB2D)
       fixtureDef.shape = shape

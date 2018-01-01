@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2
  * Default scaling: 150 pixels = 1 meter.
  * Change this as you want.
  */
-@JvmField val PPM: Float = 150f
+@JvmField val PPM = 150f
 
 /**
  * Takes in a [Float] value in pixels and returns the equivalent value of

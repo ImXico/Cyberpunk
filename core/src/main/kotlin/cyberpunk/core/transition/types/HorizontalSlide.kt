@@ -85,7 +85,7 @@ class HorizontalSlide(private val motion: Motion, private val lerp: Float = DEFA
    * @return whether or not the target position can be understood as finished.
    */
   private fun targetPositionReached(): Boolean {
-    val errorMargin: Float = 0.15f
+    val errorMargin = 0.15f
     return Math.abs(nextStateCurrentPos.x) <= errorMargin
   }
 }
