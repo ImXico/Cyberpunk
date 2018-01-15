@@ -1,8 +1,6 @@
-<p align="center">
-  <img src="https://github.com/ImXico/cyberpunk/blob/master/logo.png" height=120 />
-</p>
+# Cyberpunk 👾
 
-<p align="center">
+<p>
   <a href="https://travis-ci.org/ImXico/Cyberpunk"><img src="https://travis-ci.org/ImXico/Cyberpunk.svg?branch=master"></a>                                                                         
   <a href="http://libgdx.badlogicgames.com/"><img src="https://img.shields.io/badge/libgdx-1.9.7-red.svg"></a>
   <a href="https://kotlinlang.org/"><img src="https://img.shields.io/badge/kotlin-1.1.51-orange.svg"></a>
