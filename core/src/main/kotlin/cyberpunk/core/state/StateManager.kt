@@ -199,8 +199,8 @@ object StateManager {
   private fun setupFBOs() {
     val screenWidth = Gdx.graphics.width
     val screenHeight = Gdx.graphics.height
-    currentFBO = FrameBuffer.createFrameBuffer(Pixmap.Format.RGBA8888, screenWidth, screenHeight, false)
-    nextFBO = FrameBuffer.createFrameBuffer(Pixmap.Format.RGBA8888, screenWidth, screenHeight, false)
+    currentFBO = FrameBuffer(Pixmap.Format.RGBA8888, screenWidth, screenHeight, false)
+    nextFBO = FrameBuffer(Pixmap.Format.RGBA8888, screenWidth, screenHeight, false)
     currentFlippedRegion = TextureRegion(currentFBO.colorBufferTexture)
     currentFlippedRegion.flip(false, true)
     nextFlippedRegion = TextureRegion(nextFBO.colorBufferTexture)
@@ -216,7 +216,7 @@ object StateManager {
   private fun resizeFBOs(width: Int, height: Int) {
     currentFBO.dispose()
     nextFBO.dispose()
-    currentFBO = FrameBuffer.createFrameBuffer(Pixmap.Format.RGBA8888, width, height, false)
-    nextFBO = FrameBuffer.createFrameBuffer(Pixmap.Format.RGBA8888, width, height, false)
+    currentFBO = FrameBuffer(Pixmap.Format.RGBA8888, width, height, false)
+    nextFBO = FrameBuffer(Pixmap.Format.RGBA8888, width, height, false)
   }
 }
