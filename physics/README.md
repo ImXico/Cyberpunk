@@ -57,13 +57,16 @@ val bodyDef = BodyDef().apply {
   type = BodyDef.BodyType.DynamicBody
   position = Vector2(20f, 30f)
 }
+
 val circleShape = CircleShape().apply {
   radius = 5f
 }
+
 val fixtureDef = FixtureDef().apply {
   restitution = 0.7f
   shape = circleShape
 }
+
 val body: Body = world.createBody(bodyDef)
 body.createFixture(fixtureDef)
 circleShape.dispose()

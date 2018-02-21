@@ -1,19 +1,18 @@
-<p align="center">
-  <img src="https://github.com/ImXico/cyberpunk/blob/master/logo.png" height=120 />
-</p>
+# Cyberpunk 👾
 
-<p align="center">
-  <a href="http://libgdx.badlogicgames.com/"><img src="https://img.shields.io/badge/libgdx-1.9.8-green.svg"></a>
+<p>
+  <a href="https://travis-ci.org/ImXico/Cyberpunk"><img src="https://travis-ci.org/ImXico/Cyberpunk.svg?branch=master"></a>
+  <a href="http://libgdx.badlogicgames.com/"><img src="https://img.shields.io/badge/libgdx-1.9.8-red.svg"></a>
   <a href="https://kotlinlang.org/"><img src="https://img.shields.io/badge/kotlin-1.2.21-orange.svg"></a>
   <a href="https://jitpack.io/#ImXico/Cyberpunk"><img src="https://jitpack.io/v/ImXico/Cyberpunk.svg"></a>
-  <a href="https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-lightgrey.svg"></a>
+  <a href="https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
 </p>
 
-Cyberpunk is a collection of independent, modular, pure-Kotlin libraries to use on top of [libGDX](http://libgdx.badlogicgames.com/). By offering various utilities and boilerplates, it aims to speed up development and ease the making of prototypes, making it a great fit for game jams!
+Cyberpunk is a collection of independent, modular, pure-Kotlin libraries to use on top of [libGDX](http://libgdx.badlogicgames.com/), tailored with Java interoperability in mind. By offering various utilities and boilerplates, it aims to speed up development and ease the making of prototypes, making it a great fit for game jams!
 
 ### Modules
 
-Cyberpunk is all about small, independent modules. Because of the Gradle integration, you can easily import *just* the modules that you need. To properly serve that purpose, every single module is totally independent from all others.
+Cyberpunk is all about small, independent modules. Because of the Gradle integration, you can import *just* the modules that you need. To properly serve that purpose, every single module is totally independent from all others.
 
 Here are the **current** modules (each one has a *README.md* file):
 
