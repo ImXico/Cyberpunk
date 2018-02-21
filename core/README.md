@@ -4,7 +4,7 @@
 3. [World Coordinates](#world-coordinates)
 4. [The Base Application](#base-application)
 
-Punk offers a fairly simple and clean API, which makes it easy to use the. Throughout this Wiki page, you'll get to know all of the essential parts of the [`core`](http://www.google.pt) package.
+Cyberpunk offers a fairly simple and clean API, which makes it easy to use the. Here you'll get to know all of the essential parts of the [`core`](http://www.google.pt) package.
 
 ## State Management
 
