@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="300" height="100" src="https://cdn.rawgit.com/ImXico/Cyberpunk/8090a2dd/logo.svg">  
+  <img width="300" height="100" src="https://cdn.rawgit.com/ImXico/Cyberpunk/1458bf76/logo.svg">  
 </p>
 <p align="center">
   <a href="https://travis-ci.org/ImXico/Cyberpunk"><img src="https://travis-ci.org/ImXico/Cyberpunk.svg?branch=master"></a>
