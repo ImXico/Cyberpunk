@@ -13,10 +13,10 @@ abstract class StateAdapter : State {
 
   /* State methods that may or may not be overridden. */
 
-  override fun resize(width: Int, height: Int) {}
-  override fun hide() {}
-  override fun pause() {}
-  override fun resume() {}
+  override fun resize(width: Int, height: Int) = Unit
+  override fun hide() = Unit
+  override fun pause() = Unit
+  override fun resume() = Unit
 
   /* State input conversion methods - can't be overridden. */
 
