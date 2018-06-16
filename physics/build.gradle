@@ -1,4 +1,4 @@
 dependencies {
-    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compileOnly "com.badlogicgames.gdx:gdx-box2d:$gdx_version"
+  compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  compileOnly "com.badlogicgames.gdx:gdx-box2d:$gdx_version"
 }
