@@ -34,6 +34,12 @@ class PhysicsWorld
   fun resize(width: Int, height: Int) = debugger.resize(width, height)
 
   /**
+   * Dispose the entire [World] associated with this instance. When a world is destroyed
+   * all the bodies and joints in it are destroyed as well.
+   */
+  fun dispose() = world.dispose()
+
+  /**
    * Calls the [World.step] with the configurations of this instance's [PhysicsConfig].
    */
   fun update() = world.step(config.timestep, config.velocityIterations, config.positionIterations)

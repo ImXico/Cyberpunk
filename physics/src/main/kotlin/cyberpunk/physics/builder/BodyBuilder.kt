@@ -28,11 +28,23 @@ class BodyBuilder(private var world: PhysicsWorld) {
   private val fixturesProps: MutableMap<FixtureDef, Any?> = mutableMapOf()
 
   /**
-   * Change the currently attached [PhysicsWorld].
-   * All bodies created will be placed onto the current [world].
+   * Change the currently attached [PhysicsWorld] to a new one, returning the old one.
+   * All bodies/joints further created will be placed onto the new current [world].
+   *
+   * @param newWorld the new world to be set.
+   * @return the old.
    */
-  fun changeWorld(newWorld: PhysicsWorld) {
+  fun changeWorld(newWorld: PhysicsWorld): PhysicsWorld {
+    val oldWorld = world
     world = newWorld
+    return oldWorld
+  }
+
+  /**
+   * Effectively destroys the [PhysicsWorld.world] that was currently being used by this instance.
+   */
+  fun disposeWorld() {
+    world.dispose()
   }
 
   /**
