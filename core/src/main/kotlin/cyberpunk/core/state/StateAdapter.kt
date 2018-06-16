@@ -3,7 +3,7 @@ package cyberpunk.core.state
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.math.Vector2
 
-abstract class StateAdapter : State {
+abstract class StateAdapter(protected val stateManager: StateManager) : State {
 
   /* State methods that absolutely must be overridden. */
 
@@ -20,13 +20,11 @@ abstract class StateAdapter : State {
 
   /* State input conversion methods - should not be overridden. */
 
-  final override fun unproject(screenCoordinates: Vector2) =
-    StateManager.viewport.unproject(screenCoordinates)
+  override fun unproject(screenCoordinates: Vector2) =
+    stateManager.viewport.unproject(screenCoordinates)
 
-
-  final override fun unproject(screenX: Float, screenY: Float) =
+  override fun unproject(screenX: Float, screenY: Float) =
     this.unproject(Vector2(screenX, screenY))
-
 
   /* InputProcessor methods that may or may not be overridden. */
 
