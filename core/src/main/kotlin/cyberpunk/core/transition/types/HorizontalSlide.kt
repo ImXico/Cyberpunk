@@ -24,9 +24,11 @@ enum class Motion
   LEFT_RIGHT(Vector2(), Vector2(-WORLD_WIDTH.toFloat(), 0f), Vector2(WORLD_WIDTH.toFloat(), 0f), Vector2())
 }
 
-@JvmField val DEFAULT_LERP = 0.1f
+@JvmField val DEFAULT_LERP = 0.2f
 
-class HorizontalSlide(private val motion: Motion, private val lerp: Float = DEFAULT_LERP) : Transition {
+class HorizontalSlide
+  @JvmOverloads
+  constructor(private val motion: Motion, private val lerp: Float = DEFAULT_LERP) : Transition {
 
   /**
    * Overrides the property defined at the [Transition] interface.
@@ -56,7 +58,7 @@ class HorizontalSlide(private val motion: Motion, private val lerp: Float = DEFA
    *
    * @return whether or not the transition is finished.
    */
-  override fun completed(): Boolean = targetPositionReached()
+  override fun completed() = targetPositionReached()
 
   /**
    * @see [Transition.update]
@@ -85,7 +87,7 @@ class HorizontalSlide(private val motion: Motion, private val lerp: Float = DEFA
    * @return whether or not the target position can be understood as finished.
    */
   private fun targetPositionReached(): Boolean {
-    val errorMargin = 0.15f
+    val errorMargin = 0.1f
     return Math.abs(nextStateCurrentPos.x) <= errorMargin
   }
 }

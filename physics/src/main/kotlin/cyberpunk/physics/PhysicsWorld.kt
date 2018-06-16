@@ -2,7 +2,9 @@ package cyberpunk.physics
 
 import com.badlogic.gdx.physics.box2d.World
 
-class PhysicsWorld(worldWidth: Int, worldHeight: Int, val config: PhysicsConfig = PhysicsConfig()) {
+class PhysicsWorld
+  @JvmOverloads
+  constructor(worldWidth: Int, worldHeight: Int, private val config: PhysicsConfig = PhysicsConfig()) {
 
   /**
    * The [World] instance of this [PhysicsWorld].
