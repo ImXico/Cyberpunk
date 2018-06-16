@@ -12,16 +12,20 @@ import cyberpunk.core.transition.Transition
 /**
  * The Left-to-Right or Right-to-Left sliding motions for the [HorizontalSlide].
  * Explicitly passed on the class' constructor.
+ *
+ * Note that each of the four Vector2 values below are correspondent to the bottom-left
+ * corners of the states. In other words, currentInitial can be read as
+ * "currentState's Initial Bottom-Left Coordinate", whilst currentFinal can be read
+ * as "currentState's Final Bottom-Left Coordinate" (at the end of the transition).
  */
-enum class Motion
-(
+enum class Motion (
   val currentInitial: Vector2,
   val nextInitial: Vector2,
   val currentFinal: Vector2,
   val nextFinal: Vector2
 ) {
-  RIGHT_LEFT(Vector2(), Vector2(WORLD_WIDTH.toFloat(), 0f), Vector2(-WORLD_WIDTH.toFloat(), 0f), Vector2()),
-  LEFT_RIGHT(Vector2(), Vector2(-WORLD_WIDTH.toFloat(), 0f), Vector2(WORLD_WIDTH.toFloat(), 0f), Vector2())
+  RIGHT_TO_LEFT(Vector2(), Vector2(WORLD_WIDTH.toFloat(), 0f), Vector2(-WORLD_WIDTH.toFloat(), 0f), Vector2()),
+  LEFT_TO_RIGHT(Vector2(), Vector2(-WORLD_WIDTH.toFloat(), 0f), Vector2(WORLD_WIDTH.toFloat(), 0f), Vector2())
 }
 
 @JvmField val DEFAULT_LERP = 0.2f
