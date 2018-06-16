@@ -9,24 +9,18 @@ class PhysicsWorld
   /**
    * The [World] instance of this [PhysicsWorld].
    */
-  val world: World
-
-  /**
-   * Whether or not the [PhysicsDebugger] should render.
-   */
-  var debugMode: Boolean
+  val world: World = World(config.gravity, true)
 
   /**
    * The [PhysicsDebugger] that will render this [PhysicsWorld].
    * Essentially a wrapper around the Box2DDebugRenderer.
    */
-  private val debugger: PhysicsDebugger
+  private val debugger: PhysicsDebugger = PhysicsDebugger(worldWidth, worldHeight)
 
-  init {
-    debugger = PhysicsDebugger(worldWidth, worldHeight)
-    world = World(config.gravity, true)
-    debugMode = true
-  }
+  /**
+   * Whether or not the [PhysicsDebugger] should render.
+   */
+  var debugMode = true
 
   /**
    * Should be called in the resize method of the state/screen that holds

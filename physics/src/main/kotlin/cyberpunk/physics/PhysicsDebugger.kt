@@ -7,14 +7,11 @@ import com.badlogic.gdx.utils.viewport.Viewport
 
 internal class PhysicsDebugger(worldWidth: Int, worldHeight: Int) {
 
-  // TODO: Accept the injection of different viewports.
-  // TODO: They will need to have their dimensions converted to B2D units, though.
-
   /**
    * The [Box2DDebugRenderer] instance that will allow the rendering
    * of the given [PhysicsWorld].
    */
-  private val renderer: Box2DDebugRenderer
+  private val renderer: Box2DDebugRenderer = Box2DDebugRenderer()
 
   /**
    * Dedicated [OrthographicCamera] for the Box2D rendering, because of the
@@ -28,7 +25,6 @@ internal class PhysicsDebugger(worldWidth: Int, worldHeight: Int) {
   private val viewport: Viewport
 
   init {
-    renderer = Box2DDebugRenderer()
     val viewportWidth = worldWidth.toFloat().asBox2DUnits()
     val viewportHeight = worldHeight.toFloat().asBox2DUnits()
     camera = OrthographicCamera().apply {

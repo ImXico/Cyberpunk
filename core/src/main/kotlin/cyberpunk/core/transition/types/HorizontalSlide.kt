@@ -7,8 +7,6 @@ import cyberpunk.core.WORLD_HEIGHT
 import cyberpunk.core.WORLD_WIDTH
 import cyberpunk.core.transition.Transition
 
-// TODO: Support for the LibGDX' Interpolation class.
-
 /**
  * The Left-to-Right or Right-to-Left sliding motions for the [HorizontalSlide].
  * Explicitly passed on the class' constructor.
@@ -44,17 +42,12 @@ class HorizontalSlide
   /**
    * Current position, in the form of a [Vector2], of the current state.
    */
-  private val currentStateCurrentPos: Vector2
+  private val currentStateCurrentPos: Vector2 = motion.currentInitial
 
   /**
    * Current position, in the form of a [Vector2], of the next state.
    */
-  private val nextStateCurrentPos: Vector2
-
-  init {
-    currentStateCurrentPos = motion.currentInitial
-    nextStateCurrentPos = motion.nextInitial
-  }
+  private val nextStateCurrentPos: Vector2 = motion.nextInitial
 
   /**
    * Overrides the default [Transition.completed] function, declared
