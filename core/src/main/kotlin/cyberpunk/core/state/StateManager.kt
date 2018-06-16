@@ -13,8 +13,8 @@ import cyberpunk.core.transition.Transition
 /**
  * Initializes the [StateManager] with it a [Camera] and [Viewport].
  *
- * @param camera        camera that will use a virtual resolution.
- * @param viewport      viewport that will adapt the game screen to the physical devices.
+ * @param camera   camera that will use a virtual resolution.
+ * @param viewport viewport that will adapt the game screen to the physical devices.
  */
 class StateManager(val camera: Camera, val viewport: Viewport) {
 
