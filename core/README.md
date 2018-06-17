@@ -35,7 +35,7 @@ When instantiating a ```StateManager```, you'll need to pass in a [`Camera`](htt
 val stateManager = StateManager(camera, viewport)
 ```
 
-Any state that you create should take have this instance injected on its constructor:
+Any state that you create should have this instance injected on its constructor:
 
 ```kotlin
 class MenuState : StateAdapter(stateManager) { ... }
