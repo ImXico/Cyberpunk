@@ -4,144 +4,120 @@
 3. [World Coordinates](#world-coordinates)
 4. [The Base Application](#base-application)
 
-Cyberpunk offers a fairly simple and clean API, which makes it easy to use the. Here you'll get to know all of the essential parts of the [`core`](http://www.google.pt) package.
-
 ## State Management
 
 ### State
-A [`State`]() is, in some aspects, similar to a stage in Scene2D. All states should be capable of:
+A [`State`](https://github.com/ImXico/Cyberpunk/blob/master/core/src/main/kotlin/cyberpunk/core/state/State.kt) is, in some aspects, similar to a stage in Scene2D. All states should be capable of:
 - Handling input (like touches and key presses).
 - Updating their inner logic.
 - Rendering their internal components.
 - Disposing resources when they're not needed anymore.
 
 ### StateAdapter
-The [`StateAdapter`]() is a convenience implementation of the State interface. It contains input conversion methods, and every concrete state that you'd implement would inherit from it. When you create a new state that extends this class, you must *atleast* override these:
+The [`StateAdapter`](https://github.com/ImXico/Cyberpunk/blob/master/core/src/main/kotlin/cyberpunk/core/state/StateAdapter.kt) is a convenience implementation of the State interface. It contains input conversion methods, and every concrete state that you'd implement would inherit from it. When you create a new state that extends this class, you must *atleast* override these:
 
 ```kotlin
-class MyState : StateAdapter() {
-
+class MyState : StateAdapter(...) {
   override fun update(delta: Float) {}
   override fun render(batch: Batch) {}
   override fun dispose() {}
-
 }
 ```
 
 ### StateManager
-The [`StateManager`]() is an entity that manages how the states flow. With minimal setup (as you'll see soon, in the [base application section](), it manages stuff like state updates, renders and transitions. You have global access to it, making it easy to use.
+The [`StateManager`](https://github.com/ImXico/Cyberpunk/blob/master/core/src/main/kotlin/cyberpunk/core/state/StateManager.kt) is the entity that manages how the states flow. It requires minimal setup, and manages stuff like state updates, renders and transitions.
 
-The two key functions that you should be aware off are `setup` and `go`.
+Usually, you will create an instance of ```StateManager``` in the base application, injecting it on the constructor of each concrete ```State``` (*i.e.* a class that extends StateAdapter).
 
-`#setup` lets you initialize the state manager with a [`Camera`](https://github.com/libgdx/libgdx/wiki/Orthographic-camera) and a [`Viewport`](https://github.com/libgdx/libgdx/wiki/Viewports)- call this once:
+When instantiating a ```StateManager```, you'll need to pass in a [`Camera`](https://github.com/libgdx/libgdx/wiki/Orthographic-camera) and a [`Viewport`](https://github.com/libgdx/libgdx/wiki/Viewports):
+
 ```kotlin
-val camera: Camera = ...
-val viewport: Viewport = ...
-StateManager.setup(camera, viewport)
-```
-`#go` lets you jump around different states:
-```kotlin
-StateManager.go(otherState)
-StateManager.go(otherState, transition)
+val stateManager = StateManager(camera, viewport)
 ```
 
-The API offers more, though, but after an initial setting up phase, you won't need to bother much with them!
+Any state that you create should take have this instance injected on its constructor:
+
 ```kotlin
-fun update(delta: Float)
-fun render()
-fun resize(width: Int, height: Int)
-fun pause()
-fun resume()
-fun dispose()
+class MenuState : StateAdapter(stateManager) { ... }
+// ...
+val menuState = new MenuState(stateManager)
 ```
+
+To set the current state, is also very simple:
+
+```kotlin
+stateManager.go(otherState)
+stateManager.go(otherState, someTransition)
+```
+
+Other methods available on the ```StateManager``` API should be called on the base app. After that, you won't need to bother with them anymore. This will be shown below, under [Base Application](#base-application).
 
 ## Transitions
-A state [`Transition`]() makes up for a smoother UX - instead of changing states abruptely, you can use a transition.
+A state [`Transition`](https://github.com/ImXico/Cyberpunk/blob/master/core/src/main/kotlin/cyberpunk/core/transition/Transition.kt) makes up for a smoother UX for state changes. There are currently two types of transitions available:
 
-[`Fade`]() - The screen fades from one state to another.
+[`Fade`](https://github.com/ImXico/Cyberpunk/blob/master/core/src/main/kotlin/cyberpunk/core/transition/types/Fade.kt) - The screen fades from one state to another.
 
 ![fade-gif](https://zippy.gfycat.com/GlamorousExhaustedFrilledlizard.gif)
 
-[`HorizontalSlide`]() - Left-Right or Right-Left. Watch in 60 fps [here](https://gfycat.com/HiddenTartIzuthrush).
+[`HorizontalSlide`](https://github.com/ImXico/Cyberpunk/blob/master/core/src/main/kotlin/cyberpunk/core/transition/types/HorizontalSlide.kt) - Left-to-Right or Right-to-Left. Watch in 60 fps [here](https://gfycat.com/HiddenTartIzuthrush).
 
 ![slide-gif](https://zippy.gfycat.com/HiddenTartIzuthrush.gif)
 
-It's easy to make your own transitions - just make sure you implement the [`Transition`]() interface! Besides the implementation *itself* of the transition, you don't need to worry about its API - the [`StateManager`]() will take care of managing the transitions for you!
+### Making Your Own Transitions
+It's easy to make your own transitions - just make sure you implement the `Transition` interface! Besides the implementation *itself* of the transition, you don't need to worry about its API - the `StateManager` will take care of managing the transitions for you! However, the `Transition` API makes use of properties and default method implementations in interfaces. For the time being, [this is an issue](https://youtrack.jetbrains.com/issue/KT-4779) if you wish to create your own transitions in Java. Thus, the *only* way to create custom transitions is to create them in Kotlin and *then* call them normally from Java.
 
 ## World Coordinates
 To keep a consistent application - that's independent of real device size or asset size - it's a good idea to:
 - Define a virtual resolution (here called world dimensions), that can be whatever you want.
-- Set a [Camera](https://github.com/libgdx/libgdx/wiki/Orthographic-camera) to use that resolution.
-- Use a [Viewport](https://github.com/libgdx/libgdx/wiki/Viewports) to adapt the game screen to the different physical devices.
+- Set a `Camera` to use that resolution.
+- Use a `Viewport` to adapt the game screen to the different physical devices.
 
 These virtual dimensions will, thus, be the *boundaries* of our game screen - they'll influence all of the game's rendering.
-Because of this, two static variables, `WORLD_WIDTH` and `WORLD_HEIGHT` have been declared over at [`WorldConfig`](https://github.com/ImXico/punk/blob/feature/kotlin/kot/core/WorldConfig.kt) - important for the next step.
+Because of this, two static variables, `WORLD_WIDTH` and `WORLD_HEIGHT` have been declared over at [`WorldConfig`](https://github.com/ImXico/Cyberpunk/blob/master/core/src/main/kotlin/cyberpunk/core/WorldConfig.kt) - important for the next step.
 
 ## Base Application
-This is the final element of the core - our root/base class - the one that extends [`ApplicationAdapter`](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/ApplicationAdapter.html). More on the life-cycle of a libGDX app can be seen [here](https://github.com/libgdx/libgdx/wiki/The-life-cycle). Now that we know about world coordinates, states and how the state manager controls how states flow, we can easily set it up!
+This is the final element of the core - our root/base class - the one that extends [`ApplicationAdapter`](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/ApplicationAdapter.html). More on the life-cycle of a libGDX app can be seen [here](https://github.com/libgdx/libgdx/wiki/The-life-cycle). Now that we know about world coordinates, states and how the state manager controls how states flow, we can easily set it up:
 
 ```kotlin
 class App : ApplicationAdapter()
 ```
 
-You can override whatever you want from the [`ApplicationAdapter`](). I'd recommend overriding atleast the following functions:
+Start out by initializing the `StateManager`:
 
 ```kotlin
-override fun create()
-override fun render()
-override fun dispose()
-override fun resize(width: Int, height: Int)
-```
+private lateinit var stateManager: StateManager
 
-Start out by initializing the [`StateManager`](), passing it a [`Camera`]() and a [`Viewport`]():
-
-```kotlin
 override fun create() {
-  val camera: Camera = createCamera()
-  val viewport: Viewport = createViewport(camera)
-  StateManager.setup(camera, viewport)
-}
-
-// Private functions for an uncluttered #create.
-
-private fun createCamera(): Camera {
-  return OrthographicCamera(WORLD_WIDTH.toFloat(), WORLD_HEIGHT.toFloat()).apply {
-    position.set(viewportWidth / 2f, viewportHeight / 2f, 0f)
-  }
-}
-
-private fun createViewport(camera: Camera): Viewport {
-  return ExtendViewport(WORLD_WIDTH.toFloat(), WORLD_HEIGHT.toFloat(), camera)
+  // Have a Camera and a Viewport
+  val camera = OrthographicCamera(WORLD_WIDTH.toFloat(), WORLD_HEIGHT.toFloat())
+  camera.position.set(viewportWidth / 2f, viewportHeight / 2f, 0f)
+  val viewport = createViewport(camera)
+  
+  // Initialize the StateManager
+  stateManager = new StateManager(camera, viewport)
+  
+  // Initialize the first state of the app
+  val myCoolState = new CoolState(stateManager)
+  
+  // Set the first state
+  stateManager.go(myCoolState)
 }
 ```
 
-Usually, you'll want your game to start at some [`State`](). Imagine that we have a state called `MainMenu`:
-
-```kotlin
-val mainMenu: State = MenuState()
-
-// Option 1
-StateManager.setup(camera, viewport, mainMenu)
-
-// Option 2
-StateManager.setup(camera, viewport)
-StateManager.go(mainMenu)
-```
-
-That's it for the `#create` method! Now, the `#render` method is very simple:
+The `render` method can be implemented like this:
 
 ```kotlin
 override fun render() {
   Gdx.gl.glClearColor(230f / 255f, 230f / 255f, 230f / 255f, 1f)
   Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
-  StateManager.update(Gdx.graphics.deltaTime)
-  StateManager.render()
+  stateManager.update(Gdx.graphics.deltaTime)
+  stateManager.render()
 }
 ```
 
-Finally, `#dispose` and `#resize` are as simple as it gets:
+All other methods - `dispose`, `resize`, etc. - are as simple as it gets:
 
 ```kotlin
-override fun dispose() = StateManager.dispose()
-override fun resize(width: Int, height: Int) = StateManager.resize(width, height)
+override fun dispose() = stateManager.dispose()
+override fun resize(width: Int, height: Int) = stateManager.resize(width, height)
 ```
