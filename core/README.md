@@ -88,10 +88,12 @@ Start out by initializing the `StateManager`:
 private lateinit var stateManager: StateManager
 
 override fun create() {
-  // Have a Camera and a Viewport
+  // Have a Camera
   val camera = OrthographicCamera(WORLD_WIDTH.toFloat(), WORLD_HEIGHT.toFloat())
   camera.position.set(viewportWidth / 2f, viewportHeight / 2f, 0f)
-  val viewport = createViewport(camera)
+  
+  // And a Viewport
+  val viewport = ExtendViewport(WORLD_WIDTH.toFloat(), WORLD_HEIGHT.toFloat(), camera)
   
   // Initialize the StateManager
   stateManager = new StateManager(camera, viewport)
