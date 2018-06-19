@@ -1,4 +1,4 @@
-![Cyberpunk logo](https://github.com/ImXico/Cyberpunk/blob/v0.2.0/logo.png?raw=true)
+![Cyberpunk logo](https://github.com/ImXico/Cyberpunk/blob/master/logo.png?raw=true)
 
 [![Build Status](https://travis-ci.org/ImXico/Cyberpunk.svg?branch=master)](https://travis-ci.org/ImXico/Cyberpunk)
 [![libGDX](https://img.shields.io/badge/libgdx-1.9.8-red.svg)](http://libgdx.badlogicgames.com)
