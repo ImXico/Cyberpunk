@@ -31,8 +31,7 @@ private val DEFAULT_POSITION_ITERATIONS = 2
  * as seen above.
  * Once created, the attributes of a [PhysicsConfig] cannot be changed.
  */
-data class PhysicsConfig
-(
+data class PhysicsConfig @JvmOverloads constructor (
   val gravity: Vector2 = DEFAULT_GRAVITY,
   val timestep: Float = DEFAULT_TIMESTEP,
   val velocityIterations: Int = DEFAULT_VELOCITY_ITERATIONS,

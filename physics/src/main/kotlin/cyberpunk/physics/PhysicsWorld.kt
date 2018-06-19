@@ -2,29 +2,25 @@ package cyberpunk.physics
 
 import com.badlogic.gdx.physics.box2d.World
 
-class PhysicsWorld(worldWidth: Int, worldHeight: Int, val config: PhysicsConfig = PhysicsConfig()) {
+class PhysicsWorld
+  @JvmOverloads
+  constructor(worldWidth: Int, worldHeight: Int, private val config: PhysicsConfig = PhysicsConfig()) {
 
   /**
    * The [World] instance of this [PhysicsWorld].
    */
-  val world: World
-
-  /**
-   * Whether or not the [PhysicsDebugger] should render.
-   */
-  var debugMode: Boolean
+  val world: World = World(config.gravity, true)
 
   /**
    * The [PhysicsDebugger] that will render this [PhysicsWorld].
    * Essentially a wrapper around the Box2DDebugRenderer.
    */
-  private val debugger: PhysicsDebugger
+  private val debugger: PhysicsDebugger = PhysicsDebugger(worldWidth, worldHeight)
 
-  init {
-    debugger = PhysicsDebugger(worldWidth, worldHeight)
-    world = World(config.gravity, true)
-    debugMode = true
-  }
+  /**
+   * Whether or not the [PhysicsDebugger] should render.
+   */
+  var debugMode = true
 
   /**
    * Should be called in the resize method of the state/screen that holds
@@ -36,6 +32,12 @@ class PhysicsWorld(worldWidth: Int, worldHeight: Int, val config: PhysicsConfig 
    * @param height  new screen height.
    */
   fun resize(width: Int, height: Int) = debugger.resize(width, height)
+
+  /**
+   * Dispose the entire [World] associated with this instance. When a world is destroyed
+   * all the bodies and joints in it are destroyed as well.
+   */
+  fun dispose() = world.dispose()
 
   /**
    * Calls the [World.step] with the configurations of this instance's [PhysicsConfig].

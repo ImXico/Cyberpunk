@@ -8,7 +8,9 @@ import cyberpunk.core.transition.Transition
 
 @JvmField val DEFAULT_SPEED: Float = 1.5f
 
-class Fade(private var speed: Float = DEFAULT_SPEED) : Transition {
+class Fade
+  @JvmOverloads
+  constructor(private var speed: Float = DEFAULT_SPEED) : Transition {
 
   @JvmField val MAX_ALPHA: Float = 1f
   @JvmField val DEFAULT_ALPHA_INC: Float = 0.05f

@@ -7,26 +7,30 @@ import cyberpunk.core.WORLD_HEIGHT
 import cyberpunk.core.WORLD_WIDTH
 import cyberpunk.core.transition.Transition
 
-// TODO: Support for the LibGDX' Interpolation class.
-
 /**
  * The Left-to-Right or Right-to-Left sliding motions for the [HorizontalSlide].
  * Explicitly passed on the class' constructor.
+ *
+ * Note that each of the four Vector2 values below are correspondent to the bottom-left
+ * corners of the states. In other words, currentInitial can be read as
+ * "currentState's Initial Bottom-Left Coordinate", whilst currentFinal can be read
+ * as "currentState's Final Bottom-Left Coordinate" (at the end of the transition).
  */
-enum class Motion
-(
+enum class Motion (
   val currentInitial: Vector2,
   val nextInitial: Vector2,
   val currentFinal: Vector2,
   val nextFinal: Vector2
 ) {
-  RIGHT_LEFT(Vector2(), Vector2(WORLD_WIDTH.toFloat(), 0f), Vector2(-WORLD_WIDTH.toFloat(), 0f), Vector2()),
-  LEFT_RIGHT(Vector2(), Vector2(-WORLD_WIDTH.toFloat(), 0f), Vector2(WORLD_WIDTH.toFloat(), 0f), Vector2())
+  RIGHT_TO_LEFT(Vector2(), Vector2(WORLD_WIDTH.toFloat(), 0f), Vector2(-WORLD_WIDTH.toFloat(), 0f), Vector2()),
+  LEFT_TO_RIGHT(Vector2(), Vector2(-WORLD_WIDTH.toFloat(), 0f), Vector2(WORLD_WIDTH.toFloat(), 0f), Vector2())
 }
 
-@JvmField val DEFAULT_LERP = 0.1f
+@JvmField val DEFAULT_LERP = 0.2f
 
-class HorizontalSlide(private val motion: Motion, private val lerp: Float = DEFAULT_LERP) : Transition {
+class HorizontalSlide
+  @JvmOverloads
+  constructor(private val motion: Motion, private val lerp: Float = DEFAULT_LERP) : Transition {
 
   /**
    * Overrides the property defined at the [Transition] interface.
@@ -38,17 +42,12 @@ class HorizontalSlide(private val motion: Motion, private val lerp: Float = DEFA
   /**
    * Current position, in the form of a [Vector2], of the current state.
    */
-  private val currentStateCurrentPos: Vector2
+  private val currentStateCurrentPos: Vector2 = motion.currentInitial
 
   /**
    * Current position, in the form of a [Vector2], of the next state.
    */
-  private val nextStateCurrentPos: Vector2
-
-  init {
-    currentStateCurrentPos = motion.currentInitial
-    nextStateCurrentPos = motion.nextInitial
-  }
+  private val nextStateCurrentPos: Vector2 = motion.nextInitial
 
   /**
    * Overrides the default [Transition.completed] function, declared
@@ -56,7 +55,7 @@ class HorizontalSlide(private val motion: Motion, private val lerp: Float = DEFA
    *
    * @return whether or not the transition is finished.
    */
-  override fun completed(): Boolean = targetPositionReached()
+  override fun completed() = targetPositionReached()
 
   /**
    * @see [Transition.update]
@@ -85,7 +84,7 @@ class HorizontalSlide(private val motion: Motion, private val lerp: Float = DEFA
    * @return whether or not the target position can be understood as finished.
    */
   private fun targetPositionReached(): Boolean {
-    val errorMargin = 0.15f
+    val errorMargin = 0.1f
     return Math.abs(nextStateCurrentPos.x) <= errorMargin
   }
 }

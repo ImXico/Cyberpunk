@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef
 import com.badlogic.gdx.physics.box2d.Fixture
 import com.badlogic.gdx.physics.box2d.FixtureDef
 import cyberpunk.physics.PhysicsWorld
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 class BodyBuilder(private var world: PhysicsWorld) {
 
@@ -18,7 +17,7 @@ class BodyBuilder(private var world: PhysicsWorld) {
   /**
    * Optional [Body.userData].
    */
-  private var userData: JvmType.Object? = null
+  private var userData: Any? = null
 
   /**
    * A [Body] may have multiple [FixtureDef]s.
@@ -26,14 +25,26 @@ class BodyBuilder(private var world: PhysicsWorld) {
    * In [fixturesProps], a [FixtureDef] will be mapped to a [Fixture.userData] object,
    * that, being optional, can be null.
    */
-  private val fixturesProps: MutableMap<FixtureDef, JvmType.Object?> = mutableMapOf()
+  private val fixturesProps: MutableMap<FixtureDef, Any?> = mutableMapOf()
 
   /**
-   * Change the currently attached [PhysicsWorld].
-   * All bodies created will be placed onto the current [world].
+   * Change the currently attached [PhysicsWorld] to a new one, returning the old one.
+   * All bodies/joints further created will be placed onto the new current [world].
+   *
+   * @param newWorld the new world to be set.
+   * @return the old.
    */
-  fun changeWorld(newWorld: PhysicsWorld) {
+  fun changeWorld(newWorld: PhysicsWorld): PhysicsWorld {
+    val oldWorld = world
     world = newWorld
+    return oldWorld
+  }
+
+  /**
+   * Effectively destroys the [PhysicsWorld.world] that was currently being used by this instance.
+   */
+  fun disposeWorld() {
+    world.dispose()
   }
 
   /**
@@ -43,9 +54,7 @@ class BodyBuilder(private var world: PhysicsWorld) {
    * @return this [BodyBuilder] instance.
    * @see BodyDefBuilder
    */
-  fun withBodyDef(builder: BodyDefBuilder): BodyBuilder {
-    return this.apply { bodyDef = builder.build() }
-  }
+  fun withBodyDef(builder: BodyDefBuilder): BodyBuilder = this.apply { bodyDef = builder.build() }
 
   /**
    * Adds a [FixtureDef] to this body, by chaining the [FixtureDefBuilder] methods.
@@ -56,9 +65,8 @@ class BodyBuilder(private var world: PhysicsWorld) {
    * @see FixtureDefBuilder
    */
   @JvmOverloads
-  fun withFixtureDef(builder: FixtureDefBuilder, fixtureUserData: JvmType.Object? = null): BodyBuilder {
-    return this.apply { fixturesProps.put(builder.build(), fixtureUserData) }
-  }
+  fun withFixtureDef(builder: FixtureDefBuilder, fixtureUserData: Any? = null): BodyBuilder =
+    this.apply { fixturesProps.put(builder.build(), fixtureUserData) }
 
   /**
    * Builds and returns a [Body] that's defined by a [BodyDef] and one
