@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.PerformanceCounter
  * You should reset the counter manually when you're done using it.
  * @param operation block of code you want to profile.
  */
-inline fun PerformanceCounter.profile(operation: () -> Any): PerformanceCounter {
+inline fun PerformanceCounter.profile(operation: () -> Any) {
   // Care for the cold start.
   if (this.time.count == 0) tick()
   this.start()
@@ -18,7 +18,6 @@ inline fun PerformanceCounter.profile(operation: () -> Any): PerformanceCounter 
   this.stop()
   this.tick()
   prettyPrint(this)
-  return this
 }
 
 /**
