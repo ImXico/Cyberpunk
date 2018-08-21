@@ -16,7 +16,6 @@ class BodyDefBuilder {
   /**
    * Sets this [BodyDef]'s type.
    * If not called explicitly, the default type is [BodyDef.BodyType.StaticBody].
-   *
    * @param bodyType the desired [BodyDef.BodyType].
    * @return this [BodyDefBuilder] instance.
    * @see [BodyDef.BodyType]
@@ -27,7 +26,6 @@ class BodyDefBuilder {
   /**
    * Sets the world angle of the body, in radians.
    * If not called explicitly, the default value is 0f.
-   *
    * @param bodyAngle the desired [BodyDef.angle], in radians.
    * @return this [BodyDefBuilder] instance.
    */
@@ -37,7 +35,6 @@ class BodyDefBuilder {
   /**
    * Sets the linear velocity of the body's origin, in world coordinates.
    * If not called explicitly, the default value is (0,0).
-   *
    * @param velocity the desired [BodyDef.linearVelocity], in the form of a [Vector2].
    * @return this [BodyDefBuilder] instance.
    */
@@ -47,7 +44,6 @@ class BodyDefBuilder {
   /**
    * Sets the linear velocity of the body's origin, in world coordinates.
    * If not called explicitly, the default value is (0,0).
-   *
    * @param x the desired [BodyDef.linearVelocity] X.
    * @param y the desired [BodyDef.linearVelocity] Y.
    * @return this [BodyDefBuilder] instance.
@@ -58,7 +54,6 @@ class BodyDefBuilder {
   /**
    * Sets the angular velocity of the body.
    * If not called explicitly, the default value is 0.
-   *
    * @param velocity the desired [BodyDef.angularVelocity].
    * @return this [BodyDefBuilder] instance.
    */
@@ -68,7 +63,6 @@ class BodyDefBuilder {
   /**
    * Sets the linear damping of the body.
    * If not called explicitly, the default value is 0.
-   *
    * @param damping the desired [BodyDef.linearDamping].
    * @return this [BodyDefBuilder] instance.
    */
@@ -78,7 +72,6 @@ class BodyDefBuilder {
   /**
    * Sets the angular damping of the body.
    * If not called explicitly, the default value is 0.
-   *
    * @param damping the desired [BodyDef.angularDamping]-
    * @return this [BodyDefBuilder] instance.
    */
@@ -88,7 +81,6 @@ class BodyDefBuilder {
   /**
    * Never fall asleep - note that this WILL increase CPU usage.
    * The default value is false (i.e. the body can fall asleep).
-   *
    * @return this [BodyDefBuilder] instance.
    */
   fun noSleep(): BodyDefBuilder =
@@ -97,7 +89,6 @@ class BodyDefBuilder {
   /**
    * Sets this body to not be awake on spawn.
    * The default value is true (i.e. the body is awake on spawn).
-   *
    * @return this [BodyDefBuilder] instance.
    */
   fun notAwakeOnSpawn(): BodyDefBuilder =
@@ -106,7 +97,6 @@ class BodyDefBuilder {
   /**
    * Sets this body to not be active on spawn.
    * The default value is true (i.e. the body is active on spawn).
-   *
    * @return this [BodyDefBuilder] instance.
    */
   fun notActiveOnSpawn(): BodyDefBuilder =
@@ -115,7 +105,6 @@ class BodyDefBuilder {
   /**
    * Prevents this body from rotating.
    * The default value is false (i.e. the body can rotate).
-   *
    * @return this [BodyDefBuilder] instance.
    */
   fun fixedRotation(): BodyDefBuilder =
@@ -125,7 +114,6 @@ class BodyDefBuilder {
    * Turns this flag on in case this is a fast moving body that should be prevented from
    * tunneling through other moving bodies. Note that this WILL increase CPU usage.
    * The default value is false.
-   *
    * @return this [BodyDefBuilder] instance.
    */
   fun asBullet(): BodyDefBuilder =
@@ -134,7 +122,6 @@ class BodyDefBuilder {
   /**
    * Scales the gravity that will be applied to this body.
    * The default value is 1f.
-   *
    * @param scale the desired [BodyDef.gravityScale].
    * @return this [BodyDefBuilder] instance.
    */
@@ -145,7 +132,6 @@ class BodyDefBuilder {
    * Sets the *world* position of the body.
    * The conversion from screen to world coordinates is made implicitly,
    * so you can simply pass a [Vector2] of screen coordinates.
-   *
    * @param bodyPosition the desired [BodyDef.position].
    * @return this [BodyDefBuilder] instance.
    */
@@ -156,7 +142,6 @@ class BodyDefBuilder {
    * Sets the *world* position of the body.
    * The conversion from screen to world coordinates is made implicitly,
    * so you can simply pass an X and Y in screen coordinates.
-   *
    * @param x the desired [BodyDef.position] X.
    * @param y the desired [BodyDef.position] Y.
    * @return this [BodyDefBuilder] instance.
@@ -170,7 +155,6 @@ class BodyDefBuilder {
    * Finish building this [BodyDef].
    * The [bodyDef] instance will be cleaned up,
    * making it suitable for reuse later.
-   *
    * @return the [BodyDef] that has been worked on.
    */
   fun build(): BodyDef {
@@ -180,8 +164,7 @@ class BodyDefBuilder {
   }
 
   /**
-   * Cleans up this class' [bodyDef], making it
-   * suitable for reuse later.
+   * Cleans up this class' [bodyDef], making it suitable for reuse later.
    */
   private fun cleanup() {
     bodyDef = BodyDef()

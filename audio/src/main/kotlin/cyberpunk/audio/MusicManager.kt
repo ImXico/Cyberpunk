@@ -14,7 +14,6 @@ object MusicManager {
 
   /**
    * Creates and loads a [Music] object onto the [tracks] structure.
-   *
    * @param trackName key that will identify this track in the map.
    * @param path      track's path inside the assets folder.
    */
@@ -29,7 +28,6 @@ object MusicManager {
    * If no volume is specified (the second parameter), then the sound will be played with
    * the default volume, 1f.
    * Contrarily to the sound instances, this action doesn't return an unique id.
-   *
    * @param trackName key that identifies the track in the map.
    * @param volume    audio volume; ranges between [0, 1] and it's optional.
    * @throws AudioAssetNotFoundException
@@ -45,7 +43,6 @@ object MusicManager {
 
   /**
    * Pauses the given track's playback.
-   *
    * @param trackName key that identifies the track in the map.
    * @throws AudioAssetNotFoundException
    */
@@ -56,7 +53,6 @@ object MusicManager {
 
   /**
    * Stops the given track's playback.
-   *
    * @param trackName key that identifies the track in the map.
    * @throws AudioAssetNotFoundException
    */
@@ -67,7 +63,6 @@ object MusicManager {
 
   /**
    * Repeats the given track's playback until [stop] is called.
-   *
    * @param trackName key that identifies the track in the map.
    * @throws AudioAssetNotFoundException
    */
@@ -79,8 +74,7 @@ object MusicManager {
   }
 
   /**
-   * Whether or not the given track is playing.
-   *
+   * Checks whether or not the given track is playing.
    * @param trackName key that identifies the track in the map.
    * @return whether or not the given track is playing.
    * @throws AudioAssetNotFoundException
@@ -91,8 +85,7 @@ object MusicManager {
     tracks[trackName]?.isPlaying ?: throw AudioAssetNotFoundException("$trackName not found.")
 
   /**
-   * Whether or not the given track is looping.
-   *
+   * Checks whether or not the given track is looping.
    * @param trackName key that identifies the track in the map.
    * @return whether or not the given track is looping.
    * @throws AudioAssetNotFoundException
@@ -104,7 +97,6 @@ object MusicManager {
 
   /**
    * Gets this track's current position in seconds.
-   *
    * @param trackName key that identifies the track in the map.
    * @return this track's current position in seconds.
    * @throws AudioAssetNotFoundException
@@ -116,7 +108,6 @@ object MusicManager {
 
   /**
    * Sets this track's current position in seconds.
-   *
    * @param trackName key that identifies the track in the map.
    * @param position  target position in seconds.
    * @throws AudioAssetNotFoundException
@@ -129,9 +120,8 @@ object MusicManager {
   }
 
   /**
-   * Release resources, once you don't need the [Music] anymore.
+   * Releases resources held by the [Music] instances.
    * Accessing the sound after you disposed of it will result in undefined errors.
-   *
    * @param trackName key that identifies the track in the map.
    * @throws AudioAssetNotFoundException
    */

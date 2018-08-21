@@ -1,4 +1,4 @@
-package source.core.transition.types
+package cyberpunk.core.transition.types
 
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
@@ -10,11 +10,10 @@ import cyberpunk.core.transition.Transition
 /**
  * The Left-to-Right or Right-to-Left sliding motions for the [HorizontalSlide].
  * Explicitly passed on the class' constructor.
- *
  * Note that each of the four Vector2 values below are correspondent to the bottom-left
- * corners of the states. In other words, currentInitial can be read as
- * "currentState's Initial Bottom-Left Coordinate", whilst currentFinal can be read
- * as "currentState's Final Bottom-Left Coordinate" (at the end of the transition).
+ * corners of the states. In other words, currentInitial can be read as "currentState's
+ * Initial Bottom-Left Coordinate", whilst currentFinal can be read as "currentState's
+ * Final Bottom-Left Coordinate" (at the end of the transition).
  */
 enum class Motion (
   val currentInitial: Vector2,
@@ -34,7 +33,6 @@ class HorizontalSlide
 
   /**
    * Overrides the property defined at the [Transition] interface.
-   *
    * @property [Transition.running]
    */
   override var running: Boolean = false
@@ -52,7 +50,6 @@ class HorizontalSlide
   /**
    * Overrides the default [Transition.completed] function, declared
    * and implemented on the [Transition] interface.
-   *
    * @return whether or not the transition is finished.
    */
   override fun completed() = targetPositionReached()
@@ -80,7 +77,6 @@ class HorizontalSlide
    * Because [Vector2.lerp] is being used, we can't expect it to
    * reach exactly a given target position - hence why the need
    * to define a (small-ish) error margin.
-   *
    * @return whether or not the target position can be understood as finished.
    */
   private fun targetPositionReached(): Boolean {

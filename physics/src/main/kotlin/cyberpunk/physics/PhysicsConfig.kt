@@ -27,8 +27,7 @@ private val DEFAULT_POSITION_ITERATIONS = 2
 
 /**
  * Configuration class to use when instantiating a new [PhysicsWorld].
- * Values that aren't explicitly passed will be set to the defaults,
- * as seen above.
+ * Values that aren't explicitly passed will be set to the defaults, as seen above.
  * Once created, the attributes of a [PhysicsConfig] cannot be changed.
  */
 data class PhysicsConfig @JvmOverloads constructor (

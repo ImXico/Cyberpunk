@@ -11,7 +11,6 @@ import com.badlogic.gdx.utils.ScreenUtils
 /**
  * Takes a screenshot of the entire screen and saves the image with the given file name
  * into the external storage.
- *
  * @param fileName the name that you want your screenshot png to have.
  * @see <a href="https://github.com/libgdx/libgdx/wiki/File-handling">File Handling</a>
  */

@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2
 
 /**
  * Centers a piece of [text] on the screen, given the [worldWidth], [worldHeight] and [font] used.
- *
  * @param font        the [BitmapFont] used.
  * @param text        the [String] text to be centered.
  * @param worldWidth  width of the game world (world coordinates).
@@ -25,7 +24,6 @@ fun center(font: BitmapFont, text: String, worldWidth: Int, worldHeight: Int): V
 /**
  * Centers a piece of [text] horizontally on the screen, given the [worldWidth],
  * target [y] and [font] used.
- *
  * @param font        the [BitmapFont] used.
  * @param text        the [String] text to be centered.
  * @param worldWidth  width of the game world (world coordinates).
@@ -41,7 +39,6 @@ fun centerX(font: BitmapFont, text: String, worldWidth: Int, y: Float): Vector2 
 /**
  * Centers a piece of [text] horizontally on the screen, given the [worldHeight],
  * target [x] and [font] used.
- *
  * @param font          the [BitmapFont] used.
  * @param text          the [String] text to be centered.
  * @param worldHeight   width of the game world (world coordinates).
@@ -56,7 +53,6 @@ fun centerY(font: BitmapFont, text: String, worldHeight: Int, x: Float): Vector2
 
 /**
  * Centers a piece of [text] inside an image of dimensions <width x height>, located at [position].
- *
  * @param font      the [BitmapFont] used.
  * @param text      the [String] text to be centered.
  * @param width     the width of the outer image.

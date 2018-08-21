@@ -12,7 +12,6 @@ import cyberpunk.core.transition.Transition
 
 /**
  * Initializes the [StateManager] with it a [Camera] and [Viewport].
- *
  * @param camera   camera that will use a virtual resolution.
  * @param viewport viewport that will adapt the game screen to the physical devices.
  */
@@ -54,7 +53,6 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
   /**
    * Sets a [State] to be the currently running one. Optionally, pass
    * a [Transition] to make this change more pleasant.
-   *
    * @param state       new current state.
    * @param transition  optional transition used to move from states.
    */
@@ -75,7 +73,6 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
   /**
    * Updates the [currentState], if there is one.
    * Also updates any on-going [Transition].
-   *
    * @param delta time elapsed between this moment and the last update call.
    */
   fun update(delta: Float) {
@@ -114,7 +111,6 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
   /**
    * Resizes the [currentState], [nextState] and this class' [Viewport].
    * Here, the [FrameBuffer] objects are disposed manually and re-defined.
-   *
    * @param width  new screen width.
    * @param height new screen height.
    */
@@ -155,7 +151,6 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
   /**
    * Utility extension function to wrap any [block] inside the
    * [FrameBuffer.begin] and [FrameBuffer.end] calls, for shortness.
-   *
    * @param block a [Unit] returning function.
    */
   private inline fun FrameBuffer.wrap(block: () -> Unit) {
@@ -165,7 +160,7 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
   }
 
   /**
-   * Initialize the [FrameBuffer] objects and the [TextureRegion]s that will
+   * Initializes the [FrameBuffer] objects and the [TextureRegion]s that will
    * serve any running [Transition].
    */
   private fun setupFBOs() {
@@ -181,7 +176,6 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
 
   /**
    * Resizes the [FrameBuffer] objects in every [StateManager.resize] call.
-   *
    * @param width   new screen width.
    * @param height  new screen height.
    */

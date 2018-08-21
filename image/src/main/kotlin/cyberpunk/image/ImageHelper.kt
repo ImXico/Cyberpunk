@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2
 /**
  * Centers an image with dimensions <width x height> on the screen, given the
  * world's dimensions, [worldWidth] and [worldHeight].
- *
  * @param width       width of the image you want to center.
  * @param height      height of the image you want to center.
  * @param worldWidth  width of the game world (world coordinates).
@@ -23,7 +22,6 @@ fun center(width: Float, height: Float, worldWidth: Int, worldHeight: Int): Vect
 /**
  * Centers an image with dimensions <width x height> on the screen horizontally, keeping
  * the same, original Y value.
- *
  * @param width       width of the image you want to center.
  * @param worldWidth  width of the game world (world coordinates).
  * @param y           y value of the image-to-center's position.
@@ -37,7 +35,6 @@ fun centerX(width: Float, worldWidth: Int, y: Float): Vector2 {
 /**
  * Centers an image with dimensions <width x height> on the screen vertically, keeping
  * the same, original X value.
- *
  * @param height       height of the image you want to center.
  * @param worldHeight  height of the game world (world coordinates).
  * @param x            x value of the image-to-center's position.
@@ -51,7 +48,6 @@ fun centerY(height: Float, worldHeight: Int, x: Float): Vector2 {
 /**
  * Centers an image with dimensions <width x height> inside an image of <otherWidth x otherHeight>,
  * that's located at a given [otherPosition].
- *
  * @param width         width of the image you want to center.
  * @param height        height of the image you want to center.
  * @param otherWidth    width of the outer image.
@@ -68,7 +64,6 @@ fun centerOnImage(width: Float, height: Float, otherWidth: Float, otherHeight: F
 /**
  * Centers an image with dimensions <size x size> inside an image of <otherSize x otherSize>,
  * that's located at a given [otherPosition].
- *
  * @param size          size (both width and height) of the image you want to center.
  * @param otherSize     size (both width and height) of the outer image.
  * @param otherPosition position, in the form of a [Vector2], of the outer image.

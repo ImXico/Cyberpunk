@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20
 
 /**
  * Clears the frame and depth buffers with the selected color.
- *
  * @param red red color value.
  * @param green green color value.
  * @param blue blue color value.

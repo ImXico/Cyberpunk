@@ -5,29 +5,30 @@ import com.badlogic.gdx.math.Vector2
 
 abstract class StateAdapter(protected val stateManager: StateManager) : State {
 
-  /* State methods that absolutely must be overridden. */
-
+  /**
+   * State methods that absolutely must be overridden.
+   */
   override abstract fun update(delta: Float)
   override abstract fun render(batch: Batch)
   override abstract fun dispose()
 
-  /* State methods that may or may not be overridden. */
-
+  /**
+   * State methods that may or may not be overridden (no-op implementation).
+   */
   override fun resize(width: Int, height: Int) = Unit
   override fun hide() = Unit
   override fun pause() = Unit
   override fun resume() = Unit
 
-  /* State input conversion methods - should not be overridden. */
+  /**
+   * State input conversion methods with default implementation.
+   */
+  override fun unproject(screenCoordinates: Vector2) = stateManager.viewport.unproject(screenCoordinates)
+  override fun unproject(screenX: Float, screenY: Float) = this.unproject(Vector2(screenX, screenY))
 
-  override fun unproject(screenCoordinates: Vector2) =
-    stateManager.viewport.unproject(screenCoordinates)
-
-  override fun unproject(screenX: Float, screenY: Float) =
-    this.unproject(Vector2(screenX, screenY))
-
-  /* InputProcessor methods that may or may not be overridden. */
-
+  /**
+   * InputProcessor methods that may or may not be overridden.
+   */
   override fun keyDown(keycode: Int) = false
   override fun keyUp(keycode: Int) = false
   override fun keyTyped(character: Char) = false
