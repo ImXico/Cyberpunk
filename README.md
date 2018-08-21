@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/ImXico/Cyberpunk.svg?branch=master)](https://travis-ci.org/ImXico/Cyberpunk)
 [![libGDX](https://img.shields.io/badge/libgdx-1.9.8-red.svg)](http://libgdx.badlogicgames.com)
-[![kotlin](https://img.shields.io/badge/kotlin-1.2.41-orange.svg)](https://kotlinlang.org)
+[![kotlin](https://img.shields.io/badge/kotlin-1.2.51-orange.svg)](https://kotlinlang.org)
 [![JitPack](https://jitpack.io/v/ImXico/Cyberpunk.svg)](https://jitpack.io/#ImXico/Cyberpunk)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md)
 <br>
