@@ -21,6 +21,7 @@ Here are the **current** modules (each one has a *README.md* file):
 - [camera](https://github.com/ImXico/Cyberpunk/tree/master/camera): Various camera styles on the go.
 - [core](https://github.com/ImXico/Cyberpunk/tree/master/core): States, state management and transitions. Get up and running quickly!
 - [image](https://github.com/ImXico/Cyberpunk/tree/master/image): Image asset management and various utilities.
+- [profiler](https://github.com/ImXico/Cyberpunk/tree/master/profiler): Wrappers around libGDX profiling utilities.
 - [physics](https://github.com/ImXico/Cyberpunk/tree/master/physics): Friendly and practical Box2D constructs.
 - [text](https://github.com/ImXico/Cyberpunk/tree/master/text): Text positioning helpers.
 
@@ -49,7 +50,7 @@ Replace `$module` with the name of the desired library (see above). Likewise, `$
 
 Hey, [libKTX](https://github.com/libktx/ktx) is an awesome project! If you're already a libKTX user and you're happy with it, you should definitely stick with it. Same thing would apply if you were to start a larger, *pure Kotlin* project. It provides an *incredible* range of utilities, and makes full use of Kotlin's awesome features!
 
-That being said, if you're looking for a smoother Java interop or are carrying out a game jam, give Cyberpunk a try!
+That being said, if you're looking for a smoother Java interoperability or are carrying out a game jam, give Cyberpunk a try!
 
 ## Report Issues
 
