@@ -4,4 +4,5 @@ include 'camera'
 include 'image'
 include 'text'
 include 'physics'
+include 'profiler'
 
