@@ -24,7 +24,6 @@ object ImageManager {
   /**
    * Loads a [TextureAtlas] stored in the assets folder under [path] and stores it
    * into [atlases] with the given key.
-   *
    * @param key           key that will identify this [TextureAtlas] in the [atlases] structure.
    * @param path          path of the atlas, under the assets folder.
    * @param setAsDefault  whether or not this [TextureAtlas] should be set as the [DEFAULT_ATLAS_KEY].
@@ -41,7 +40,6 @@ object ImageManager {
 
   /**
    * Returns the [TextureAtlas] identified by the given key.
-   *
    * @param key key that identifies the [TextureAtlas] in the [atlases] structure.
    * @return the correct [TextureAtlas] or null, in case of failure.
    */
@@ -53,7 +51,6 @@ object ImageManager {
    * action has no effect at all.
    * This releases all the textures backing all [TextureRegion] and sprites,
    * which should no longer be used after calling this method.
-   *
    * @param key key that identifies the [TextureAtlas] in the [atlases] structure.
    */
   @JvmStatic
@@ -63,7 +60,6 @@ object ImageManager {
    * Fetches a [TextureRegion] identified by the given [region] name from a [TextureAtlas]
    * identified by the given [key].
    * If no atlas key is supplied, then [DEFAULT_ATLAS_KEY] will be used - which can be null!
-   *
    * @param region  region that identifies the [TextureRegion] wanted.
    * @param key     key that identifies the [TextureAtlas] in the [atlases] structure.
    * @return the [TextureRegion] wanted, or null, in case it was not found.

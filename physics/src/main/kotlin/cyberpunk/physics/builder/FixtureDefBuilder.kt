@@ -19,9 +19,7 @@ class FixtureDefBuilder {
   private var fixtureDef = FixtureDef()
 
   /**
-   * Sets this fixture def's shape to a [CircleShape], given the
-   * desired radius in pixels.
-   *
+   * Sets this fixture def's shape to a [CircleShape], given the desired radius in pixels.
    * @param radius circle shape's radius in pixels.
    * @return this [FixtureDefBuilder] instance.
    * @see CircleShape
@@ -37,9 +35,7 @@ class FixtureDefBuilder {
 
   /**
    * Generates a [PolygonShape] given its vertices.
-   * Both the X and Y components of these [Vector2] should
-   * be in pixel coordinates.
-   *
+   * Both the X and Y components of these [Vector2] should be in pixel coordinates.
    * @param vertices shape's vertices; components in pixels.
    * @return this [FixtureDefBuilder] instance.
    * @see PolygonShape
@@ -54,9 +50,7 @@ class FixtureDefBuilder {
   }
 
   /**
-   * Generates a [PolygonShape] and sets it as a box, given its
-   * dimensions in pixel values.
-   *
+   * Generates a [PolygonShape] and sets it as a box, given its dimensions in pixel values.
    * @param width the desired box width in pixels.
    * @param height the desired box height in pixels.
    * @return this [FixtureDefBuilder] instance.
@@ -73,9 +67,7 @@ class FixtureDefBuilder {
   }
 
   /**
-   * Sets this fixture def's shape to a [ChainShape], given its vertices
-   * in pixel coordinates.
-   *
+   * Sets this fixture def's shape to a [ChainShape], given its vertices in pixel coordinates.
    * @param vertices array of [Vector2] vertices, in pixels.
    * @return this [FixtureDefBuilder] instance.
    * @see ChainShape
@@ -93,7 +85,6 @@ class FixtureDefBuilder {
    * Sets the fixture def's friction coefficient.
    * As stated in the docs, should be in the [0,1] interval.
    * The default value for this property is 0.2f.
-   *
    * @param friction desired friction.
    * @return this [FixtureDefBuilder] instance.
    */
@@ -104,7 +95,6 @@ class FixtureDefBuilder {
    * Sets the fixture def's restitution (elasticity/bounciness).
    * As stated in the docs, should be in the [0,1] interval.
    * The default value for this property is 0.
-   *
    * @param restitution desired restitution.
    * @return this [FixtureDefBuilder] instance.
    */
@@ -115,7 +105,6 @@ class FixtureDefBuilder {
    * Sets the fixture def's density.
    * As stated in the docs, should be in kg/m^2.
    * The default value for this property is 0.
-   *
    * @param density desired density.
    * @return this [FixtureDefBuilder] instance.
    */
@@ -127,7 +116,6 @@ class FixtureDefBuilder {
    * As stated in the docs, a sensor shape collects contact
    * information but never generates a collision response.
    * The default value for this property is false.
-   *
    * @return this [FixtureDefBuilder] instance.
    */
   fun asSensor(): FixtureDefBuilder =
@@ -137,7 +125,6 @@ class FixtureDefBuilder {
    * Finish building this [FixtureDef].
    * The [fixtureDef] instance will be cleaned up,
    * making it suitable for reuse later.
-   *
    * @return the [FixtureDef] that has been worked on.
    */
   fun build(): FixtureDef {
@@ -147,8 +134,7 @@ class FixtureDefBuilder {
   }
 
   /**
-   * Cleans up this class' [FixtureDef], making it
-   * suitable for reuse later.
+   * Cleans up this class' [FixtureDef], making it suitable for reuse later.
    */
   private fun cleanup() {
     fixtureDef = FixtureDef()

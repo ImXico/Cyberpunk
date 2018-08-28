@@ -36,7 +36,6 @@ internal class PhysicsDebugger(worldWidth: Int, worldHeight: Int) {
   /**
    * Called on [PhysicsWorld.resize] to make sure that the [viewport]
    * responds correctly to the screen resizing events.
-   *
    * @param width   new screen width.
    * @param height  new screen height.
    */
@@ -45,7 +44,6 @@ internal class PhysicsDebugger(worldWidth: Int, worldHeight: Int) {
   /**
    * Calls [Box2DDebugRenderer.render] on the given [PhysicsWorld.world], using the
    * dedicated [camera]'s projection and view matrix.
-   *
    * @param world instance of the [PhysicsWorld] that will be rendered.
    */
   internal fun render(world: PhysicsWorld) = renderer.render(world.world, camera.combined)

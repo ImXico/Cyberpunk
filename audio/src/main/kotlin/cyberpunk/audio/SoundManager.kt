@@ -13,7 +13,6 @@ object SoundManager {
 
   /**
    * Creates and loads a [Sound] onto the [sounds] structure.
-   *
    * @param soundName key that will identify this sound in the map.
    * @param path      sounds's path inside the assets folder.
    */
@@ -27,7 +26,6 @@ object SoundManager {
    * Plays the given sound, if present in the [sounds] map.
    * If no volume is specified (the second parameter), then the sound will be played with
    * the default volume, 1f.
-   *
    * @param soundName key that identifies the sound in the map.
    * @param volume    audio volume; ranges between [0, 1] and it's optional.
    * @param pitch     the pitch multiplier; ranges between [0.5 (slower), 2.0 (faster)] and it's optional.
@@ -47,7 +45,6 @@ object SoundManager {
    * Plays the given sound, if present in the [sounds] map.
    * If no volume is specified (the second parameter), then the sound will be played with
    * the default volume, 1f.
-   *
    * @param soundName key that identifies the sound in the map.
    * @param volume    audio volume; ranges between [0, 1] and it's optional.
    * @param pitch     the pitch multiplier; ranges between [0.5 (slower), 2.0 (faster)] and it's optional.
@@ -66,7 +63,6 @@ object SoundManager {
   /**
    * Stops all instances of the sound identified by the given [soundName].
    * If the instance doesn't exist, this method has no effect.
-   *
    * @param soundName key that identifies the sound in the map.
    * @throws AudioAssetNotFoundException
    */
@@ -78,7 +74,6 @@ object SoundManager {
   /**
    * Pauses all instances of the sound identified by the given [soundName].
    * If the instance doesn't exist, this method has no effect.
-   *
    * @param soundName key that identifies the sound in the map.
    * @throws AudioAssetNotFoundException
    */
@@ -90,7 +85,6 @@ object SoundManager {
   /**
    * Resumes all instances of the sound identified by the given [soundName].
    * If the instance doesn't exist, this method has no effect.
-   *
    * @param soundName key that identifies the sound in the map.
    * @throws AudioAssetNotFoundException
    */
@@ -100,9 +94,8 @@ object SoundManager {
     sounds[soundName]?.resume() ?: throw AudioAssetNotFoundException("$soundName not found.")
 
   /**
-   * Release resources, once you don't need the [Sound] anymore.
+   * Releases resources held by the [Sound] instances.
    * Accessing the sound after you disposed of it will result in undefined errors.
-   *
    * @param soundName key that identifies the sound in the map.
    * @throws AudioAssetNotFoundException
    */

@@ -30,7 +30,6 @@ class BodyBuilder(private var world: PhysicsWorld) {
   /**
    * Change the currently attached [PhysicsWorld] to a new one, returning the old one.
    * All bodies/joints further created will be placed onto the new current [world].
-   *
    * @param newWorld the new world to be set.
    * @return the old.
    */
@@ -49,7 +48,6 @@ class BodyBuilder(private var world: PhysicsWorld) {
 
   /**
    * Adds a [BodyDef] to this body, by chaining the [BodyDefBuilder] methods.
-   *
    * @param builder [BodyDefBuilder].
    * @return this [BodyBuilder] instance.
    * @see BodyDefBuilder
@@ -58,7 +56,6 @@ class BodyBuilder(private var world: PhysicsWorld) {
 
   /**
    * Adds a [FixtureDef] to this body, by chaining the [FixtureDefBuilder] methods.
-   *
    * @param builder {@link FixtureDefBuilder}.
    * @param fixtureUserData user data for the fixture that will have this [FixtureDef].
    * @return this [BodyBuilder] instance.
@@ -71,7 +68,6 @@ class BodyBuilder(private var world: PhysicsWorld) {
   /**
    * Builds and returns a [Body] that's defined by a [BodyDef] and one
    * or more [FixtureDef]. This body is added onto the current [world].
-   *
    * @return [Body] created.
    */
   fun build(): Body {

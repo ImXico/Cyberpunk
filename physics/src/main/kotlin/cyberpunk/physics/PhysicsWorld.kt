@@ -23,11 +23,8 @@ class PhysicsWorld
   var debugMode = true
 
   /**
-   * Should be called in the resize method of the state/screen that holds
-   * this instance.
-   * Crucial to update the viewport of the [PhysicsDebugger] after all
-   * resize events.
-   *
+   * Should be called in the resize method of the state/screen that holds this instance.
+   * Crucial to update the viewport of the [PhysicsDebugger] after all resize events.
    * @param width   new screen width.
    * @param height  new screen height.
    */
