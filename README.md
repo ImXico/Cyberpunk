@@ -1,11 +1,28 @@
-![Cyberpunk logo](https://github.com/ImXico/Cyberpunk/blob/master/logo.png?raw=true)
+<p align="center">
+  <img src="https://github.com/ImXico/Cyberpunk/blob/master/logo.png?raw=true" alt="Cyberpunk Logo"/>
+</p>
 
-[![Build Status](https://travis-ci.org/ImXico/Cyberpunk.svg?branch=master)](https://travis-ci.org/ImXico/Cyberpunk)
-[![libGDX](https://img.shields.io/badge/libgdx-1.9.8-red.svg)](http://libgdx.badlogicgames.com)
-[![kotlin](https://img.shields.io/badge/kotlin-1.2.51-orange.svg)](https://kotlinlang.org)
-[![JitPack](https://jitpack.io/v/ImXico/Cyberpunk.svg)](https://jitpack.io/#ImXico/Cyberpunk)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/ImXico/HandyGDX/blob/master/LICENSE.md)
-<br>
+<p align="center">
+  <a href="https://travis-ci.org/ImXico/Cyberpunk">
+    <img src="https://travis-ci.org/ImXico/Cyberpunk.svg?branch=master">
+  </a>
+  
+  <a href="https://jitpack.io/#ImXico/Cyberpunk">
+    <img src="https://jitpack.io/v/ImXico/Cyberpunk.svg">
+  </a>
+
+  <a href="http://libgdx.badlogicgames.com">
+    <img src="https://img.shields.io/badge/libgdx-1.9.8-red.svg">
+  </a>
+
+  <a href="https://kotlinlang.org">
+    <img src="https://img.shields.io/badge/kotlin-1.2.51-orange.svg">
+  </a>
+
+  <a href="https://github.com/ImXico/Cyberpunk/blob/master/LICENSE.md">
+    <img src="https://img.shields.io/badge/license-MIT-green.svg">
+  </a>
+</p>
 
 ## Introduction
 
@@ -13,17 +30,17 @@ Cyberpunk is a collection of independent, modular, pure-Kotlin libraries to use 
 
 ## Modules
 
-Cyberpunk is all about small, independent modules. Because of the Gradle integration, you can import *just* the modules that you need. To properly serve that purpose, every single module is totally independent from all others.
+Cyberpunk is all about small, independent modules. Because of the Gradle integration, you can import *just* the modules that you need. To properly serve that purpose, every single module is totally independent from all others:
 
-Here are the **current** modules (each one has a *README.md* file):
-
-- [audio](https://github.com/ImXico/Cyberpunk/tree/master/audio): Music/Sound asset management and various utilities.
-- [camera](https://github.com/ImXico/Cyberpunk/tree/master/camera): Various camera styles on the go.
-- [core](https://github.com/ImXico/Cyberpunk/tree/master/core): States, state management and transitions. Get up and running quickly!
-- [image](https://github.com/ImXico/Cyberpunk/tree/master/image): Image asset management and various utilities.
-- [profiler](https://github.com/ImXico/Cyberpunk/tree/master/profiler): Wrappers around libGDX profiling utilities.
-- [physics](https://github.com/ImXico/Cyberpunk/tree/master/physics): Friendly and practical Box2D constructs.
-- [text](https://github.com/ImXico/Cyberpunk/tree/master/text): Text positioning helpers.
+| Module | Description |
+| ------ | ----------- |
+| [audio](https://github.com/ImXico/Cyberpunk/tree/master/audio)       | Music/Sound asset management and various utilities. |
+| [camera](https://github.com/ImXico/Cyberpunk/tree/master/camera)     | Various camera styles on the go.
+| [core](https://github.com/ImXico/Cyberpunk/tree/master/core)         | State management and transitions - get up and running quickly! |
+| [image](https://github.com/ImXico/Cyberpunk/tree/master/image)       | Image asset management and various utilities. |
+| [profiler](https://github.com/ImXico/Cyberpunk/tree/master/profiler) | Wrappers around libGDX profiling utilities. |
+| [physics](https://github.com/ImXico/Cyberpunk/tree/master/physics)   | Friendly and practical Box2D constructs. |
+| [text](https://github.com/ImXico/Cyberpunk/tree/master/text)         | Text positioning helpers. |
 
 ## Usage
 
@@ -48,13 +65,7 @@ Replace `$module` with the name of the desired library (see above). Likewise, `$
 
 ## What About libKTX?
 
-Hey, [libKTX](https://github.com/libktx/ktx) is an awesome project! If you're already a libKTX user and you're happy with it, you should definitely stick with it. Same thing would apply if you were to start a larger, *pure Kotlin* project. It provides an *incredible* range of utilities, and makes full use of Kotlin's awesome features!
-
-That being said, if you're looking for a smoother Java interoperability or are carrying out a game jam, give Cyberpunk a try!
-
-## Report Issues
-
-Something not working quite as expected? Do you need a feature that has not been implemented yet? Feel free to report bugs, fix them, suggest enhancements, add functionality and point out any mistakes!
+Hey, [libKTX](https://github.com/libktx/ktx) is an awesome project, and I recommend it for larger Kotlin projects. It provides an *incredible* range of features, all very high quality. That being said, If you're looking for a smoother Java interoperability or are carrying out a game jam, give Cyberpunk a try!
 
 ## License
 
