@@ -1,8 +1,8 @@
-The audio package for Cyberpunk is split into two different utilities: [`SoundManager`]() and [`MusicManager`]().
+The audio package for Cyberpunk is split into two different utilities: [`SoundManager`](#soundmanager) and [`MusicManager`](#musicmanager).
 
 ### SoundManager
 
-The [`SoundManager`]() will hold [`Sound`]() instances. As stated in the official libGDX [wiki]():
+The [`SoundManager`](https://github.com/ImXico/Cyberpunk/blob/master/audio/src/main/kotlin/cyberpunk/audio/SoundManager.kt) will hold [`Sound`](https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/audio/Sound.html) instances. As stated in the official libGDX [wiki](https://github.com/libgdx/libgdx/wiki/Sound-effects):
 > Sound effects are small audio samples, usually no longer than a few seconds, that are played back on specific game events such as a character jumping or shooting a gun. On Android, a Sound instance can not be over 1mb in size. If you have a bigger file, use Music.
 
 Say we've got ourselves a sound file called `mysound.mp3`, located at assets/sounds.
@@ -29,10 +29,10 @@ SoundManager.dispose("mysound")
 ```
 
 ### MusicManager
-The [`MusicManager`]() will hold [`Music`]() instances. As stated in the official libGDX [wiki]():
+The [`MusicManager`](https://github.com/ImXico/Cyberpunk/blob/master/audio/src/main/kotlin/cyberpunk/audio/MusicManager.kt) will hold [`Music`](https://github.com/libgdx/libgdx/wiki/Streaming-music) instances. As stated in the official libGDX [wiki](https://github.com/libgdx/libgdx/wiki/Streaming-music):
 > For any sound that's longer than a few seconds, it is preferable to stream it from disk instead of fully loading it into RAM. Libgdx provides a Music interface that lets you do that.
 
-Once again, with a music file called `mymusic.mp3`, located at assets/music, you'd load it the same way you'd do with the [`SoundManager`]():
+Once again, with a music file called `mymusic.mp3`, located at assets/music, you'd load it the same way you'd do with the [`SoundManager`](#soundmanager):
 ```kotlin
 MusicManager.load("mymusic", "music/mymusic.mp3")
 ```

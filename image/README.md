@@ -1,4 +1,4 @@
-Likewise the [`audio`]() module, the [`image`]() extension is also split in two classes: [`ImageManager`]() and [`ImageHelper`]().
+Likewise the [`audio`](https://github.com/ImXico/Cyberpunk/tree/master/audio) module, the [`image`]() extension is also split in two classes: [`ImageManager`](https://github.com/ImXico/Cyberpunk/blob/master/image/src/main/kotlin/cyberpunk/image/ImageManager.kt) and [`ImageHelper`](https://github.com/ImXico/Cyberpunk/blob/master/image/src/main/kotlin/cyberpunk/image/ImageHelper.kt).
 
 ### ImageManager
 This is made to be used with [`TextureAtlas`](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.html). Information on how to use the TexturePacker to pack many smaller images onto larger images can be found [here](https://github.com/libgdx/libgdx/wiki/Texture-packer).
@@ -15,7 +15,7 @@ Alternatively, if you want the pack being loaded to be your default one, you can
 ImageManager.load("mypack", "mypack.pack", setAsDefault = true)
 ```
 
-To fetch a [`TextureRegion`]() named `myregion` from the loaded `mypack` pack, you'd call:
+To fetch a [`TextureRegion`](https://libgdx.badlogicgames.com/ci/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.AtlasRegion.html) named `myregion` from the loaded `mypack` pack, you'd call:
 ```kotlin
 ImageManager.take("myregion", "mypack")
 ```
@@ -31,7 +31,7 @@ ImageManager.disposeAtlas("mypack")
 ```
 
 ### ImageHelper
-The [`ImageHelper`]() grants a bunch of positioning utilities for your images. All functions of this mini extension return [`Vector2`]() objects.
+The [`ImageHelper`](https://github.com/ImXico/Cyberpunk/blob/master/image/src/main/kotlin/cyberpunk/image/ImageHelper.kt) grants a bunch of positioning utilities for your images. All functions of this mini extension return [`Vector2`](https://github.com/ImXico/Cyberpunk/blob/master/image/src/main/kotlin/cyberpunk/image/ImageHelper.kt) objects.
 
 To center an image on the screen, you'd call:
 ```kotlin
