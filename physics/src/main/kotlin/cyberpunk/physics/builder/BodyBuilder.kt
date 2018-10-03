@@ -12,7 +12,7 @@ class BodyBuilder(private var world: PhysicsWorld) {
    * [BodyDef] for the body that will be built.
    * Gets reset after [BodyBuilder.build] or [BodyBuilder.cleanup].
    */
-  private var bodyDef: BodyDef = BodyDef()
+  private var bodyDef = BodyDef()
 
   /**
    * Optional [Body.userData].
@@ -52,7 +52,7 @@ class BodyBuilder(private var world: PhysicsWorld) {
    * @return this [BodyBuilder] instance.
    * @see BodyDefBuilder
    */
-  fun withBodyDef(builder: BodyDefBuilder): BodyBuilder = this.apply { bodyDef = builder.build() }
+  fun withBodyDef(builder: BodyDefBuilder) = this.apply { bodyDef = builder.build() }
 
   /**
    * Adds a [FixtureDef] to this body, by chaining the [FixtureDefBuilder] methods.
@@ -62,7 +62,7 @@ class BodyBuilder(private var world: PhysicsWorld) {
    * @see FixtureDefBuilder
    */
   @JvmOverloads
-  fun withFixtureDef(builder: FixtureDefBuilder, fixtureUserData: Any? = null): BodyBuilder =
+  fun withFixtureDef(builder: FixtureDefBuilder, fixtureUserData: Any? = null) =
     this.apply { fixturesProps.put(builder.build(), fixtureUserData) }
 
   /**
