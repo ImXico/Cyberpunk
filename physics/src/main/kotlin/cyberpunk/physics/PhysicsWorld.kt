@@ -15,7 +15,7 @@ class PhysicsWorld
    * The [PhysicsDebugger] that will render this [PhysicsWorld].
    * Essentially a wrapper around the Box2DDebugRenderer.
    */
-  private val debugger: PhysicsDebugger = PhysicsDebugger(worldWidth, worldHeight)
+  private val debugger = PhysicsDebugger(worldWidth, worldHeight)
 
   /**
    * Whether or not the [PhysicsDebugger] should render.

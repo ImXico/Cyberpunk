@@ -11,7 +11,7 @@ internal class PhysicsDebugger(worldWidth: Int, worldHeight: Int) {
    * The [Box2DDebugRenderer] instance that will allow the rendering
    * of the given [PhysicsWorld].
    */
-  private val renderer: Box2DDebugRenderer = Box2DDebugRenderer()
+  private val renderer = Box2DDebugRenderer()
 
   /**
    * Dedicated [OrthographicCamera] for the Box2D rendering, because of the
