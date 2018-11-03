@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
-import cyberpunk.core.state.StateManager
 
 /**
  * Holds the frame buffer objects (FBOs) and flipped regions
@@ -44,7 +43,7 @@ internal class TransitionFBO {
   }
 
   /**
-   * Resizes the [FrameBuffer] objects in every [StateManager.resize] call.
+   * Resizes the [FrameBuffer] objects.
    * The [FrameBuffer] objects are disposed manually and re-defined.
    * @param width   new screen width.
    * @param height  new screen height.
