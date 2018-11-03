@@ -2,5 +2,5 @@
 
 package cyberpunk.core
 
-@JvmField val WORLD_WIDTH = 700
-@JvmField val WORLD_HEIGHT = 300
+const val WORLD_WIDTH = 700
+const val WORLD_HEIGHT = 300

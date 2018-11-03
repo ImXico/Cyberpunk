@@ -20,8 +20,7 @@ class BodyDefBuilder {
    * @return this [BodyDefBuilder] instance.
    * @see [BodyDef.BodyType]
    */
-  fun type(bodyType: BodyDef.BodyType) =
-    this.apply { bodyDef.type = bodyType }
+  fun type(bodyType: BodyDef.BodyType) = this.apply { bodyDef.type = bodyType }
 
   /**
    * Sets the world angle of the body, in radians.
@@ -29,8 +28,7 @@ class BodyDefBuilder {
    * @param bodyAngle the desired [BodyDef.angle], in radians.
    * @return this [BodyDefBuilder] instance.
    */
-  fun angle(bodyAngle: Float) =
-    this.apply { bodyDef.angle = bodyAngle }
+  fun angle(bodyAngle: Float) = this.apply { bodyDef.angle = bodyAngle }
 
   /**
    * Sets the linear velocity of the body's origin, in world coordinates.
@@ -38,8 +36,7 @@ class BodyDefBuilder {
    * @param velocity the desired [BodyDef.linearVelocity], in the form of a [Vector2].
    * @return this [BodyDefBuilder] instance.
    */
-  fun linearVelocity(velocity: Vector2) =
-    this.apply { bodyDef.linearVelocity.set(velocity) }
+  fun linearVelocity(velocity: Vector2) = this.apply { bodyDef.linearVelocity.set(velocity) }
 
   /**
    * Sets the linear velocity of the body's origin, in world coordinates.
@@ -48,8 +45,7 @@ class BodyDefBuilder {
    * @param y the desired [BodyDef.linearVelocity] Y.
    * @return this [BodyDefBuilder] instance.
    */
-  fun linearVelocity(x: Float, y: Float) =
-    this.apply { bodyDef.linearVelocity.set(Vector2(x, y)) }
+  fun linearVelocity(x: Float, y: Float) = this.apply { bodyDef.linearVelocity.set(Vector2(x, y)) }
 
   /**
    * Sets the angular velocity of the body.
@@ -57,8 +53,7 @@ class BodyDefBuilder {
    * @param velocity the desired [BodyDef.angularVelocity].
    * @return this [BodyDefBuilder] instance.
    */
-  fun angularVelocity(velocity: Float) =
-    this.apply { bodyDef.angularVelocity = velocity }
+  fun angularVelocity(velocity: Float) = this.apply { bodyDef.angularVelocity = velocity }
 
   /**
    * Sets the linear damping of the body.
@@ -66,8 +61,7 @@ class BodyDefBuilder {
    * @param damping the desired [BodyDef.linearDamping].
    * @return this [BodyDefBuilder] instance.
    */
-  fun linearDamping(damping: Float) =
-    this.apply { bodyDef.linearDamping = damping }
+  fun linearDamping(damping: Float) = this.apply { bodyDef.linearDamping = damping }
 
   /**
    * Sets the angular damping of the body.
@@ -75,40 +69,35 @@ class BodyDefBuilder {
    * @param damping the desired [BodyDef.angularDamping]-
    * @return this [BodyDefBuilder] instance.
    */
-  fun angularDamping(damping: Float) =
-    this.apply { bodyDef.angularDamping = damping }
+  fun angularDamping(damping: Float) = this.apply { bodyDef.angularDamping = damping }
 
   /**
    * Never fall asleep - note that this WILL increase CPU usage.
    * The default value is false (i.e. the body can fall asleep).
    * @return this [BodyDefBuilder] instance.
    */
-  fun noSleep() =
-    this.apply { bodyDef.allowSleep = false }
+  fun noSleep() = this.apply { bodyDef.allowSleep = false }
 
   /**
    * Sets this body to not be awake on spawn.
    * The default value is true (i.e. the body is awake on spawn).
    * @return this [BodyDefBuilder] instance.
    */
-  fun notAwakeOnSpawn() =
-    this.apply { bodyDef.awake = false }
+  fun notAwakeOnSpawn() = this.apply { bodyDef.awake = false }
 
   /**
    * Sets this body to not be active on spawn.
    * The default value is true (i.e. the body is active on spawn).
    * @return this [BodyDefBuilder] instance.
    */
-  fun notActiveOnSpawn() =
-    this.apply { bodyDef.active = false }
+  fun notActiveOnSpawn() = this.apply { bodyDef.active = false }
 
   /**
    * Prevents this body from rotating.
    * The default value is false (i.e. the body can rotate).
    * @return this [BodyDefBuilder] instance.
    */
-  fun fixedRotation() =
-    this.apply { bodyDef.fixedRotation = true }
+  fun fixedRotation() = this.apply { bodyDef.fixedRotation = true }
 
   /**
    * Turns this flag on in case this is a fast moving body that should be prevented from
@@ -116,8 +105,7 @@ class BodyDefBuilder {
    * The default value is false.
    * @return this [BodyDefBuilder] instance.
    */
-  fun asBullet() =
-    this.apply { bodyDef.bullet = true }
+  fun asBullet() = this.apply { bodyDef.bullet = true }
 
   /**
    * Scales the gravity that will be applied to this body.
@@ -125,8 +113,7 @@ class BodyDefBuilder {
    * @param scale the desired [BodyDef.gravityScale].
    * @return this [BodyDefBuilder] instance.
    */
-  fun gravityScale(scale: Float) =
-    this.apply { bodyDef.gravityScale = scale }
+  fun gravityScale(scale: Float) = this.apply { bodyDef.gravityScale = scale }
 
   /**
    * Sets the *world* position of the body.
@@ -135,8 +122,7 @@ class BodyDefBuilder {
    * @param bodyPosition the desired [BodyDef.position].
    * @return this [BodyDefBuilder] instance.
    */
-  fun position(bodyPosition: Vector2) =
-    this.apply { bodyDef.position.set(bodyPosition.asBox2DUnits()) }
+  fun position(bodyPosition: Vector2) = this.apply { bodyDef.position.set(bodyPosition.asBox2DUnits()) }
 
   /**
    * Sets the *world* position of the body.

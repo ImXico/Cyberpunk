@@ -23,12 +23,13 @@ SoundManager.pause("mysound")
 SoundManager.resume("mysound")
 ```
 
-Diposose it when you don't need to use it anymore - hey, leave a good footprint!
+Dispose it when you don't need to use it anymore - hey, leave a good footprint!
 ```kotlin
 SoundManager.dispose("mysound")
 ```
 
 ### MusicManager
+
 The [`MusicManager`](https://github.com/ImXico/Cyberpunk/blob/master/audio/src/main/kotlin/cyberpunk/audio/MusicManager.kt) will hold [`Music`](https://github.com/libgdx/libgdx/wiki/Streaming-music) instances. As stated in the official libGDX [wiki](https://github.com/libgdx/libgdx/wiki/Streaming-music):
 > For any sound that's longer than a few seconds, it is preferable to stream it from disk instead of fully loading it into RAM. Libgdx provides a Music interface that lets you do that.
 

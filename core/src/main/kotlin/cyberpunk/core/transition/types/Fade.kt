@@ -6,33 +6,31 @@ import cyberpunk.core.WORLD_HEIGHT
 import cyberpunk.core.WORLD_WIDTH
 import cyberpunk.core.transition.Transition
 
-@JvmField val DEFAULT_SPEED: Float = 1.5f
+const val DEFAULT_SPEED = 1.5f
 
 class Fade
   @JvmOverloads
   constructor(private var speed: Float = DEFAULT_SPEED) : Transition {
 
-  @JvmField val MAX_ALPHA: Float = 1f
-  @JvmField val DEFAULT_ALPHA_INC: Float = 0.05f
+  @JvmField val MAX_ALPHA = 1f
+  @JvmField val DEFAULT_ALPHA_INC = 0.05f
 
   /**
    * Overrides the property defined at the [Transition] interface.
-   *
    * @property [Transition.running]
    */
-  override var running: Boolean = false
+  override var running = false
 
   /**
    * Current alpha, ranging from 0 to [MAX_ALPHA].
-   *
    * @see MAX_ALPHA
    */
-  private var alpha: Float = 0f
+  private var alpha = 0f
 
   /**
    * Alpha increment to be used at each frame
    */
-  private val alphaInc: Float = calculateAlphaInc()
+  private val alphaInc = calculateAlphaInc()
 
   /**
    * @see [Transition.update]
@@ -60,8 +58,7 @@ class Fade
 
   /**
    * Calculates the alpha increment to be used at each frame based on the [speed] property.
-   *
    * @return alpha increment.
    */
-  private fun calculateAlphaInc(): Float = this.speed * DEFAULT_ALPHA_INC / DEFAULT_SPEED
+  private fun calculateAlphaInc() = this.speed * DEFAULT_ALPHA_INC / DEFAULT_SPEED
 }

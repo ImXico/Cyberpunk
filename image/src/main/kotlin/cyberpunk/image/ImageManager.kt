@@ -32,7 +32,7 @@ object ImageManager {
   @JvmOverloads
   fun load(key: String, path: String, setAsDefault: Boolean = false) {
     val atlas = TextureAtlas(Gdx.files.internal(path))
-    atlases.put(key, atlas)
+    atlases[key] = atlas
     if (setAsDefault) {
       DEFAULT_ATLAS_KEY = key
     }

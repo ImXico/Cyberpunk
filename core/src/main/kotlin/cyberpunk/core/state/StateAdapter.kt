@@ -8,9 +8,9 @@ abstract class StateAdapter(protected val stateManager: StateManager) : State {
   /**
    * State methods that absolutely must be overridden.
    */
-  override abstract fun update(delta: Float)
-  override abstract fun render(batch: Batch)
-  override abstract fun dispose()
+  abstract override fun update(delta: Float)
+  abstract override fun render(batch: Batch)
+  abstract override fun dispose()
 
   /**
    * State methods that may or may not be overridden (no-op implementation).

@@ -25,7 +25,7 @@ enum class Motion (
   LEFT_TO_RIGHT(Vector2(), Vector2(-WORLD_WIDTH.toFloat(), 0f), Vector2(WORLD_WIDTH.toFloat(), 0f), Vector2())
 }
 
-@JvmField val DEFAULT_LERP = 0.2f
+const val DEFAULT_LERP = 0.2f
 
 class HorizontalSlide
   @JvmOverloads
@@ -35,17 +35,17 @@ class HorizontalSlide
    * Overrides the property defined at the [Transition] interface.
    * @property [Transition.running]
    */
-  override var running: Boolean = false
+  override var running = false
 
   /**
    * Current position, in the form of a [Vector2], of the current state.
    */
-  private val currentStateCurrentPos: Vector2 = motion.currentInitial
+  private val currentStateCurrentPos = motion.currentInitial
 
   /**
    * Current position, in the form of a [Vector2], of the next state.
    */
-  private val nextStateCurrentPos: Vector2 = motion.nextInitial
+  private val nextStateCurrentPos = motion.nextInitial
 
   /**
    * Overrides the default [Transition.completed] function, declared
