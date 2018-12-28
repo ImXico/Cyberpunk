@@ -88,8 +88,7 @@ class FixtureDefBuilder {
    * @param friction desired friction.
    * @return this [FixtureDefBuilder] instance.
    */
-  fun friction(friction: Float) =
-    this.apply { fixtureDef.friction = friction }
+  fun friction(friction: Float) = this.apply { fixtureDef.friction = friction }
 
   /**
    * Sets the fixture def's restitution (elasticity/bounciness).
@@ -98,8 +97,7 @@ class FixtureDefBuilder {
    * @param restitution desired restitution.
    * @return this [FixtureDefBuilder] instance.
    */
-  fun restitution(restitution: Float) =
-    this.apply { fixtureDef.restitution = restitution }
+  fun restitution(restitution: Float) = this.apply { fixtureDef.restitution = restitution }
 
   /**
    * Sets the fixture def's density.
@@ -108,8 +106,7 @@ class FixtureDefBuilder {
    * @param density desired density.
    * @return this [FixtureDefBuilder] instance.
    */
-  fun density(density: Float) =
-    this.apply { fixtureDef.density = density }
+  fun density(density: Float) = this.apply { fixtureDef.density = density }
 
   /**
    * Set this fixture def to be a sensor.
@@ -118,8 +115,7 @@ class FixtureDefBuilder {
    * The default value for this property is false.
    * @return this [FixtureDefBuilder] instance.
    */
-  fun asSensor() =
-    this.apply { fixtureDef.isSensor = true }
+  fun asSensor() = this.apply { fixtureDef.isSensor = true }
 
   /**
    * Finish building this [FixtureDef].

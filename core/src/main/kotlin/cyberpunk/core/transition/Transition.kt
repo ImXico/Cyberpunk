@@ -28,13 +28,13 @@ interface Transition {
    * Checks whether or not this [Transition] is running.
    * @return true if it is running, false otherwise.
    */
-  fun running(): Boolean = running
+  fun running() = running
 
   /**
    * Checks whether or not this [Transition] is completed.
    * @return true if it is completed, false otherwise.
    */
-  fun completed(): Boolean = !running
+  fun completed() = !running
 
   /**
    * Updates the [Transition].
