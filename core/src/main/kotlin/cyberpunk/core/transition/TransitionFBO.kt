@@ -73,7 +73,7 @@ internal class TransitionFBO {
   }
 
   /**
-   * Return the current and next flipped regions in an easy-to-destructure way.
+   * Return the current and next flipped regions in an easy-to-destruct way.
    * @return a [Pair] holding both flipped regions.
    */
   internal fun getFlippedRegions() = Pair(currentFlippedRegion, nextFlippedRegion)
