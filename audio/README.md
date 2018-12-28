@@ -1,3 +1,7 @@
+**Note**
+
+> LibGDX provides [AssetManager](https://github.com/libgdx/libgdx/wiki/Managing-your-assets), which has a fully-fledged API for loading, storing and fetching assets (sounds, music, textures, fonts...). Using `AssetManager` (with maybe some DI framework) might be a more scalable and testable solution as projects grow in complexity. The manager modules (`ImageManager`, `SoundManger`, `MusicManager`...) may eventually become wrappers around `AssetManager`. Until then, they'll remain as singleton-based managers whose simplicity might come in handy for game jams or PoCs.
+
 The audio package for Cyberpunk is split into two different utilities: [`SoundManager`](#soundmanager) and [`MusicManager`](#musicmanager).
 
 ### SoundManager
