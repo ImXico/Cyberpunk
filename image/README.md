@@ -1,4 +1,8 @@
-Likewise the [`audio`](https://github.com/ImXico/Cyberpunk/tree/master/audio) module, the [`image`]() extension is also split in two classes: [`ImageManager`](https://github.com/ImXico/Cyberpunk/blob/master/image/src/main/kotlin/cyberpunk/image/ImageManager.kt) and [`ImageHelper`](https://github.com/ImXico/Cyberpunk/blob/master/image/src/main/kotlin/cyberpunk/image/ImageHelper.kt).
+**Note**
+
+> LibGDX provides [AssetManager](https://github.com/libgdx/libgdx/wiki/Managing-your-assets), which has a fully-fledged API for loading, storing and fetching assets (sounds, music, textures, fonts...). Using `AssetManager` (with maybe some DI framework) might be a more scalable and testable solution as projects grow in complexity. The manager modules (`ImageManager`, `SoundManger`, `MusicManager`...) may eventually become wrappers around `AssetManager`. Until then, they'll remain as singleton-based managers whose simplicity might come in handy for game jams or PoCs.
+
+The [`image`]() extension is split in two classes: [`ImageManager`](https://github.com/ImXico/Cyberpunk/blob/master/image/src/main/kotlin/cyberpunk/image/ImageManager.kt) and [`ImageHelper`](https://github.com/ImXico/Cyberpunk/blob/master/image/src/main/kotlin/cyberpunk/image/ImageHelper.kt).
 
 ### ImageManager
 This is made to be used with [`TextureAtlas`](https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/graphics/g2d/TextureAtlas.html). Information on how to use the TexturePacker to pack many smaller images onto larger images can be found [here](https://github.com/libgdx/libgdx/wiki/Texture-packer).

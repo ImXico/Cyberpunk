@@ -9,7 +9,7 @@ class PhysicsWorld
   /**
    * The [World] instance of this [PhysicsWorld].
    */
-  val world: World = World(config.gravity, true)
+  val world = World(config.gravity, true)
 
   /**
    * The [PhysicsDebugger] that will render this [PhysicsWorld].

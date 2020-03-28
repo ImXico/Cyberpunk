@@ -2,13 +2,12 @@ package cyberpunk.core.state
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Camera
-import com.badlogic.gdx.graphics.Pixmap
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.graphics.glutils.FrameBuffer
 import com.badlogic.gdx.utils.viewport.Viewport
 import cyberpunk.core.transition.Transition
+import cyberpunk.core.transition.TransitionFBO
 
 /**
  * Initializes the [StateManager] with it a [Camera] and [Viewport].
@@ -33,22 +32,15 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
   private var transition: Transition? = null
 
   /**
-   * [FrameBuffer] objects and [TextureRegion]s for the transitions.
-   * Initialized at the init block, under [setupFBOs].
+   * Holds the frame buffer objects (FBOs) and flipped regions
+   * that are used during transitions.
    */
-  private lateinit var currentFBO: FrameBuffer
-  private lateinit var nextFBO: FrameBuffer
-  private lateinit var currentFlippedRegion: TextureRegion
-  private lateinit var nextFlippedRegion: TextureRegion
+  private val transitionFBO = TransitionFBO()
 
   /**
    * [Batch] used to render everything.
    */
-  private val batch: Batch = SpriteBatch()
-
-  init {
-    setupFBOs()
-  }
+  private val batch = SpriteBatch()
 
   /**
    * Sets a [State] to be the currently running one. Optionally, pass
@@ -77,7 +69,9 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
    */
   fun update(delta: Float) {
     currentState?.update(delta)
-    transition?.let { if (it.running()) it.update(delta) }
+    transition?.let {
+      if (it.running()) it.update(delta)
+    }
   }
 
   /**
@@ -98,11 +92,10 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
           currentState?.render(batch)
           Gdx.input.inputProcessor = currentState
         } else {
-          currentFBO.wrap { currentState?.render(batch) }
-          nextFBO.wrap { nextState?.render(batch) }
-          currentFlippedRegion.texture = currentFBO.colorBufferTexture
-          nextFlippedRegion.texture = nextFBO.colorBufferTexture
-          transition?.render(batch, currentFlippedRegion, nextFlippedRegion)
+          transitionFBO.wrapCurrent { currentState?.render(batch) }
+          transitionFBO.wrapNext { nextState?.render(batch)  }
+          val (currentRegion, nextRegion) = transitionFBO.getFlippedRegions()
+          transition?.render(batch, currentRegion, nextRegion)
         }
       }
     }
@@ -144,34 +137,7 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
   fun dispose() {
     currentState?.dispose()
     nextState?.dispose()
-    currentFBO.dispose()
-    nextFBO.dispose()
-  }
-
-  /**
-   * Utility extension function to wrap any [block] inside the
-   * [FrameBuffer.begin] and [FrameBuffer.end] calls, for shortness.
-   * @param block a [Unit] returning function.
-   */
-  private inline fun FrameBuffer.wrap(block: () -> Unit) {
-    this.begin()
-    block()
-    this.end()
-  }
-
-  /**
-   * Initializes the [FrameBuffer] objects and the [TextureRegion]s that will
-   * serve any running [Transition].
-   */
-  private fun setupFBOs() {
-    val screenWidth = Gdx.graphics.width
-    val screenHeight = Gdx.graphics.height
-    currentFBO = FrameBuffer(Pixmap.Format.RGBA8888, screenWidth, screenHeight, false)
-    nextFBO = FrameBuffer(Pixmap.Format.RGBA8888, screenWidth, screenHeight, false)
-    currentFlippedRegion = TextureRegion(currentFBO.colorBufferTexture)
-    currentFlippedRegion.flip(false, true)
-    nextFlippedRegion = TextureRegion(nextFBO.colorBufferTexture)
-    nextFlippedRegion.flip(false, true)
+    transitionFBO.dispose()
   }
 
   /**
@@ -179,10 +145,5 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
    * @param width   new screen width.
    * @param height  new screen height.
    */
-  private fun resizeFBOs(width: Int, height: Int) {
-    currentFBO.dispose()
-    nextFBO.dispose()
-    currentFBO = FrameBuffer(Pixmap.Format.RGBA8888, width, height, false)
-    nextFBO = FrameBuffer(Pixmap.Format.RGBA8888, width, height, false)
-  }
+  private fun resizeFBOs(width: Int, height: Int) = transitionFBO.resize(width, height)
 }

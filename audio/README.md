@@ -1,3 +1,7 @@
+**Note**
+
+> LibGDX provides [AssetManager](https://github.com/libgdx/libgdx/wiki/Managing-your-assets), which has a fully-fledged API for loading, storing and fetching assets (sounds, music, textures, fonts...). Using `AssetManager` (with maybe some DI framework) might be a more scalable and testable solution as projects grow in complexity. The manager modules (`ImageManager`, `SoundManger`, `MusicManager`...) may eventually become wrappers around `AssetManager`. Until then, they'll remain as singleton-based managers whose simplicity might come in handy for game jams or PoCs.
+
 The audio package for Cyberpunk is split into two different utilities: [`SoundManager`](#soundmanager) and [`MusicManager`](#musicmanager).
 
 ### SoundManager
@@ -23,12 +27,13 @@ SoundManager.pause("mysound")
 SoundManager.resume("mysound")
 ```
 
-Diposose it when you don't need to use it anymore - hey, leave a good footprint!
+Dispose it when you don't need to use it anymore - hey, leave a good footprint!
 ```kotlin
 SoundManager.dispose("mysound")
 ```
 
 ### MusicManager
+
 The [`MusicManager`](https://github.com/ImXico/Cyberpunk/blob/master/audio/src/main/kotlin/cyberpunk/audio/MusicManager.kt) will hold [`Music`](https://github.com/libgdx/libgdx/wiki/Streaming-music) instances. As stated in the official libGDX [wiki](https://github.com/libgdx/libgdx/wiki/Streaming-music):
 > For any sound that's longer than a few seconds, it is preferable to stream it from disk instead of fully loading it into RAM. Libgdx provides a Music interface that lets you do that.
 
