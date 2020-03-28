@@ -11,19 +11,19 @@ private val DEFAULT_GRAVITY = Vector2(0f, -9.8f)
  * The amount of time to simulate, this should not vary.
  * @see PhysicsWorld.world#step
  */
-private val DEFAULT_TIMESTEP = 1 / 60f
+private const val DEFAULT_TIMESTEP = 1 / 60f
 
 /**
  * For the velocity constraint solver.
  * @see PhysicsWorld.world#step
  */
-private val DEFAULT_VELOCITY_ITERATIONS = 6
+private const val DEFAULT_VELOCITY_ITERATIONS = 6
 
 /**
  * For the position constraint solver.
  * @see PhysicsWorld.world#step
  */
-private val DEFAULT_POSITION_ITERATIONS = 2
+private const val DEFAULT_POSITION_ITERATIONS = 2
 
 /**
  * Configuration class to use when instantiating a new [PhysicsWorld].

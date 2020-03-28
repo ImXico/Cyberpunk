@@ -19,7 +19,7 @@ object SoundManager {
   @JvmStatic
   fun load(soundName: String, path: String) {
     val sound = Gdx.audio.newSound(Gdx.files.internal(path))
-    sounds.put(soundName, sound)
+    sounds[soundName] = sound
   }
 
   /**

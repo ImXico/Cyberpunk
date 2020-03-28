@@ -31,7 +31,7 @@ class BodyBuilder(private var world: PhysicsWorld) {
    * Change the currently attached [PhysicsWorld] to a new one, returning the old one.
    * All bodies/joints further created will be placed onto the new current [world].
    * @param newWorld the new world to be set.
-   * @return the old.
+   * @return the old world.
    */
   fun changeWorld(newWorld: PhysicsWorld): PhysicsWorld {
     val oldWorld = world
@@ -42,9 +42,7 @@ class BodyBuilder(private var world: PhysicsWorld) {
   /**
    * Effectively destroys the [PhysicsWorld.world] that was currently being used by this instance.
    */
-  fun disposeWorld() {
-    world.dispose()
-  }
+  fun disposeWorld() = world.dispose()
 
   /**
    * Adds a [BodyDef] to this body, by chaining the [BodyDefBuilder] methods.
@@ -63,7 +61,7 @@ class BodyBuilder(private var world: PhysicsWorld) {
    */
   @JvmOverloads
   fun withFixtureDef(builder: FixtureDefBuilder, fixtureUserData: Any? = null) =
-    this.apply { fixturesProps.put(builder.build(), fixtureUserData) }
+    this.apply { fixturesProps[builder.build()] = fixtureUserData }
 
   /**
    * Builds and returns a [Body] that's defined by a [BodyDef] and one

@@ -36,10 +36,10 @@ class StateManager(val camera: Camera, val viewport: Viewport) {
    * [FrameBuffer] objects and [TextureRegion]s for the transitions.
    * Initialized at the init block, under [setupFBOs].
    */
-  lateinit private var currentFBO: FrameBuffer
-  lateinit private var nextFBO: FrameBuffer
-  lateinit private var currentFlippedRegion: TextureRegion
-  lateinit private var nextFlippedRegion: TextureRegion
+  private lateinit var currentFBO: FrameBuffer
+  private lateinit var nextFBO: FrameBuffer
+  private lateinit var currentFlippedRegion: TextureRegion
+  private lateinit var nextFlippedRegion: TextureRegion
 
   /**
    * [Batch] used to render everything.

@@ -20,7 +20,7 @@ object MusicManager {
   @JvmStatic
   fun load(trackName: String, path: String) {
     val track = Gdx.audio.newMusic(Gdx.files.internal(path))
-    tracks.put(trackName, track)
+    tracks[trackName] = track
   }
 
   /**
