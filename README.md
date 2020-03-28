@@ -12,11 +12,11 @@
   </a>
 
   <a href="http://libgdx.badlogicgames.com">
-    <img src="https://img.shields.io/badge/libgdx-1.9.8-red.svg">
+    <img src="https://img.shields.io/badge/libgdx-1.9.10-red.svg">
   </a>
 
   <a href="https://kotlinlang.org">
-    <img src="https://img.shields.io/badge/kotlin-1.2.51-orange.svg">
+    <img src="https://img.shields.io/badge/kotlin-1.3.61-orange.svg">
   </a>
 
   <a href="https://github.com/ImXico/Cyberpunk/blob/master/LICENSE.md">
