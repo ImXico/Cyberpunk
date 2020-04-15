@@ -65,7 +65,7 @@ Replace `$module` with the name of the desired library (see above). Likewise, `$
 
 ## What About libKTX?
 
-Hey, [libKTX](https://github.com/libktx/ktx) is an awesome project, and I recommend it for larger Kotlin projects. It provides an *incredible* range of features, all very high quality. That being said, If you're looking for a smoother Java interoperability or are carrying out a game jam, give Cyberpunk a try!
+Hey, [libKTX](https://github.com/libktx/ktx) is an awesome project, and I recommend it for larger Kotlin projects. Moreover, Cyberpunk and libKTX *have* actually [collaborated](https://github.com/libktx/ktx/issues/183) in the past. libKTX provides an *incredible* range of features, all very high quality. That being said, if you're looking for a smoother Java interoperability, or are carrying out a game jam, give Cyberpunk a try!
 
 ## License
 
